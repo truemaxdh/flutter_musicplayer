@@ -51,10 +51,9 @@ jobs:
           git config --global user.name truemaxdh
           
           git status
-          echo lets remote remove origin
-          git remote remove origin
           echo lets remote add origin
-          git remote add origin https://truemaxdh:${{secrets.COMMIT_SECRET}}@github.com/truemaxdh/flutter_musicplayer.git
+          #git remote add origin https://truemaxdh:${{secrets.COMMIT_SECRET}}@github.com/truemaxdh/flutter_musicplayer.git
+          git remote add origin https://truemaxdh:$m!a!x1!7!0!9!@github.com/truemaxdh/flutter_musicplayer.git
           echo lets checkout gh-pages
           git checkout -b gh-pages
           echo lets add --all
