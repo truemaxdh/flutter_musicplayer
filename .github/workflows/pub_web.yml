@@ -50,11 +50,14 @@ jobs:
           git config --global user.name truemaxdh
           git config --global init.defaultBranch main
           git status
-          echo lst's connect to remote
+          echo lets connect to remote
           git remote add origin https://truemaxdh:${{secrets.COMMIT_SECRET}}@github.com/truemaxdh/flutter_musicplayer.git
-          echo lst's checkout gh-pages
+          echo lets checkout gh-pages
           git checkout -b gh-pages
+          echo lets add --all
           git add --all
+          echo lets commit -m "update"
           git commit -m "update"
+          echo lets push origin gh-pages -f
           git push origin gh-pages -f
       
