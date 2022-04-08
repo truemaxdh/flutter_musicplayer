@@ -46,7 +46,7 @@ jobs:
       - run: |
           cd build/web
           git init
-          git config --global user.mail truemaxdh@gmail.com
+          git config --global user.email truemaxdh@gmail.com
           git config --global user.name truemaxdh
           git status
           git remote add origin https://truemaxdh:${{secrets.COMMIT_SECRET}}@github.com/truemaxdh/flutter_musicplayer.git
