@@ -6,9 +6,9 @@ name: publish web
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ main ]
+    branches: [ master ]
   pull_request:
-    branches: [ main ]
+    branches: [ master ]
 
   # Allows you to run this workflow manually from the Actions tab
   #workflow_dispatch:
@@ -49,7 +49,9 @@ jobs:
           git config --global user.email truemaxdh@gmail.com
           git config --global user.name truemaxdh
           git status
+          echo lst's connect to remote
           git remote add origin https://truemaxdh:${{secrets.COMMIT_SECRET}}@github.com/truemaxdh/flutter_musicplayer.git
+          echo lst's checkout gh-pages
           git checkout -b gh-pages
           git add --all
           git commit -m "update"
