@@ -52,7 +52,8 @@ jobs:
           
           git status
           echo lets remote add origin
-          git remote add origin https://truemaxdh:${{secrets.COMMIT_SECRET}}@github.com/truemaxdh/flutter_musicplayer.git
+          #git remote add origin https://truemaxdh:${{secrets.COMMIT_SECRET}}@github.com/truemaxdh/flutter_musicplayer.git
+          git remote add origin https://truemaxdh:${{secrets.COMMIT_SECRET}}@github.com/truemaxdh/admob-ads-in-flutter.git
           echo lets checkout gh-pages
           git checkout -b gh-pages
           echo lets add --all
