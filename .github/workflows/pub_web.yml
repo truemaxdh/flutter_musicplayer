@@ -19,7 +19,7 @@ jobs:
   build:
     name: Build web
     env:
-      my_secret: ${{secrets.COMMIT_SECRET}}
+      my_secret: ${{secrets.COMMIT_SECRET2}}
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -53,8 +53,7 @@ jobs:
           git status
           
           echo lets remote add origin
-          #git remote add origin https://truemaxdh:${{secrets.COMMIT_SECRET}}@github.com/truemaxdh/flutter_musicplayer.git
-          git remote add origin https://truemaxdh:${{secrets.COMMIT_SECRET}}@github.com/truemaxdh/admob-ads-in-flutter.git
+          git remote add origin https://truemaxdh:${{secrets.COMMIT_SECRET2}}@github.com/truemaxdh/flutter_musicplayer.git
           
           echo lets checkout gh-pages
           git checkout -b gh-pages
