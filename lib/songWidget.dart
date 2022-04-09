@@ -5,7 +5,7 @@ import 'package:flutter_audio_query/flutter_audio_query.dart';
 import 'package:flutter_music_player/widget.dart';
 
 class SongWidget extends StatelessWidget {
-  final List<SongInfo> songList;
+  final List<SongInfo2> songList;
 
   SongWidget({@required this.songList});
 
@@ -14,7 +14,7 @@ class SongWidget extends StatelessWidget {
     return ListView.builder(
         itemCount: songList.length,
         itemBuilder: (context, songIndex) {
-          SongInfo song = songList[songIndex];
+          SongInfo2 song = songList[songIndex];
           if (song.displayName.contains(".mp3"))
             return Card(
               elevation: 5,

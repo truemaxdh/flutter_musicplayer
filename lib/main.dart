@@ -98,26 +98,39 @@ class _MyAppState extends State<MyApp> {
                 future: FlutterAudioQuery()
                     .getSongs(sortType: SongSortType.RECENT_YEAR),
                 builder: (context, snapshot) {
-                  List<SongInfo> songInfo = snapshot.data;
-                  if (snapshot.hasData) return SongWidget(songList: songInfo);
-                  return Container(
-                    height: MediaQuery.of(context).size.height * 0.4,
-                    child: Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          CircularProgressIndicator(),
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Text(
-                            "Loading....",
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          )
-                        ],
-                      ),
-                    ),
-                  );
+                  List<SongInfo2> songInfo;
+                  if (snapshot.hasData) {
+                    songInfo = snapshot.data;
+                  } else {
+                    songInfo = new List.empty(growable: true);
+                  }
+
+                  songInfo.add(SongInfo2.fromURL(
+                      "https://truemaxdh.github.io/MusicTreasureHouse/ArirangTroll/ArirangTroll.mp3"));
+                  songInfo.add(SongInfo2.fromURL(
+                      "https://truemaxdh.github.io/MusicTreasureHouse/FirstFlight/FirstFlight.mp3"));
+
+                  //if (snapshot.hasData) return SongWidget(songList: songInfo);
+                  // return Container(
+                  //     height: MediaQuery.of(context).size.height * 0.4,
+                  //     child: Center(
+                  //       child: Row(
+                  //         mainAxisAlignment: MainAxisAlignment.center,
+                  //         children: <Widget>[
+                  //           CircularProgressIndicator(),
+                  //           SizedBox(
+                  //             width: 20,
+                  //           ),
+                  //           Text(
+                  //             "Loading....",
+                  //             style: TextStyle(fontWeight: FontWeight.bold),
+                  //           )
+                  //         ],
+                  //       ),
+                  //     ),
+
+                  // );
+                  return SongWidget(songList: songInfo);
                 },
               ),
             ),
