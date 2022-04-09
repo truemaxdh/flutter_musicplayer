@@ -29,29 +29,21 @@ class _MyAppState extends State<MyApp> {
         case AudioManagerEvents.seekComplete:
           _slider = audioManagerInstance.position.inMilliseconds /
               audioManagerInstance.duration.inMilliseconds;
-          setState(() {
-
-          });
+          setState(() {});
           break;
         case AudioManagerEvents.playstatus:
           isPlaying = audioManagerInstance.isPlaying;
-          setState(() {
-
-          });
+          setState(() {});
           break;
         case AudioManagerEvents.timeupdate:
           _slider = audioManagerInstance.position.inMilliseconds /
               audioManagerInstance.duration.inMilliseconds;
           audioManagerInstance.updateLrc(args["position"].toString());
-          setState(() {
-
-          });
+          setState(() {});
           break;
         case AudioManagerEvents.ended:
           audioManagerInstance.next();
-          setState(() {
-            
-          });
+          setState(() {});
           break;
         default:
           break;
