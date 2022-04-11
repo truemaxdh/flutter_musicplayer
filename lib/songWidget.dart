@@ -29,7 +29,7 @@ class SongWidget extends StatelessWidget {
                         fit: BoxFit.cover,
                         image: 
                           (song.albumArtwork.startsWith('http:') || song.albumArtwork.startsWith('https:')) ?
-                            Image.network(song.albumArtwork) : FileImage(File(song.albumArtwork))
+                            NetworkImage(song.albumArtwork) : FileImage(File(song.albumArtwork))
                         ,
                       ),
                       borderRadius: BorderRadius.circular(5),
