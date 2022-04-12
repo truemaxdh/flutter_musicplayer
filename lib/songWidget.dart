@@ -76,7 +76,7 @@ class SongWidget extends StatelessWidget {
                           ),
                           InkWell(
                             onTap: () {
-                              audioManagerInstance
+                              audioPlayer
                                   .start("file://${song.filePath}", song.title,
                                       desc: song.displayName,
                                       auto: true,
