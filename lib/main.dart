@@ -21,28 +21,28 @@ class _MyAppState extends State<MyApp> {
   }
 
   void setupAudio() {
-    audioManagerInstance.onEvents((events, args) {
+    audioPlayer.onEvents((events, args) {
       switch (events) {
         case AudioManagerEvents.start:
           _slider = 0;
           break;
         case AudioManagerEvents.seekComplete:
-          _slider = audioManagerInstance.position.inMilliseconds /
-              audioManagerInstance.duration.inMilliseconds;
+          _slider = audioPlayer.position.inMilliseconds /
+              audioPlayer.duration.inMilliseconds;
           setState(() {});
           break;
         case AudioManagerEvents.playstatus:
-          isPlaying = audioManagerInstance.isPlaying;
+          isPlaying = audioPlayer.isPlaying;
           setState(() {});
           break;
         case AudioManagerEvents.timeupdate:
-          _slider = audioManagerInstance.position.inMilliseconds /
-              audioManagerInstance.duration.inMilliseconds;
-          audioManagerInstance.updateLrc(args["position"].toString());
+          _slider = audioPlayer.position.inMilliseconds /
+              audioPlayer.duration.inMilliseconds;
+          audioPlayer.updateLrc(args["position"].toString());
           setState(() {});
           break;
         case AudioManagerEvents.ended:
-          audioManagerInstance.next();
+          audioPlayer.next();
           setState(() {});
           break;
         default:
@@ -80,10 +80,10 @@ class _MyAppState extends State<MyApp> {
           backgroundColor: Colors.black,
           title: showVol
               ? Slider(
-                  value: audioManagerInstance.volume ?? 0,
+                  value: audioPlayer.volume ?? 0,
                   onChanged: (value) {
                     setState(() {
-                      audioManagerInstance.setVolume(value, showVolume: true);
+                      audioPlayer.setVolume(value, showVolume: true);
                     });
                   },
                 )
@@ -156,7 +156,7 @@ class _MyAppState extends State<MyApp> {
     return Row(
       children: <Widget>[
         Text(
-          _formatDuration(audioManagerInstance.position),
+          _formatDuration(audioPlayer.position),
           style: style,
         ),
         Expanded(
@@ -185,20 +185,20 @@ class _MyAppState extends State<MyApp> {
                     });
                   },
                   onChangeEnd: (value) {
-                    if (audioManagerInstance.duration != null) {
+                    if (audioPlayer.duration != null) {
                       Duration msec = Duration(
                           milliseconds:
-                              (audioManagerInstance.duration.inMilliseconds *
+                              (audioPlayer.duration.inMilliseconds *
                                       value)
                                   .round());
-                      audioManagerInstance.seekTo(msec);
+                      audioPlayer.seekTo(msec);
                     }
                   },
                 )),
           ),
         ),
         Text(
-          _formatDuration(audioManagerInstance.duration),
+          _formatDuration(audioPlayer.duration),
           style: style,
         ),
       ],
@@ -223,7 +223,7 @@ class _MyAppState extends State<MyApp> {
                       Icons.skip_previous,
                       color: Colors.white,
                     ),
-                    onPressed: () => audioManagerInstance.previous()),
+                    onPressed: () => audioPlayer.previous()),
               ),
               backgroundColor: Colors.cyan.withOpacity(0.3),
             ),
@@ -232,11 +232,11 @@ class _MyAppState extends State<MyApp> {
               child: Center(
                 child: IconButton(
                   onPressed: () async {
-                    audioManagerInstance.playOrPause();
+                    audioPlayer.playOrPause();
                   },
                   padding: const EdgeInsets.all(0.0),
                   icon: Icon(
-                    audioManagerInstance.isPlaying
+                    audioPlayer.isPlaying
                         ? Icons.pause
                         : Icons.play_arrow,
                     color: Colors.white,
@@ -252,7 +252,7 @@ class _MyAppState extends State<MyApp> {
                       Icons.skip_next,
                       color: Colors.white,
                     ),
-                    onPressed: () => audioManagerInstance.next()),
+                    onPressed: () => audioPlayer.next()),
               ),
             ),
           ],
@@ -262,8 +262,9 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-var audioManagerInstance = AudioManager.instance;
+//var audioPlayer = AudioManager.instance;
+AudioPlayer audioPlayer = AudioPlayer();
 bool showVol = false;
-PlayMode playMode = audioManagerInstance.playMode;
+PlayMode playMode = audioPlayer.playMode;
 bool isPlaying = false;
 double _slider;
