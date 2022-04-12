@@ -76,14 +76,12 @@ class SongWidget extends StatelessWidget {
                           ),
                           InkWell(
                             onTap: () {
-                              audioPlayer
-                                  .start("file://${song.filePath}", song.title,
-                                      desc: song.displayName,
-                                      auto: true,
-                                      cover: song.albumArtwork)
-                                  .then((err) {
-                                print(err);
-                              });
+                            	if (song.albumArtwork.startsWith('http:') || song.albumArtwork.startsWith('https:')) {
+                            		audioPlayer.play(song.filePath);
+                            	} else {
+                            		audioPlayer.play(song.filePath, isLocal: true);
+                            	}
+                              );
                             },
                             child: IconText(
                               iconData: Icons.play_circle_outline,
