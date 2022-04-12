@@ -1,4 +1,4 @@
-import 'package:audio_manager/audio_manager.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_audio_query/flutter_audio_query.dart';
 import 'package:flutter_music_player/songWidget.dart';
