@@ -21,7 +21,24 @@ class _MyAppState extends State<MyApp> {
   }
 
   void setupAudio() {
-    audioPlayer.onEvents((events, args) {
+  	
+  	
+  	audioPlayer.onDurationChanged.listen((Duration d)=>{
+  		duration = d;
+  	});
+  	audioPlayer.onAudioPositionChanged.listen((Duration p)=>{
+  		_slider = p / duration;
+  		setState(() {});
+  	});
+  	audioPlayer.onPlayerStateChanged.listen((PlayerState s)=>{
+  		isPlaying = s;
+  		setState(() {});
+  	});
+  	audioPlayer.onPlayerCompletion.listen((event) {
+  		
+  	});
+  	
+    /*audioPlayer.onEvents((events, args) {
       switch (events) {
         case AudioManagerEvents.start:
           _slider = 0;
@@ -47,7 +64,7 @@ class _MyAppState extends State<MyApp> {
           break;
         default:
           break;
-      }
+      }*/
     });
   }
 
@@ -264,6 +281,8 @@ class _MyAppState extends State<MyApp> {
 
 //var audioPlayer = AudioManager.instance;
 AudioPlayer audioPlayer = AudioPlayer();
+var duration = 0;
+audioPlayer.setReleaseMode(ReleaseMode.STOP);
 bool showVol = false;
 PlayMode playMode = audioPlayer.playMode;
 bool isPlaying = false;
