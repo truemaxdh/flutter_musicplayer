@@ -21,24 +21,20 @@ class _MyAppState extends State<MyApp> {
   }
 
   void setupAudio() {
-  	
-  	
-  	audioPlayer.onDurationChanged.listen((Duration d)=>{
-  		duration = d;
-  	});
-  	audioPlayer.onAudioPositionChanged.listen((Duration p)=>{
-  		_slider = p / duration;
-  		setState(() {});
-  	});
-  	audioPlayer.onPlayerStateChanged.listen((PlayerState s)=>{
-  		isPlaying = s;
-  		setState(() {});
-  	});
-  	audioPlayer.onPlayerCompletion.listen((event) {
-  		
-  	});
-  	
-    /*audioPlayer.onEvents((events, args) {
+    audioPlayer.onDurationChanged.listen((Duration d) {
+      duration = d.inSeconds;
+    });
+    audioPlayer.onAudioPositionChanged.listen((Duration p) {
+      _slider = p.inSeconds / duration;
+      setState(() {});
+    });
+    audioPlayer.onPlayerStateChanged.listen((PlayerState s) {
+      isPlaying = (s == PlayerState.PLAYING);
+      setState(() {});
+    });
+    audioPlayer.onPlayerCompletion.listen((event) {});
+  }
+  /*audioPlayer.onEvents((events, args) {
       switch (events) {
         case AudioManagerEvents.start:
           _slider = 0;
@@ -64,9 +60,8 @@ class _MyAppState extends State<MyApp> {
           break;
         default:
           break;
-      }*/
-    });
-  }
+      }
+    }*/
 
   @override
   Widget build(BuildContext context) {
@@ -97,10 +92,10 @@ class _MyAppState extends State<MyApp> {
           backgroundColor: Colors.black,
           title: showVol
               ? Slider(
-                  value: audioPlayer.volume ?? 0,
+                  value: 0.5,
                   onChanged: (value) {
                     setState(() {
-                      audioPlayer.setVolume(value, showVolume: true);
+                      audioPlayer.setVolume(value);
                     });
                   },
                 )
@@ -173,7 +168,7 @@ class _MyAppState extends State<MyApp> {
     return Row(
       children: <Widget>[
         Text(
-          _formatDuration(audioPlayer.position),
+          _formatDuration(Duration(seconds: duration)),
           style: style,
         ),
         Expanded(
@@ -202,20 +197,14 @@ class _MyAppState extends State<MyApp> {
                     });
                   },
                   onChangeEnd: (value) {
-                    if (audioPlayer.duration != null) {
-                      Duration msec = Duration(
-                          milliseconds:
-                              (audioPlayer.duration.inMilliseconds *
-                                      value)
-                                  .round());
-                      audioPlayer.seekTo(msec);
-                    }
+                    audioPlayer
+                        .seek(Duration(seconds: (duration * value).floor()));
                   },
                 )),
           ),
         ),
         Text(
-          _formatDuration(audioPlayer.duration),
+          _formatDuration(Duration(seconds: duration)),
           style: style,
         ),
       ],
@@ -240,7 +229,7 @@ class _MyAppState extends State<MyApp> {
                       Icons.skip_previous,
                       color: Colors.white,
                     ),
-                    onPressed: () => audioPlayer.previous()),
+                    onPressed: () {}),
               ),
               backgroundColor: Colors.cyan.withOpacity(0.3),
             ),
@@ -249,13 +238,11 @@ class _MyAppState extends State<MyApp> {
               child: Center(
                 child: IconButton(
                   onPressed: () async {
-                    audioPlayer.playOrPause();
+                    audioPlayer.resume();
                   },
                   padding: const EdgeInsets.all(0.0),
                   icon: Icon(
-                    audioPlayer.isPlaying
-                        ? Icons.pause
-                        : Icons.play_arrow,
+                    isPlaying ? Icons.pause : Icons.play_arrow,
                     color: Colors.white,
                   ),
                 ),
@@ -269,7 +256,7 @@ class _MyAppState extends State<MyApp> {
                       Icons.skip_next,
                       color: Colors.white,
                     ),
-                    onPressed: () => audioPlayer.next()),
+                    onPressed: () {}),
               ),
             ),
           ],
@@ -282,8 +269,6 @@ class _MyAppState extends State<MyApp> {
 //var audioPlayer = AudioManager.instance;
 AudioPlayer audioPlayer = AudioPlayer();
 var duration = 0;
-audioPlayer.setReleaseMode(ReleaseMode.STOP);
 bool showVol = false;
-PlayMode playMode = audioPlayer.playMode;
 bool isPlaying = false;
 double _slider;
