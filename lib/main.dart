@@ -21,11 +21,9 @@ class _MyAppState extends State<MyApp> {
   }
 
   void setupAudio() {
-    audioPlayer.onDurationChanged.listen((Duration d) {
-      duration = d.inSeconds;
-    });
     audioPlayer.onAudioPositionChanged.listen((Duration p) {
-      _slider = p.inSeconds / duration;
+      _slider = p.inSeconds;
+      if (duration <= _slider) duration = _slider + 10;
       setState(() {});
     });
     audioPlayer.onPlayerStateChanged.listen((PlayerState s) {
@@ -92,20 +90,23 @@ class _MyAppState extends State<MyApp> {
           backgroundColor: Colors.black,
           title: showVol
               ? Slider(
-                  value: 0.5,
+                  min: 0,
+                  max: 1,
+                  value: _volume,
                   onChanged: (value) {
                     setState(() {
+                      _volume = value;
                       audioPlayer.setVolume(value);
                     });
                   },
                 )
-              : Text("Music app demo"),
+              : Text("Music Player"),
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Container(
-              height: 500,
+              height: 450,
               child: FutureBuilder(
                 future: FlutterAudioQuery()
                     .getSongs(sortType: SongSortType.RECENT_YEAR),
@@ -168,7 +169,7 @@ class _MyAppState extends State<MyApp> {
     return Row(
       children: <Widget>[
         Text(
-          _formatDuration(Duration(seconds: duration)),
+          _formatDuration(Duration(seconds: _slider)),
           style: style,
         ),
         Expanded(
@@ -190,15 +191,16 @@ class _MyAppState extends State<MyApp> {
                   inactiveTrackColor: Colors.grey,
                 ),
                 child: Slider(
+                  min: 0,
+                  max: duration.toDouble(),
                   value: _slider ?? 0,
                   onChanged: (value) {
                     setState(() {
-                      _slider = value;
+                      _slider = value.floor();
                     });
                   },
                   onChangeEnd: (value) {
-                    audioPlayer
-                        .seek(Duration(seconds: (duration * value).floor()));
+                    audioPlayer.seek(Duration(seconds: value.toInt()));
                   },
                 )),
           ),
@@ -238,7 +240,7 @@ class _MyAppState extends State<MyApp> {
               child: Center(
                 child: IconButton(
                   onPressed: () async {
-                    audioPlayer.resume();
+                    isPlaying ? audioPlayer.pause() : audioPlayer.resume();
                   },
                   padding: const EdgeInsets.all(0.0),
                   icon: Icon(
@@ -268,7 +270,8 @@ class _MyAppState extends State<MyApp> {
 
 //var audioPlayer = AudioManager.instance;
 AudioPlayer audioPlayer = AudioPlayer();
-var duration = 0;
+var duration = 10;
 bool showVol = false;
 bool isPlaying = false;
-double _slider;
+var _slider = 0;
+double _volume = 1;

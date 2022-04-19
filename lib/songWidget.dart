@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'main.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_audio_query/flutter_audio_query.dart';
 import 'package:flutter_music_player/widget.dart';
 
 class SongWidget extends StatelessWidget {
@@ -27,10 +26,10 @@ class SongWidget extends StatelessWidget {
                         height: 90,
                         width: 150,
                         fit: BoxFit.cover,
-                        image: 
-                          (song.albumArtwork.startsWith('http:') || song.albumArtwork.startsWith('https:')) ?
-                            NetworkImage(song.albumArtwork) : FileImage(File(song.albumArtwork))
-                        ,
+                        image: (song.albumArtwork.startsWith('http:') ||
+                                song.albumArtwork.startsWith('https:'))
+                            ? NetworkImage(song.albumArtwork)
+                            : FileImage(File(song.albumArtwork)),
                       ),
                       borderRadius: BorderRadius.circular(5),
                     ),
@@ -76,12 +75,12 @@ class SongWidget extends StatelessWidget {
                           ),
                           InkWell(
                             onTap: () {
-                            	if (song.albumArtwork.startsWith('http:') || song.albumArtwork.startsWith('https:')) {
-                            		audioPlayer.play(song.filePath);
-                            	} else {
-                            		audioPlayer.play(song.filePath, isLocal: true);
-                            	}
-                              );
+                              if (song.albumArtwork.startsWith('http:') ||
+                                  song.albumArtwork.startsWith('https:')) {
+                                audioPlayer.play(song.filePath);
+                              } else {
+                                audioPlayer.play(song.filePath, isLocal: true);
+                              }
                             },
                             child: IconText(
                               iconData: Icons.play_circle_outline,
