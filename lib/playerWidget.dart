@@ -2,7 +2,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_music_player/main.dart';
 
-Widget playerWidget() {
+Widget playerWidget(BuildContext context) {
     return Column(children: <Widget>[
       Padding(
         padding: EdgeInsets.symmetric(horizontal: 16),
@@ -114,3 +114,4 @@ Widget playerWidget() {
       ],
     );
   }
+var _slider = 0;
