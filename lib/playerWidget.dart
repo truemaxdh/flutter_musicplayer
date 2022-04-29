@@ -1,3 +1,7 @@
+import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_music_player/main.dart';
+
 Widget playerWidget() {
     return Column(children: <Widget>[
       Padding(
