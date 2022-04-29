@@ -4,6 +4,7 @@ import 'package:flutter_audio_query/flutter_audio_query.dart';
 import 'package:flutter_music_player/songWidget.dart';
 import 'package:flutter_music_player/widget.dart';
 import 'package:flutter_music_player/playerWidget.dart';
+import 'package:http/http.dart' as http;
 
 void main() {
   runApp(MyApp());
