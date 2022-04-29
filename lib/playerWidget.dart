@@ -71,7 +71,7 @@ Widget playerWidget(BuildContext context) {
     return Row(
       children: <Widget>[
         Text(
-          _formatDuration(Duration(seconds: _slider)),
+          _formatDuration(Duration(seconds: sliderValue)),
           style: style,
         ),
         Expanded(
@@ -95,10 +95,10 @@ Widget playerWidget(BuildContext context) {
                 child: Slider(
                   min: 0,
                   max: duration.toDouble(),
-                  value: _slider ?? 0,
+                  value: sliderValue ?? 0,
                   onChanged: (value) {
                     setState(() {
-                      _slider = value.floor();
+                      sliderValue = value.floor();
                     });
                   },
                   onChangeEnd: (value) {
@@ -114,4 +114,3 @@ Widget playerWidget(BuildContext context) {
       ],
     );
   }
-var _slider = 0;
