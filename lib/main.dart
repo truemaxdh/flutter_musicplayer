@@ -32,35 +32,7 @@ class _MyAppState extends State<MyApp> {
     });
     audioPlayer.onPlayerCompletion.listen((event) {});
   }
-  /*audioPlayer.onEvents((events, args) {
-      switch (events) {
-        case AudioManagerEvents.start:
-          _slider = 0;
-          break;
-        case AudioManagerEvents.seekComplete:
-          _slider = audioPlayer.position.inMilliseconds /
-              audioPlayer.duration.inMilliseconds;
-          setState(() {});
-          break;
-        case AudioManagerEvents.playstatus:
-          isPlaying = audioPlayer.isPlaying;
-          setState(() {});
-          break;
-        case AudioManagerEvents.timeupdate:
-          _slider = audioPlayer.position.inMilliseconds /
-              audioPlayer.duration.inMilliseconds;
-          audioPlayer.updateLrc(args["position"].toString());
-          setState(() {});
-          break;
-        case AudioManagerEvents.ended:
-          audioPlayer.next();
-          setState(() {});
-          break;
-        default:
-          break;
-      }
-    }*/
-
+  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -147,7 +119,7 @@ class _MyAppState extends State<MyApp> {
                 },
               ),
             ),
-            bottomPanel(),
+            playerWidget(),
           ],
         ),
       ),
@@ -213,59 +185,6 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  Widget bottomPanel() {
-    return Column(children: <Widget>[
-      Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16),
-        child: songProgress(context),
-      ),
-      Container(
-        padding: EdgeInsets.symmetric(vertical: 16),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            CircleAvatar(
-              child: Center(
-                child: IconButton(
-                    icon: Icon(
-                      Icons.skip_previous,
-                      color: Colors.white,
-                    ),
-                    onPressed: () {}),
-              ),
-              backgroundColor: Colors.cyan.withOpacity(0.3),
-            ),
-            CircleAvatar(
-              radius: 30,
-              child: Center(
-                child: IconButton(
-                  onPressed: () async {
-                    isPlaying ? audioPlayer.pause() : audioPlayer.resume();
-                  },
-                  padding: const EdgeInsets.all(0.0),
-                  icon: Icon(
-                    isPlaying ? Icons.pause : Icons.play_arrow,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
-            CircleAvatar(
-              backgroundColor: Colors.cyan.withOpacity(0.3),
-              child: Center(
-                child: IconButton(
-                    icon: Icon(
-                      Icons.skip_next,
-                      color: Colors.white,
-                    ),
-                    onPressed: () {}),
-              ),
-            ),
-          ],
-        ),
-      ),
-    ]);
-  }
 }
 
 //var audioPlayer = AudioManager.instance;
