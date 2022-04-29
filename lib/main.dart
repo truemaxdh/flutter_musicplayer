@@ -120,7 +120,7 @@ class _MyAppState extends State<MyApp> {
                 },
               ),
             ),
-            playerWidget(),
+            playerWidget(context),
           ],
         ),
       ),
@@ -136,5 +136,4 @@ AudioPlayer audioPlayer = AudioPlayer();
 var duration = 10;
 bool showVol = false;
 bool isPlaying = false;
-var _slider = 0;
 double _volume = 1;
