@@ -27,10 +27,13 @@ class _MyAppState extends State<MyApp> {
       if (duration <= sliderValue) duration = sliderValue + 10;
       setState(() {});
     });
-    audioPlayer.onPlayerStateChanged.listen((PlayerState s) {
-      isPlaying = (s == PlayerState.PLAYING);
-      setState(() {});
-    });
+    //audioPlayer.onPlayerStateChanged.listen((Event e) {
+    //});
+    audioPlayer.onSeekComplete.listen((PlayerState s) {: (value) {
+                    setState(() {
+                      sliderValue = value.floor();
+                    });
+                  },
     audioPlayer.onPlayerCompletion.listen((event) {});
   }
   
