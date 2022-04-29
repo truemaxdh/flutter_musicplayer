@@ -23,8 +23,8 @@ class _MyAppState extends State<MyApp> {
 
   void setupAudio() {
     audioPlayer.onAudioPositionChanged.listen((Duration p) {
-      _slider = p.inSeconds;
-      if (duration <= _slider) duration = _slider + 10;
+      sliderValue = p.inSeconds;
+      if (duration <= sliderValue) duration = sliderValue + 10;
       setState(() {});
     });
     audioPlayer.onPlayerStateChanged.listen((PlayerState s) {
@@ -137,3 +137,4 @@ var duration = 10;
 bool showVol = false;
 bool isPlaying = false;
 double _volume = 1;
+var sliderValue = 0;
