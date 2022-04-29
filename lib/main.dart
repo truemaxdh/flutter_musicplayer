@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_audio_query/flutter_audio_query.dart';
 import 'package:flutter_music_player/songWidget.dart';
 import 'package:flutter_music_player/widget.dart';
+import 'package:flutter_music_player/playerWidget.dart';
 
 void main() {
   runApp(MyApp());
@@ -126,64 +127,7 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  String _formatDuration(Duration d) {
-    if (d == null) return "--:--";
-    int minute = d.inMinutes;
-    int second = (d.inSeconds > 60) ? (d.inSeconds % 60) : d.inSeconds;
-    String format = ((minute < 10) ? "0$minute" : "$minute") +
-        ":" +
-        ((second < 10) ? "0$second" : "$second");
-    return format;
-  }
-
-  Widget songProgress(BuildContext context) {
-    var style = TextStyle(color: Colors.black);
-    return Row(
-      children: <Widget>[
-        Text(
-          _formatDuration(Duration(seconds: _slider)),
-          style: style,
-        ),
-        Expanded(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 5),
-            child: SliderTheme(
-                data: SliderTheme.of(context).copyWith(
-                  trackHeight: 2,
-                  thumbColor: Colors.blueAccent,
-                  overlayColor: Colors.blue,
-                  thumbShape: RoundSliderThumbShape(
-                    disabledThumbRadius: 5,
-                    enabledThumbRadius: 5,
-                  ),
-                  overlayShape: RoundSliderOverlayShape(
-                    overlayRadius: 10,
-                  ),
-                  activeTrackColor: Colors.blueAccent,
-                  inactiveTrackColor: Colors.grey,
-                ),
-                child: Slider(
-                  min: 0,
-                  max: duration.toDouble(),
-                  value: _slider ?? 0,
-                  onChanged: (value) {
-                    setState(() {
-                      _slider = value.floor();
-                    });
-                  },
-                  onChangeEnd: (value) {
-                    audioPlayer.seek(Duration(seconds: value.toInt()));
-                  },
-                )),
-          ),
-        ),
-        Text(
-          _formatDuration(Duration(seconds: duration)),
-          style: style,
-        ),
-      ],
-    );
-  }
+  
 
 }
 
