@@ -96,11 +96,6 @@ Widget playerWidget(BuildContext context) {
                   min: 0,
                   max: duration.toDouble(),
                   value: sliderValue ?? 0,
-                  onChanged: (value) {
-                    setState(() {
-                      sliderValue = value.floor();
-                    });
-                  },
                   onChangeEnd: (value) {
                     audioPlayer.seek(Duration(seconds: value.toInt()));
                   },
