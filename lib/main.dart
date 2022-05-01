@@ -30,14 +30,14 @@ class _MyAppState extends State<MyApp> {
     });
     //audioPlayer.onPlayerStateChanged.listen((Event e) {
     //});
-    audioPlayer.onSeekComplete.listen((PlayerState s) {: (value) {
-                    setState(() {
-                      sliderValue = value.floor();
-                    });
-                  },
+    // audioPlayer.onSeekComplete.listen((value) {
+    //                 setState(() {
+    //                   sliderValue = value.floor();
+    //                 });
+    //               },
     audioPlayer.onPlayerCompletion.listen((event) {});
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -130,9 +130,6 @@ class _MyAppState extends State<MyApp> {
       ),
     );
   }
-
-  
-
 }
 
 //var audioPlayer = AudioManager.instance;
