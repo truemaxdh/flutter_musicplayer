@@ -98,6 +98,7 @@ Widget songProgress(BuildContext context) {
                 onChangeEnd: (value) {
                   audioPlayer.seek(Duration(seconds: value.toInt()));
                 },
+                onChanged: (double value) {},
               )),
         ),
       ),
