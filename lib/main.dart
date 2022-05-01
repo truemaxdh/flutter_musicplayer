@@ -1,6 +1,5 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_audio_query/flutter_audio_query.dart';
 import 'package:flutter_music_player/songWidget.dart';
 import 'package:flutter_music_player/widget.dart';
 import 'package:flutter_music_player/playerWidget.dart';
@@ -16,6 +15,10 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  var musicDomain = "https://truemaxdh.github.io/MusicTreasureHouse";
+  var musicListPath = "/README.md";
+  var httpClient = http.Client();
+
   @override
   void initState() {
     super.initState();
@@ -30,11 +33,6 @@ class _MyAppState extends State<MyApp> {
     });
     //audioPlayer.onPlayerStateChanged.listen((Event e) {
     //});
-    // audioPlayer.onSeekComplete.listen((value) {
-    //                 setState(() {
-    //                   sliderValue = value.floor();
-    //                 });
-    //               },
     audioPlayer.onPlayerCompletion.listen((event) {});
   }
 
@@ -85,20 +83,40 @@ class _MyAppState extends State<MyApp> {
             Container(
               height: 450,
               child: FutureBuilder(
-                future: FlutterAudioQuery()
-                    .getSongs(sortType: SongSortType.RECENT_YEAR),
+                future: httpClient.get(Uri.parse(musicDomain + musicListPath)),
                 builder: (context, snapshot) {
                   List<SongInfo2> songInfo;
                   if (snapshot.hasData) {
-                    songInfo = snapshot.data;
-                  } else {
-                    songInfo = new List.empty(growable: true);
-                  }
+                    var response = snapshot.data;
+                    print('Response status: ${response.statusCode}');
+                    print('Response body: ${response.body}');
 
-                  songInfo.add(SongInfo2.fromURL(
-                      "https://truemaxdh.github.io/MusicTreasureHouse/ArirangTroll/ArirangTroll.mp3"));
-                  songInfo.add(SongInfo2.fromURL(
-                      "https://truemaxdh.github.io/MusicTreasureHouse/FirstFlight/FirstFlight.mp3"));
+                    songInfo = new List.empty(growable: true);
+                    songInfo.add(SongInfo2.fromURL(
+                        "https://truemaxdh.github.io/MusicTreasureHouse/ArirangTroll/ArirangTroll.mp3"));
+                    songInfo.add(SongInfo2.fromURL(
+                        "https://truemaxdh.github.io/MusicTreasureHouse/FirstFlight/FirstFlight.mp3"));
+                    return SongWidget(songList: songInfo);
+                  } else {
+                    return Container(
+                      height: MediaQuery.of(context).size.height * 0.4,
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            CircularProgressIndicator(),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Text(
+                              "Loading....",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            )
+                          ],
+                        ),
+                      ),
+                    );
+                  }
 
                   //if (snapshot.hasData) return SongWidget(songList: songInfo);
                   // return Container(
@@ -120,7 +138,6 @@ class _MyAppState extends State<MyApp> {
                   //     ),
 
                   // );
-                  return SongWidget(songList: songInfo);
                 },
               ),
             ),

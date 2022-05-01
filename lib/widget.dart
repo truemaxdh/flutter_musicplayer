@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_audio_query/flutter_audio_query.dart';
 
 class IconText extends StatelessWidget {
   final IconData iconData;
@@ -40,27 +39,7 @@ class IconText extends StatelessWidget {
 
 class SongInfo2 {
   Map<dynamic, dynamic> _data = new Map();
-  SongInfo2(SongInfo songInfo) {
-    _data['album_id'] = songInfo.albumId;
-    _data['artist_id'] = songInfo.artistId;
-    _data['artist'] = songInfo.artist;
-    _data['album'] = songInfo.album;
-    _data['title'] = songInfo.title;
-    _data['_display_name'] = songInfo.displayName;
-    _data['composer'] = songInfo.composer;
-    _data['year'] = songInfo.year;
-    _data['track'] = songInfo.track;
-    _data['duration'] = songInfo.duration;
-    _data['bookmark'] = songInfo.bookmark;
-    _data['_data'] = songInfo.filePath;
-    _data['_size'] = songInfo.fileSize;
-    _data['album_artwork'] = songInfo.albumArtwork;
-    _data['is_music'] = songInfo.isMusic;
-    _data['is_podcast'] = songInfo.isPodcast;
-    _data['is_ringtone'] = songInfo.isRingtone;
-    _data['is_alarm'] = songInfo.isAlarm;
-    _data['is_notification'] = songInfo.isNotification;
-  }
+
   SongInfo2.fromURL(String url) {
     _data['album_id'] = "1234.mp3"; //albumId;
     _data['artist_id'] = "1234.mp3"; //artistId;
