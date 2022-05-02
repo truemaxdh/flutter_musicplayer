@@ -96,7 +96,7 @@ class _MyAppState extends State<MyApp> {
                     for (var i = 0; i < lines.length; i++) {
                       if (lines[i].indexOf(".mp3") > 0) {
                         songInfo.add(SongInfo2.fromURL(
-                           musicDomain +  lines[i].substring(lines[i].indexOf(".mp3") + 6, lines[i].length - 1));
+                           musicDomain +  lines[i].substring(lines[i].indexOf(".mp3") + 6, lines[i].length - 1)));
                       }
                     }
                     return SongWidget(songList: songInfo);
