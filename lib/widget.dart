@@ -40,7 +40,8 @@ class IconText extends StatelessWidget {
 class SongInfo2 {
   Map<dynamic, dynamic> _data = new Map();
 
-  SongInfo2.abbreviated(String title, String artist, String composer, String url) {
+  SongInfo2.abbreviated(
+      String title, String artist, String composer, String url) {
     _data['album_id'] = ""; //albumId;
     _data['artist_id'] = ""; //artistId;
     _data['artist'] = artist; //artist;
@@ -50,7 +51,7 @@ class SongInfo2 {
     _data['composer'] = composer; //composer;
     _data['year'] = ""; //year;
     _data['track'] = ""; //track;
-    _data['duration'] = ""; //duration;
+    _data['duration'] = "120"; //duration;
     _data['bookmark'] = ""; //bookmark;
     _data['_data'] = url; //filePath;
     _data['_size'] = ""; //fileSize;

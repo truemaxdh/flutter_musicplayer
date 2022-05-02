@@ -14,7 +14,7 @@ class SongWidget extends StatelessWidget {
         itemCount: songList.length,
         itemBuilder: (context, songIndex) {
           SongInfo2 song = songList[songIndex];
-          //if (song.displayName.contains(".mp3"))
+          if (song.displayName.length > 0)
             return Card(
               elevation: 5,
               child: Padding(
@@ -98,9 +98,9 @@ class SongWidget extends StatelessWidget {
               ),
             );
 
-          /*return SizedBox(
+          return SizedBox(
             height: 0,
-          );*/
+          );
         });
   }
 
