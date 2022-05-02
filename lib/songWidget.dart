@@ -14,7 +14,7 @@ class SongWidget extends StatelessWidget {
         itemCount: songList.length,
         itemBuilder: (context, songIndex) {
           SongInfo2 song = songList[songIndex];
-          if (song.displayName.contains(".mp3"))
+          //if (song.displayName.contains(".mp3"))
             return Card(
               elevation: 5,
               child: Padding(
