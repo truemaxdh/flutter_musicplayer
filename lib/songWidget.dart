@@ -98,9 +98,9 @@ class SongWidget extends StatelessWidget {
               ),
             );
 
-          return SizedBox(
+          /*return SizedBox(
             height: 0,
-          );
+          );*/
         });
   }
 
