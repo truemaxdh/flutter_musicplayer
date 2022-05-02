@@ -88,14 +88,17 @@ class _MyAppState extends State<MyApp> {
                   List<SongInfo2> songInfo;
                   if (snapshot.hasData) {
                     var response = snapshot.data;
-                    print('Response status: ${response.statusCode}');
-                    print('Response body: ${response.body}');
-
+                    //print('Response status: ${response.statusCode}');
+                    //print('Response body: ${response.body}');
+                    
                     songInfo = new List.empty(growable: true);
-                    songInfo.add(SongInfo2.fromURL(
-                        "https://truemaxdh.github.io/MusicTreasureHouse/ArirangTroll/ArirangTroll.mp3"));
-                    songInfo.add(SongInfo2.fromURL(
-                        "https://truemaxdh.github.io/MusicTreasureHouse/FirstFlight/FirstFlight.mp3"));
+                    var lines = response.body.split("\n");
+                    for (var i = 0; i < lines.length; i++) {
+                      if (lines[i].indexOf(".mp3") > 0) {
+                        songInfo.add(SongInfo2.fromURL(
+                           musicDomain +  lines[i].substring(lines[i].indexOf(".mp3") + 6, lines[i].length - 1));
+                      }
+                    }
                     return SongWidget(songList: songInfo);
                   } else {
                     return Container(
@@ -117,27 +120,6 @@ class _MyAppState extends State<MyApp> {
                       ),
                     );
                   }
-
-                  //if (snapshot.hasData) return SongWidget(songList: songInfo);
-                  // return Container(
-                  //     height: MediaQuery.of(context).size.height * 0.4,
-                  //     child: Center(
-                  //       child: Row(
-                  //         mainAxisAlignment: MainAxisAlignment.center,
-                  //         children: <Widget>[
-                  //           CircularProgressIndicator(),
-                  //           SizedBox(
-                  //             width: 20,
-                  //           ),
-                  //           Text(
-                  //             "Loading....",
-                  //             style: TextStyle(fontWeight: FontWeight.bold),
-                  //           )
-                  //         ],
-                  //       ),
-                  //     ),
-
-                  // );
                 },
               ),
             ),
