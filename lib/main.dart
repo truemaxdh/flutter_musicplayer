@@ -15,8 +15,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  var musicDomain = "https://truemaxdh.github.io/MusicTreasureHouse";
-  var musicListPath = "/README.md";
+  var musicDomain = "https://truemaxdh.github.io";
+  var musicListPath = "/MusicTreasureHouse/README.md";
   var httpClient = http.Client();
 
   @override
