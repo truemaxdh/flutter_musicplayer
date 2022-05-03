@@ -94,7 +94,7 @@ Widget songProgress(BuildContext context) {
               child: Slider(
                 min: 0,
                 max: duration.toDouble(),
-                value: sliderValue ?? 0,
+                value: sliderValue.toDouble(),
                 onChangeEnd: (value) {
                   audioPlayer.seek(Duration(seconds: value.toInt()));
                 },
