@@ -19,7 +19,12 @@ Widget playerWidget(BuildContext context) {
                     Icons.skip_previous,
                     color: Colors.white,
                   ),
-                  onPressed: () {}),
+                  onPressed: () {
+                    if (--curSongIdx < 0) {
+                      curSongIdx += songList.length;
+                    }
+                    playCurrentSong();
+                  }),
             ),
             backgroundColor: Colors.cyan.withOpacity(0.3),
           ),
@@ -46,7 +51,12 @@ Widget playerWidget(BuildContext context) {
                     Icons.skip_next,
                     color: Colors.white,
                   ),
-                  onPressed: () {}),
+                  onPressed: () {
+                    if (++curSongIdx >= songList.length) {
+                      curSongIdx -= songList.length;
+                    }
+                    playCurrentSong();
+                  }),
             ),
           ),
         ],
