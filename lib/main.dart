@@ -27,7 +27,7 @@ class _MyAppState extends State<MyApp> {
 
   void setupAudio() {
     audioPlayer.onAudioPositionChanged.listen((Duration p) {
-      print('Position: ${p.inSeconds}');
+      //print('Position: ${p.inSeconds}');
       if (isPlaying) {
         sliderValue = p.inSeconds;
         if (duration <= sliderValue) duration = sliderValue + 10;
@@ -35,8 +35,9 @@ class _MyAppState extends State<MyApp> {
       }
     });
     audioPlayer.onPlayerStateChanged.listen((PlayerState s) {
-      print('PlayerState: ${s}');
+      //print('PlayerState: ${s}');
       isPlaying = (s == PlayerState.PLAYING);
+      setState(() {});
     });
     audioPlayer.onPlayerCompletion.listen((event) {});
   }
