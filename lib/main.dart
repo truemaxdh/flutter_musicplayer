@@ -91,22 +91,22 @@ class _MyAppState extends State<MyApp> {
               child: FutureBuilder(
                 future: httpClient.get(Uri.parse(musicDomain + musicListPath)),
                 builder: (context, snapshot) {
-                  List<SongInfo2> songInfo;
+                  
                   if (snapshot.hasData) {
                     var response = snapshot.data;
                     //print('Response status: ${response.statusCode}');
                     //print('Response body: ${response.body}');
                     
-                    songInfo = new List.empty(growable: true);
+                    songList = new List.empty(growable: true);
                     var lines = response.body.split("\n");
                     for (var i = 0; i < lines.length; i++) {
                       if (lines[i].indexOf(".mp3") > 0) {
                         var title = lines[i].substring(1, lines[i].indexOf(".mp3"));
                         var url = musicDomain +  lines[i].substring(lines[i].indexOf(".mp3") + 6, lines[i].length - 1);
-                        songInfo.add(SongInfo2.abbreviated(title, "", "Danny Choi", url));
+                        songList.add(SongInfo2.abbreviated(title, "", "Danny Choi", url));
                       }
                     }
-                    return SongWidget(songList: songInfo);
+                    return SongWidget();
                   } else {
                     return Container(
                       height: MediaQuery.of(context).size.height * 0.4,
@@ -138,8 +138,9 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-//var audioPlayer = AudioManager.instance;
 AudioPlayer audioPlayer = AudioPlayer();
+List<SongInfo2> songInfo;
+var curSongIdx = 0;
 var duration = 10;
 bool showVol = false;
 bool isPlaying = false;
