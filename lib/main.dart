@@ -27,11 +27,15 @@ class _MyAppState extends State<MyApp> {
 
   void setupAudio() {
     audioPlayer.onAudioPositionChanged.listen((Duration p) {
-      sliderValue = p.inSeconds;
-      if (duration <= sliderValue) duration = sliderValue + 10;
-      setState(() {});
+      print('Position: ${p.inSeconds}');
+      if (isPlaying) {
+        sliderValue = p.inSeconds;
+        if (duration <= sliderValue) duration = sliderValue + 10;
+        setState(() {});
+      }
     });
     audioPlayer.onPlayerStateChanged.listen((PlayerState s) {
+      print('PlayerState: ${s}');
       isPlaying = (s == PlayerState.PLAYING);
     });
     audioPlayer.onPlayerCompletion.listen((event) {});
