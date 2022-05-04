@@ -74,12 +74,7 @@ class SongWidget extends StatelessWidget {
                           InkWell(
                             onTap: () {
                               curSongIdx = songIndex;
-                              if (song.albumArtwork.startsWith('http:') ||
-                                  song.albumArtwork.startsWith('https:')) {
-                                audioPlayer.play(song.filePath);
-                              } else {
-                                audioPlayer.play(song.filePath, isLocal: true);
-                              }
+                              playCurrentSong();
                             },
                             child: IconText(
                               iconData: Icons.play_circle_outline,
