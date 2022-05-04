@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_music_player/widget.dart';
 
 class SongWidget extends StatelessWidget {
-  final List<SongInfo2> songList;
-
-  SongWidget({@required this.songList});
+  SongWidget();
 
   @override
   Widget build(BuildContext context) {
@@ -75,6 +73,7 @@ class SongWidget extends StatelessWidget {
                           ),
                           InkWell(
                             onTap: () {
+                              curSongIdx = songIndex;
                               if (song.albumArtwork.startsWith('http:') ||
                                   song.albumArtwork.startsWith('https:')) {
                                 audioPlayer.play(song.filePath);
