@@ -141,6 +141,15 @@ class _MyAppState extends State<MyApp> {
 AudioPlayer audioPlayer = AudioPlayer();
 List<SongInfo2> songList = new List.empty(growable: true);
 var curSongIdx = 0;
+var playCurrentSong = () {
+  SongInfo2 song = songList[songIndex];
+  if (song.filePath.startsWith('http:') || song.filePath.startsWith('https:')) {
+	  audioPlayer.play(song.filePath);
+  } else {
+	  audioPlayer.play(song.filePath, isLocal: true);
+  }
+}
+
 var duration = 10;
 bool showVol = false;
 bool isPlaying = false;
