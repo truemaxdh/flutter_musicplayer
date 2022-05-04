@@ -97,7 +97,7 @@ class _MyAppState extends State<MyApp> {
                     //print('Response status: ${response.statusCode}');
                     //print('Response body: ${response.body}');
                     
-                    songList = new List.empty(growable: true);
+                    songList.clear();
                     var lines = response.body.split("\n");
                     for (var i = 0; i < lines.length; i++) {
                       if (lines[i].indexOf(".mp3") > 0) {
@@ -139,7 +139,7 @@ class _MyAppState extends State<MyApp> {
 }
 
 AudioPlayer audioPlayer = AudioPlayer();
-List<SongInfo2> songInfo;
+List<SongInfo2> songList = new List.empty(growable: true);
 var curSongIdx = 0;
 var duration = 10;
 bool showVol = false;
