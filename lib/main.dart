@@ -148,7 +148,7 @@ var playCurrentSong = function() {
   } else {
     audioPlayer.play(song.filePath, isLocal: true);
   }
-}
+};
 
 var duration = 10;
 bool showVol = false;
