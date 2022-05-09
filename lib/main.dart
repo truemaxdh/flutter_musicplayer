@@ -35,7 +35,7 @@ class _MyAppState extends State<MyApp> {
       }
     });
     audioPlayer.onPlayerStateChanged.listen((PlayerState s) {
-      //print('PlayerState: ${s}');
+      print('PlayerState: ${s}');
       isPlaying = (s == PlayerState.PLAYING);
       if (s == PlayerState.COMPLETED) {
         print('curSongIdx: ${curSongIdx}');
