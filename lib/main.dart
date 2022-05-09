@@ -40,7 +40,9 @@ class _MyAppState extends State<MyApp> {
       setState(() {});
     });
     audioPlayer.onPlayerCompletion.listen((event) {
+      print('curSongIdx: ${curSongIdx}');
       playNextSong(1);
+      print('curSongIdx: ${curSongIdx}');
     });
   }
 
