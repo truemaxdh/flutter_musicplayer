@@ -43,6 +43,7 @@ class _MyAppState extends State<MyApp> {
       print('curSongIdx: ${curSongIdx}');
       playNextSong(1);
       print('curSongIdx: ${curSongIdx}');
+      setState(() {});
     });
   }
 
