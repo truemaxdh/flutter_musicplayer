@@ -74,7 +74,7 @@ class SongWidget extends StatelessWidget {
                           InkWell(
                             onTap: () {
                               curSongIdx = songIndex;
-                              playCurrentSong();
+                              playNextSong(0);
                             },
                             child: IconText(
                               iconData: Icons.play_circle_outline,
