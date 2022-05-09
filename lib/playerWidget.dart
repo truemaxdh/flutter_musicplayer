@@ -20,10 +20,7 @@ Widget playerWidget(BuildContext context) {
                     color: Colors.white,
                   ),
                   onPressed: () {
-                    if (--curSongIdx < 0) {
-                      curSongIdx += songList.length;
-                    }
-                    playCurrentSong();
+                    playNextSong(-1);
                   }),
             ),
             backgroundColor: Colors.cyan.withOpacity(0.3),
@@ -52,10 +49,7 @@ Widget playerWidget(BuildContext context) {
                     color: Colors.white,
                   ),
                   onPressed: () {
-                    if (++curSongIdx >= songList.length) {
-                      curSongIdx -= songList.length;
-                    }
-                    playCurrentSong();
+                    playNextSong(1);
                   }),
             ),
           ),
