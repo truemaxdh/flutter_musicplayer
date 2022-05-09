@@ -142,7 +142,7 @@ class _MyAppState extends State<MyApp> {
 
 AudioPlayer audioPlayer = AudioPlayer();
 List<SongInfo2> songList = new List.empty(growable: true);
-var curSongIdx = 0;
+var curSongIdx = -1;
 var playNextSong = (idxIncrease) {
   curSongIdx += idxIncrease;
   if (curSongIdx < 0) {
