@@ -14,9 +14,7 @@ class SongWidget extends StatelessWidget {
           SongInfo2 song = songList[songIndex];
           if (song.displayName.length > 0)
             return Card(
-              if (curSongIdx == songIndex) {
-                return {color: Colors.green.shade100};
-              },
+              color: (curSongIdx == songIndex) ? Colors.green.shade100 : Colors.transparent,
               elevation: 5,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
