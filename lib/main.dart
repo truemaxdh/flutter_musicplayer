@@ -149,7 +149,7 @@ var playNextSong = (idxIncrease) {
   curSongIdx += idxIncrease;
   if (curSongIdx < 0) {
     curSongIdx += songList.length;
-  } else if (++curSongIdx >= songList.length) {
+  } else if (curSongIdx >= songList.length) {
     curSongIdx -= songList.length;
   }
   
