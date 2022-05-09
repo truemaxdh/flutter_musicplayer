@@ -39,7 +39,9 @@ class _MyAppState extends State<MyApp> {
       isPlaying = (s == PlayerState.PLAYING);
       setState(() {});
     });
-    audioPlayer.onPlayerCompletion.listen((event) {});
+    audioPlayer.onPlayerCompletion.listen((event) {
+      playNextSong(1);
+    });
   }
 
   @override
