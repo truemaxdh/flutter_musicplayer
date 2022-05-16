@@ -9,12 +9,22 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Music Player',
+      home: MainPage(),
+    );
+  }
+}
+
+class MainPage extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _MyAppState extends State<MainPage> {
   var musicDomain = "https://truemaxdh.github.io";
   var musicListPath = "/MusicTreasureHouse/README.md";
   var httpClient = http.Client();
@@ -91,23 +101,26 @@ class _MyAppState extends State<MyApp> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Container(
-              height:  MediaQuery.of(context).size.height * 0.8,
+              height: MediaQuery.of(context).size.height * 0.8,
               child: FutureBuilder(
                 future: httpClient.get(Uri.parse(musicDomain + musicListPath)),
                 builder: (context, snapshot) {
-                  
                   if (snapshot.hasData) {
                     var response = snapshot.data;
                     //print('Response status: ${response.statusCode}');
                     //print('Response body: ${response.body}');
-                    
+
                     songList.clear();
                     var lines = response.body.split("\n");
                     for (var i = 0; i < lines.length; i++) {
                       if (lines[i].indexOf(".mp3") > 0) {
-                        var title = lines[i].substring(1, lines[i].indexOf(".mp3"));
-                        var url = musicDomain +  lines[i].substring(lines[i].indexOf(".mp3") + 6, lines[i].length - 1);
-                        songList.add(SongInfo2.abbreviated(title, "", "Danny Choi", url));
+                        var title =
+                            lines[i].substring(1, lines[i].indexOf(".mp3"));
+                        var url = musicDomain +
+                            lines[i].substring(lines[i].indexOf(".mp3") + 6,
+                                lines[i].length - 1);
+                        songList.add(SongInfo2.abbreviated(
+                            title, "", "Danny Choi", url));
                       }
                     }
                     return SongWidget();
@@ -152,7 +165,7 @@ var playNextSong = (idxIncrease) {
   } else if (curSongIdx >= songList.length) {
     curSongIdx -= songList.length;
   }
-  
+
   SongInfo2 song = songList[curSongIdx];
   if (song.filePath.startsWith('http:') || song.filePath.startsWith('https:')) {
     audioPlayer.play(song.filePath);
