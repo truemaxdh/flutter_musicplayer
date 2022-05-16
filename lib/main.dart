@@ -91,7 +91,7 @@ class _MyAppState extends State<MyApp> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Container(
-              height:  MediaQuery.of(context).size.height - 200,
+              height:  MediaQuery.of(context).size.height * 0.8,
               child: FutureBuilder(
                 future: httpClient.get(Uri.parse(musicDomain + musicListPath)),
                 builder: (context, snapshot) {
@@ -133,8 +133,8 @@ class _MyAppState extends State<MyApp> {
                   }
                 },
               ),
-              playerWidget(context),
-            ),            
+            ),
+            playerWidget(context),
           ],
         ),
       ),
