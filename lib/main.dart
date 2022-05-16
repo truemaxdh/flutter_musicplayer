@@ -134,8 +134,11 @@ class _MyAppState extends State<MyApp> {
                 },
               ),
             ),
-            playerWidget(context),
+            
           ],
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          playerWidget(context),
         ),
       ),
     );
