@@ -91,7 +91,7 @@ class _MyAppState extends State<MyApp> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Container(
-              height: 450,
+              //height: 450,
               child: FutureBuilder(
                 future: httpClient.get(Uri.parse(musicDomain + musicListPath)),
                 builder: (context, snapshot) {
