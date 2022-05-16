@@ -133,8 +133,8 @@ class _MyAppState extends State<MyApp> {
                   }
                 },
               ),
-            ),
-            playerWidget(context),
+              playerWidget(context),
+            ),            
           ],
         ),
       ),
