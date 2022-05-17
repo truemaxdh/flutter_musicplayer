@@ -53,6 +53,18 @@ Widget playerWidget(BuildContext context) {
                   }),
             ),
           ),
+          CircleAvatar(
+            child; Center(
+              child: IconButton(
+                  icon: Icon(
+                  	 icons.expand_less,  //icons.expand_more,
+                  	 color: Colors.white,
+                  ),
+                  onPressed: () {
+                 
+                  }),
+          	),
+          ),
         ],
       ),
     ),
