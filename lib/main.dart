@@ -147,7 +147,7 @@ class _MyAppState extends State<MainPage> {
                 },
               ),
             ),
-            playerWidget(context),
+            playerWidget(context, this),
           ],
         ),
       ),
