@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_music_player/main.dart';
 
-Widget playerWidget(BuildContext context, _MyAppState _myAppState) {
+Widget playerWidget(BuildContext context, MyAppState _myAppState) {
   print(_myAppState);
   return Column(children: <Widget>[
     Padding(
