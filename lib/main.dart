@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
 
 class MainPage extends StatefulWidget {
   @override
-  MyAppState createState() => _MyAppState();
+  MyAppState createState() => MyAppState();
 }
 
 class MyAppState extends State<MainPage> {
