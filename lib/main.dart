@@ -99,9 +99,9 @@ class MyAppState extends State<MainPage> {
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: () {
+          children: <Widget>() {
           	if ( screenMode == 'mixed' || screenMode == 'list') {
-		  return <Widget>[
+		  return [
 			Container(
 			  height: MediaQuery.of(context).size.height * 0.8,
 			  child: FutureBuilder(
@@ -152,7 +152,7 @@ class MyAppState extends State<MainPage> {
 				playerWidget(context, this),
 		  ];
           	} else {
-          		return playerWidget(context, this);
+          		return [playerWidget(context, this),];
           	}
           }
         ),
