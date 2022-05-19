@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_music_player/main.dart';
 
 Widget playerWidget(BuildContext context, MyAppState _myAppState) {
-  print(_myAppState);
   return Column(children: <Widget>[
     Padding(
       padding: EdgeInsets.symmetric(horizontal: 16),
@@ -58,13 +57,18 @@ Widget playerWidget(BuildContext context, MyAppState _myAppState) {
             child: Center(
               child: IconButton(
                   icon: Icon(
-                  	 Icons.expand_less,  //icons.expand_more,
-                  	 color: Colors.white,
+                    (screenMode == "player")
+                        ? Icons.expand_more
+                        : Icons.expand_less, //icons.expand_more,
+                    color: Colors.white,
                   ),
                   onPressed: () {
-                 
+                    _myAppState.setState(() {
+                      screenMode =
+                          (screenMode == "player") ? "mixed" : "player";
+                    });
                   }),
-          	),
+            ),
           ),
         ],
       ),
