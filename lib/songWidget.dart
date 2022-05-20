@@ -6,14 +6,14 @@ Widget playerWidget(BuildContext context, MyAppState _myAppState) {
   	mainAxisAlignment: MainAxisAlignment.spaceEvenly,
   	children: <Widget>[
   	  Image(
-		height: 72,
-		width: 120,
-		fit: BoxFit.cover,
-		image: NetworkImage(https://avatars.githubusercontent.com/u/12081386?s=120&v=4)),
+				height: 72,
+				width: 120,
+				fit: BoxFit.cover,
+				image: NetworkImage("https://avatars.githubusercontent.com/u/12081386?s=120&v=4")),
   	  Column(children: <Widget>[
-	    Padding(
-			  padding: EdgeInsets.symmetric(horizontal: 16),
-			  child: songProgress(context),
+				Padding(
+					padding: EdgeInsets.symmetric(horizontal: 16),
+					child: songProgress(context),
 	    ),
 	    Container(
 			  padding: EdgeInsets.symmetric(vertical: 16),
