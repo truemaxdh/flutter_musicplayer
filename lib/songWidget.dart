@@ -1,115 +1,143 @@
-import 'dart:io';
-import 'main.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_music_player/widget.dart';
+import 'package:flutter_music_player/main.dart';
 
-class SongWidget extends StatelessWidget {
-  SongWidget();
+Widget playerWidget(BuildContext context, MyAppState _myAppState) {
+  return Row(
+  	mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  	children: <Widget>[
+  	  Image(
+		height: 72,
+		width: 120,
+		fit: BoxFit.cover,
+		image: NetworkImage(https://avatars.githubusercontent.com/u/12081386?s=120&v=4)),
+  	  Column(children: <Widget>[
+	    Padding(
+			  padding: EdgeInsets.symmetric(horizontal: 16),
+			  child: songProgress(context),
+	    ),
+	    Container(
+			  padding: EdgeInsets.symmetric(vertical: 16),
+			  child: Row(
+				mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+				children: <Widget>[
+				  CircleAvatar(
+					child: Center(
+					  child: IconButton(
+						  icon: Icon(
+							Icons.skip_previous,
+							color: Colors.white,
+						  ),
+						  onPressed: () {
+							playNextSong(-1);
+						  }),
+					),
+					backgroundColor: Colors.cyan.withOpacity(0.3),
+				  ),
+				  CircleAvatar(
+					radius: 30,
+					child: Center(
+					  child: IconButton(
+						onPressed: () async {
+						  isPlaying ? audioPlayer.pause() : audioPlayer.resume();
+						},
+						padding: const EdgeInsets.all(0.0),
+						icon: Icon(
+						  isPlaying ? Icons.pause : Icons.play_arrow,
+						  color: Colors.white,
+						),
+					  ),
+					),
+				  ),
+				  CircleAvatar(
+					backgroundColor: Colors.cyan.withOpacity(0.3),
+					child: Center(
+					  child: IconButton(
+						  icon: Icon(
+							Icons.skip_next,
+							color: Colors.white,
+						  ),
+						  onPressed: () {
+							playNextSong(1);
+						  }),
+					),
+				  ),
+				  CircleAvatar(
+					backgroundColor: Colors.cyan.withOpacity(0.3),
+					child: Center(
+					  child: IconButton(
+						  icon: Icon(
+							(screenMode == "player")
+								? Icons.expand_more
+								: Icons.expand_less, //icons.expand_more,
+							color: Colors.white,
+						  ),
+						  onPressed: () {
+							_myAppState.setState(() {
+							  screenMode =
+								  (screenMode == "player") ? "mixed" : "player";
+							});
+						  }),
+					),
+				  ),
+				],
+			  ),
+	    ),
+	  ]),
+  	],
+  );
+}
 
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: songList.length,
-        itemBuilder: (context, songIndex) {
-          SongInfo2 song = songList[songIndex];
-          if (song.displayName.length > 0)
-            return Card(
-              color: (curSongIdx == songIndex) ? Colors.green.shade100 : Colors.white,
-              elevation: 5,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: <Widget>[
-                    ClipRRect(
-                      child: Image(
-                        height: 90,
-                        width: 150,
-                        fit: BoxFit.cover,
-                        image: (song.albumArtwork.startsWith('http:') ||
-                                song.albumArtwork.startsWith('https:'))
-                            ? NetworkImage(song.albumArtwork)
-                            : FileImage(File(song.albumArtwork)),
-                      ),
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.5,
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Container(
-                                width: MediaQuery.of(context).size.width * 0.4,
-                                child: Text(song.title,
-                                    style: TextStyle(
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w700)),
-                              ),
-                              Text("Release Year: ${song.year}",
-                                  style: TextStyle(
-                                      fontSize: 11,
-                                      color: Colors.grey,
-                                      fontWeight: FontWeight.w500)),
-                              Text("Artist: ${song.artist}",
-                                  style: TextStyle(
-                                      fontSize: 11,
-                                      color: Colors.grey,
-                                      fontWeight: FontWeight.w500)),
-                              Text("Composer: ${song.composer}",
-                                  style: TextStyle(
-                                      fontSize: 11,
-                                      color: Colors.grey,
-                                      fontWeight: FontWeight.w500)),
-                              Text(
-                                  "Duration: ${parseToMinutesSeconds(int.parse(song.duration))} min",
-                                  style: TextStyle(
-                                      fontSize: 11,
-                                      color: Colors.grey,
-                                      fontWeight: FontWeight.w500)),
-                            ],
-                          ),
-                          InkWell(
-                            onTap: () {
-                              curSongIdx = songIndex;
-                              playNextSong(0);
-                            },
-                            child: IconText(
-                              iconData: Icons.play_circle_outline,
-                              iconColor: Colors.red,
-                              string: "Play",
-                              textColor: Colors.black,
-                              iconSize: 25,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
+String _formatDuration(Duration d) {
+  if (d == null) return "--:--";
+  int minute = d.inMinutes;
+  int second = (d.inSeconds > 60) ? (d.inSeconds % 60) : d.inSeconds;
+  String format = ((minute < 10) ? "0$minute" : "$minute") +
+      ":" +
+      ((second < 10) ? "0$second" : "$second");
+  return format;
+}
+
+Widget songProgress(BuildContext context) {
+  var style = TextStyle(color: Colors.black);
+  return Row(
+    children: <Widget>[
+      Text(
+        _formatDuration(Duration(seconds: sliderValue)),
+        style: style,
+      ),
+      Expanded(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 5),
+          child: SliderTheme(
+              data: SliderTheme.of(context).copyWith(
+                trackHeight: 2,
+                thumbColor: Colors.blueAccent,
+                overlayColor: Colors.blue,
+                thumbShape: RoundSliderThumbShape(
+                  disabledThumbRadius: 5,
+                  enabledThumbRadius: 5,
                 ),
+                overlayShape: RoundSliderOverlayShape(
+                  overlayRadius: 10,
+                ),
+                activeTrackColor: Colors.blueAccent,
+                inactiveTrackColor: Colors.grey,
               ),
-            );
-
-          return SizedBox(
-            height: 0,
-          );
-        });
-  }
-
-  static String parseToMinutesSeconds(int ms) {
-    String data;
-    Duration duration = Duration(milliseconds: ms);
-
-    int minutes = duration.inMinutes;
-    int seconds = (duration.inSeconds) - (minutes * 60);
-
-    data = minutes.toString() + ":";
-    if (seconds <= 9) data += "0";
-
-    data += seconds.toString();
-    return data;
-  }
+              child: Slider(
+                min: 0,
+                max: duration.toDouble(),
+                value: sliderValue.toDouble(),
+                onChangeEnd: (value) {
+                  audioPlayer.seek(Duration(seconds: value.toInt()));
+                },
+                onChanged: (double value) {},
+              )),
+        ),
+      ),
+      Text(
+        _formatDuration(Duration(seconds: duration)),
+        style: style,
+      ),
+    ],
+  );
 }
