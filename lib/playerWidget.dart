@@ -54,6 +54,7 @@ Widget playerWidget(BuildContext context, MyAppState _myAppState) {
             ),
           ),
           CircleAvatar(
+            backgroundColor: Colors.cyan.withOpacity(0.3),
             child: Center(
               child: IconButton(
                   icon: Icon(
