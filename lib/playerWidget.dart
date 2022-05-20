@@ -2,79 +2,90 @@ import 'package:flutter/material.dart';
 import 'package:flutter_music_player/main.dart';
 
 Widget playerWidget(BuildContext context, MyAppState _myAppState) {
-  return Column(children: <Widget>[
-    Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16),
-      child: songProgress(context),
-    ),
-    Container(
-      padding: EdgeInsets.symmetric(vertical: 16),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          CircleAvatar(
-            child: Center(
-              child: IconButton(
-                  icon: Icon(
-                    Icons.skip_previous,
-                    color: Colors.white,
-                  ),
-                  onPressed: () {
-                    playNextSong(-1);
-                  }),
-            ),
-            backgroundColor: Colors.cyan.withOpacity(0.3),
-          ),
-          CircleAvatar(
-            radius: 30,
-            child: Center(
-              child: IconButton(
-                onPressed: () async {
-                  isPlaying ? audioPlayer.pause() : audioPlayer.resume();
-                },
-                padding: const EdgeInsets.all(0.0),
-                icon: Icon(
-                  isPlaying ? Icons.pause : Icons.play_arrow,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ),
-          CircleAvatar(
-            backgroundColor: Colors.cyan.withOpacity(0.3),
-            child: Center(
-              child: IconButton(
-                  icon: Icon(
-                    Icons.skip_next,
-                    color: Colors.white,
-                  ),
-                  onPressed: () {
-                    playNextSong(1);
-                  }),
-            ),
-          ),
-          CircleAvatar(
-            backgroundColor: Colors.cyan.withOpacity(0.3),
-            child: Center(
-              child: IconButton(
-                  icon: Icon(
-                    (screenMode == "player")
-                        ? Icons.expand_more
-                        : Icons.expand_less, //icons.expand_more,
-                    color: Colors.white,
-                  ),
-                  onPressed: () {
-                    _myAppState.setState(() {
-                      screenMode =
-                          (screenMode == "player") ? "mixed" : "player";
-                    });
-                  }),
-            ),
-          ),
-        ],
-      ),
-    ),
-  ]);
+  return Row(
+  	mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  	children: <Widget>[
+  	  Image(
+				height: 72,
+				width: 120,
+				fit: BoxFit.cover,
+				image: NetworkImage("https://avatars.githubusercontent.com/u/12081386?s=120&v=4")
+	  ),
+  	  Column(
+  	    children: <Widget>[
+		Padding(
+		  padding: EdgeInsets.symmetric(horizontal: 16),
+		  child: songProgress(context),
+	      ),
+	      Container(
+			  padding: EdgeInsets.symmetric(vertical: 16),
+			  child: Row(
+				mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+				children: <Widget>[
+				  CircleAvatar(
+					child: Center(
+					  child: IconButton(
+						  icon: Icon(
+							Icons.skip_previous,
+							color: Colors.white,
+						  ),
+						  onPressed: () {
+							playNextSong(-1);
+						  }),
+					),
+					backgroundColor: Colors.cyan.withOpacity(0.3),
+				  ),
+				  CircleAvatar(
+					radius: 30,
+					child: Center(
+					  child: IconButton(
+						onPressed: () async {
+						  isPlaying ? audioPlayer.pause() : audioPlayer.resume();
+						},
+						padding: const EdgeInsets.all(0.0),
+						icon: Icon(
+						  isPlaying ? Icons.pause : Icons.play_arrow,
+						  color: Colors.white,
+						),
+					  ),
+					),
+				  ),
+				  CircleAvatar(
+					backgroundColor: Colors.cyan.withOpacity(0.3),
+					child: Center(
+					  child: IconButton(
+						  icon: Icon(
+							Icons.skip_next,
+							color: Colors.white,
+						  ),
+						  onPressed: () {
+							playNextSong(1);
+						  }),
+					),
+				  ),
+				  CircleAvatar(
+					backgroundColor: Colors.cyan.withOpacity(0.3),
+					child: Center(
+					  child: IconButton(
+						  icon: Icon(
+							(screenMode == "player")
+								? Icons.expand_more
+								: Icons.expand_less, //icons.expand_more,
+							color: Colors.white,
+						  ),
+						  onPressed: () {
+							_myAppState.setState(() {
+							  screenMode =
+								  (screenMode == "player") ? "mixed" : "player";
+							});
+						  }),
+					),
+				  ),
+				],
+			  ),
+	      ),
+	   ]),
+  	]);
 }
 
 String _formatDuration(Duration d) {
