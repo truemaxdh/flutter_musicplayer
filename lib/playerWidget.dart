@@ -13,9 +13,11 @@ Widget playerWidget(BuildContext context, MyAppState _myAppState) {
                 "https://avatars.githubusercontent.com/u/12081386?s=120&v=4")),
         Container(
           height: 72,
-          width: 620,
+          //width: 620,
           padding: EdgeInsets.symmetric(horizontal: 3),
-          child: Column(children: <Widget>[
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16),
               child: songProgress(context),
