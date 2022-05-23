@@ -23,7 +23,7 @@ Widget playerWidget(BuildContext context, MyAppState _myAppState) {
               child: songProgress(context),
             ),
             Container(
-              padding: EdgeInsets.symmetric(vertical: 16),
+              padding: EdgeInsets.symmetric(vertical: 10),
               child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
@@ -41,7 +41,7 @@ Widget playerWidget(BuildContext context, MyAppState _myAppState) {
                 backgroundColor: Colors.cyan.withOpacity(0.3),
                 ),
                 CircleAvatar(
-                radius: 30,
+                radius: 25,
                 child: Center(
                   child: IconButton(
                   onPressed: () async {
