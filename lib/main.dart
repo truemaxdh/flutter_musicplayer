@@ -123,7 +123,7 @@ class MyAppState extends State<MainPage> {
     return ret;
   }
 
-  Container getSongListContainer() {
+  Expanded getSongListContainer() {
     return Expanded(
       child: Container(
         child: FutureBuilder(
