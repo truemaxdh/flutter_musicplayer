@@ -1,200 +1,153 @@
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_music_player/songWidget.dart';
-import 'package:flutter_music_player/widget.dart';
-import 'package:flutter_music_player/playerWidget.dart';
-import 'package:http/http.dart' as http;
+import 'package:flutter_music_player/main.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Music Player',
-      home: MainPage(),
-    );
-  }
-}
-
-class MainPage extends StatefulWidget {
-  @override
-  MyAppState createState() => MyAppState();
-}
-
-class MyAppState extends State<MainPage> {
-  var musicDomain = "https://truemaxdh.github.io";
-  var musicListPath = "/MusicTreasureHouse/README.md";
-  var httpClient = http.Client();
-
-  @override
-  void initState() {
-    super.initState();
-    setupAudio();
-  }
-
-  void setupAudio() {
-    audioPlayer.onAudioPositionChanged.listen((Duration p) {
-      //print('Position: ${p.inSeconds}');
-      if (isPlaying) {
-        sliderValue = p.inSeconds;
-        if (duration <= sliderValue) duration = sliderValue + 10;
-        setState(() {});
-      }
-    });
-    audioPlayer.onPlayerStateChanged.listen((PlayerState s) {
-      print('PlayerState: ${s}');
-      isPlaying = (s == PlayerState.PLAYING);
-      if (s == PlayerState.COMPLETED) {
-        print('curSongIdx: ${curSongIdx}');
-        playNextSong(1);
-        print('curSongIdx: ${curSongIdx}');
-      }
-      setState(() {});
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        drawer: Drawer(),
-        appBar: AppBar(
-          actions: <Widget>[
+Widget playerWidget(BuildContext context, MyAppState _myAppState) {
+  return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        Image(
+          height: 72,
+          width: 120,
+          fit: BoxFit.cover,
+          image: NetworkImage(
+              "https://avatars.githubusercontent.com/u/12081386?s=120&v=4")),
+        Expanded(
+          child:Container(
+            height: 72,
+            //width: 620,
+            padding: EdgeInsets.symmetric(horizontal: 3),
+            child: Column(
+            children: <Widget>[
             Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: InkWell(
-                onTap: () {
-                  setState(() {
-                    showVol = !showVol;
-                  });
-                },
-                child: IconText(
-                    textColor: Colors.white,
-                    iconColor: Colors.white,
-                    string: "volume",
-                    iconSize: 20,
-                    iconData: Icons.volume_down),
-              ),
-            )
-          ],
-          elevation: 0,
-          backgroundColor: Colors.black,
-          title: showVol
-              ? Slider(
-                  min: 0,
-                  max: 1,
-                  value: _volume,
-                  onChanged: (value) {
-                    setState(() {
-                      _volume = value;
-                      audioPlayer.setVolume(value);
-                    });
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: songProgress(context),
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(vertical: 16),
+              child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                CircleAvatar(
+                child: Center(
+                  child: IconButton(
+                    icon: Icon(
+                    Icons.skip_previous,
+                    color: Colors.white,
+                    ),
+                    onPressed: () {
+                    playNextSong(-1);
+                    }),
+                ),
+                backgroundColor: Colors.cyan.withOpacity(0.3),
+                ),
+                CircleAvatar(
+                radius: 30,
+                child: Center(
+                  child: IconButton(
+                  onPressed: () async {
+                    isPlaying
+                      ? audioPlayer.pause()
+                      : audioPlayer.resume();
                   },
-                )
-              : Text("Music Player"),
-        ),
-        body: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: getBodyChildren()),
-      ),
-    );
-  }
-
-  List<Widget> getBodyChildren() {
-    List<Widget> ret;
-    if (screenMode == "player") {
-      ret = <Widget>[
-        playerWidget(context, this),
-      ];
-    } else if (screenMode == "list") {
-      ret = <Widget>[
-        getSongListContainer(),
-      ];
-    } else {
-      ret = <Widget>[
-        getSongListContainer(),
-        playerWidget(context, this),
-      ];
-    }
-    return ret;
-  }
-
-  Container getSongListContainer() {
-    return Expanded(
-		Container(
-		  child: FutureBuilder(
-			future: httpClient.get(Uri.parse(musicDomain + musicListPath)),
-			builder: (context, snapshot) {
-			  if (snapshot.hasData) {
-				var response = snapshot.data;
-				//print('Response status: ${response.statusCode}');
-				//print('Response body: ${response.body}');
-
-				songList.clear();
-				var lines = response.body.split("\n");
-				for (var i = 0; i < lines.length; i++) {
-				  if (lines[i].indexOf(".mp3") > 0) {
-					var title = lines[i].substring(1, lines[i].indexOf(".mp3"));
-					var url = musicDomain +
-						lines[i].substring(
-							lines[i].indexOf(".mp3") + 6, lines[i].length - 1);
-					songList
-						.add(SongInfo2.abbreviated(title, "", "Danny Choi", url));
-				  }
-				}
-				return SongWidget();
-			  } else {
-				return Container(
-				  child: Center(
-					child: Row(
-					  mainAxisAlignment: MainAxisAlignment.center,
-					  children: <Widget>[
-						CircularProgressIndicator(),
-						SizedBox(
-						  width: 20,
-						),
-						Text(
-						  "Loading....",
-						  style: TextStyle(fontWeight: FontWeight.bold),
-						)
-					  ],
-					),
-				  ),
-				);
-			  }
-			},
-		  ),
-		),
-    );
-  }
+                  padding: const EdgeInsets.all(0.0),
+                  icon: Icon(
+                    isPlaying ? Icons.pause : Icons.play_arrow,
+                    color: Colors.white,
+                  ),
+                  ),
+                ),
+                ),
+                CircleAvatar(
+                backgroundColor: Colors.cyan.withOpacity(0.3),
+                child: Center(
+                  child: IconButton(
+                    icon: Icon(
+                    Icons.skip_next,
+                    color: Colors.white,
+                    ),
+                    onPressed: () {
+                    playNextSong(1);
+                    }),
+                ),
+                ),
+                CircleAvatar(
+                backgroundColor: Colors.cyan.withOpacity(0.3),
+                child: Center(
+                  child: IconButton(
+                    icon: Icon(
+                    (screenMode == "player")
+                      ? Icons.expand_more
+                      : Icons.expand_less, //icons.expand_more,
+                    color: Colors.white,
+                    ),
+                    onPressed: () {
+                    _myAppState.setState(() {
+                      screenMode =
+                        (screenMode == "player") ? "mixed" : "player";
+                    });
+                    }),
+                ),
+                ),
+              ],
+              ),
+            ),
+            ]),
+          ),	
+        ),    
+      ]);
 }
 
-AudioPlayer audioPlayer = AudioPlayer();
-List<SongInfo2> songList = new List.empty(growable: true);
-var curSongIdx = -1;
-var playNextSong = (idxIncrease) {
-  curSongIdx += idxIncrease;
-  if (curSongIdx < 0) {
-    curSongIdx += songList.length;
-  } else if (curSongIdx >= songList.length) {
-    curSongIdx -= songList.length;
-  }
+String _formatDuration(Duration d) {
+  if (d == null) return "--:--";
+  int minute = d.inMinutes;
+  int second = (d.inSeconds > 60) ? (d.inSeconds % 60) : d.inSeconds;
+  String format = ((minute < 10) ? "0$minute" : "$minute") +
+      ":" +
+      ((second < 10) ? "0$second" : "$second");
+  return format;
+}
 
-  SongInfo2 song = songList[curSongIdx];
-  if (song.filePath.startsWith('http:') || song.filePath.startsWith('https:')) {
-    audioPlayer.play(song.filePath);
-  } else {
-    audioPlayer.play(song.filePath, isLocal: true);
-  }
-};
-
-var duration = 10;
-bool showVol = false;
-bool isPlaying = false;
-double _volume = 1;
-var sliderValue = 0;
-var screenMode = 'mixed'; // 'mixed', 'player', 'list'
+Widget songProgress(BuildContext context) {
+  var style = TextStyle(color: Colors.black);
+  return Row(
+    children: <Widget>[
+      Text(
+        _formatDuration(Duration(seconds: sliderValue)),
+        style: style,
+      ),
+      Expanded(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 5),
+          child: SliderTheme(
+              data: SliderTheme.of(context).copyWith(
+                trackHeight: 2,
+                thumbColor: Colors.blueAccent,
+                overlayColor: Colors.blue,
+                thumbShape: RoundSliderThumbShape(
+                  disabledThumbRadius: 5,
+                  enabledThumbRadius: 5,
+                ),
+                overlayShape: RoundSliderOverlayShape(
+                  overlayRadius: 10,
+                ),
+                activeTrackColor: Colors.blueAccent,
+                inactiveTrackColor: Colors.grey,
+              ),
+              child: Slider(
+                min: 0,
+                max: duration.toDouble(),
+                value: sliderValue.toDouble(),
+                onChangeEnd: (value) {
+                  audioPlayer.seek(Duration(seconds: value.toInt()));
+                },
+                onChanged: (double value) {},
+              )),
+        ),
+      ),
+      Text(
+        _formatDuration(Duration(seconds: duration)),
+        style: style,
+      ),
+    ],
+  );
+}
