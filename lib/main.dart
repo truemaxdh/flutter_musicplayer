@@ -125,50 +125,50 @@ class MyAppState extends State<MainPage> {
 
   Container getSongListContainer() {
     return Expanded(
-		Container(
-		  child: FutureBuilder(
-			future: httpClient.get(Uri.parse(musicDomain + musicListPath)),
-			builder: (context, snapshot) {
-			  if (snapshot.hasData) {
-				var response = snapshot.data;
-				//print('Response status: ${response.statusCode}');
-				//print('Response body: ${response.body}');
+      child: Container(
+        child: FutureBuilder(
+          future: httpClient.get(Uri.parse(musicDomain + musicListPath)),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              var response = snapshot.data;
+              //print('Response status: ${response.statusCode}');
+              //print('Response body: ${response.body}');
 
-				songList.clear();
-				var lines = response.body.split("\n");
-				for (var i = 0; i < lines.length; i++) {
-				  if (lines[i].indexOf(".mp3") > 0) {
-					var title = lines[i].substring(1, lines[i].indexOf(".mp3"));
-					var url = musicDomain +
-						lines[i].substring(
-							lines[i].indexOf(".mp3") + 6, lines[i].length - 1);
-					songList
-						.add(SongInfo2.abbreviated(title, "", "Danny Choi", url));
-				  }
-				}
-				return SongWidget();
-			  } else {
-				return Container(
-				  child: Center(
-					child: Row(
-					  mainAxisAlignment: MainAxisAlignment.center,
-					  children: <Widget>[
-						CircularProgressIndicator(),
-						SizedBox(
-						  width: 20,
-						),
-						Text(
-						  "Loading....",
-						  style: TextStyle(fontWeight: FontWeight.bold),
-						)
-					  ],
-					),
-				  ),
-				);
-			  }
-			},
-		  ),
-		),
+              songList.clear();
+              var lines = response.body.split("\n");
+              for (var i = 0; i < lines.length; i++) {
+                if (lines[i].indexOf(".mp3") > 0) {
+                var title = lines[i].substring(1, lines[i].indexOf(".mp3"));
+                var url = musicDomain +
+                  lines[i].substring(
+                    lines[i].indexOf(".mp3") + 6, lines[i].length - 1);
+                songList
+                  .add(SongInfo2.abbreviated(title, "", "Danny Choi", url));
+                }
+              }
+              return SongWidget();
+            } else {
+              return Container(
+                child: Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      CircularProgressIndicator(),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Text(
+                        "Loading....",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      )
+                    ],
+                  ),
+                ),
+              );
+            }
+          },
+        ),
+      ),
     );
   }
 }
