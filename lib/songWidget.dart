@@ -75,6 +75,7 @@ class SongWidget extends StatelessWidget {
                           InkWell(
                             onTap: () {
                               curSongIdx = songIndex;
+                              screenMode = "mixed";
                               playNextSong(0);
                             },
                             child: IconText(
