@@ -3,7 +3,7 @@ import 'package:flutter_music_player/main.dart';
 
 Widget playerWidget(BuildContext context, MyAppState _myAppState) {
   return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.stretch,
       children: <Widget>[
         Image(
             height: 72,
