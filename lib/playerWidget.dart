@@ -17,80 +17,80 @@ Widget playerWidget(BuildContext context, MyAppState _myAppState) {
             //width: 620,
             padding: EdgeInsets.symmetric(horizontal: 3),
             child: Column(
-            children: <Widget>[
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: songProgress(context),
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(vertical: 10),
-              child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                CircleAvatar(
-                child: Center(
-                  child: IconButton(
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 9),
+                  child: songProgress(context),
+                ),
+              Container(
+                padding: EdgeInsets.symmetric(vertical: 9),
+                child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  CircleAvatar(
+                  child: Center(
+                    child: IconButton(
+                      icon: Icon(
+                      Icons.skip_previous,
+                      color: Colors.white,
+                      ),
+                      onPressed: () {
+                      playNextSong(-1);
+                      }),
+                  ),
+                  backgroundColor: Colors.cyan.withOpacity(0.3),
+                  ),
+                  CircleAvatar(
+                  radius: 25,
+                  child: Center(
+                    child: IconButton(
+                    onPressed: () async {
+                      isPlaying
+                        ? audioPlayer.pause()
+                        : audioPlayer.resume();
+                    },
+                    padding: const EdgeInsets.all(0.0),
                     icon: Icon(
-                    Icons.skip_previous,
-                    color: Colors.white,
+                      isPlaying ? Icons.pause : Icons.play_arrow,
+                      color: Colors.white,
                     ),
-                    onPressed: () {
-                    playNextSong(-1);
-                    }),
-                ),
-                backgroundColor: Colors.cyan.withOpacity(0.3),
-                ),
-                CircleAvatar(
-                radius: 25,
-                child: Center(
-                  child: IconButton(
-                  onPressed: () async {
-                    isPlaying
-                      ? audioPlayer.pause()
-                      : audioPlayer.resume();
-                  },
-                  padding: const EdgeInsets.all(0.0),
-                  icon: Icon(
-                    isPlaying ? Icons.pause : Icons.play_arrow,
-                    color: Colors.white,
+                    ),
                   ),
                   ),
+                  CircleAvatar(
+                  backgroundColor: Colors.cyan.withOpacity(0.3),
+                  child: Center(
+                    child: IconButton(
+                      icon: Icon(
+                      Icons.skip_next,
+                      color: Colors.white,
+                      ),
+                      onPressed: () {
+                      playNextSong(1);
+                      }),
+                  ),
+                  ),
+                  CircleAvatar(
+                  backgroundColor: Colors.cyan.withOpacity(0.3),
+                  child: Center(
+                    child: IconButton(
+                      icon: Icon(
+                      (screenMode == "player")
+                        ? Icons.expand_more
+                        : Icons.expand_less, //icons.expand_more,
+                      color: Colors.white,
+                      ),
+                      onPressed: () {
+                      _myAppState.setState(() {
+                        screenMode =
+                          (screenMode == "player") ? "mixed" : "player";
+                      });
+                      }),
+                  ),
+                  ),
+                ],
                 ),
-                ),
-                CircleAvatar(
-                backgroundColor: Colors.cyan.withOpacity(0.3),
-                child: Center(
-                  child: IconButton(
-                    icon: Icon(
-                    Icons.skip_next,
-                    color: Colors.white,
-                    ),
-                    onPressed: () {
-                    playNextSong(1);
-                    }),
-                ),
-                ),
-                CircleAvatar(
-                backgroundColor: Colors.cyan.withOpacity(0.3),
-                child: Center(
-                  child: IconButton(
-                    icon: Icon(
-                    (screenMode == "player")
-                      ? Icons.expand_more
-                      : Icons.expand_less, //icons.expand_more,
-                    color: Colors.white,
-                    ),
-                    onPressed: () {
-                    _myAppState.setState(() {
-                      screenMode =
-                        (screenMode == "player") ? "mixed" : "player";
-                    });
-                    }),
-                ),
-                ),
-              ],
               ),
-            ),
             ]),
           ),	
         ),    
