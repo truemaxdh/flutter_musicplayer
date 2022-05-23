@@ -197,4 +197,4 @@ bool showVol = false;
 bool isPlaying = false;
 double _volume = 1;
 var sliderValue = 0;
-var screenMode = 'mixed'; // 'mixed', 'player', 'list'
+var screenMode = 'list'; // 'mixed', 'player', 'list'
