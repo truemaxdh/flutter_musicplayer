@@ -140,12 +140,12 @@ class MyAppState extends State<MainPage> {
                 if (lines[i].indexOf(".mp3") > 0) {
                   var title = lines[i].substring(1, lines[i].indexOf(".mp3"));
                   var url = musicDomain + lines[i].substring(lines[i].indexOf(".mp3") + 6, lines[i].length - 1);
-                  songList.add(SongInfo2.abbreviated(title, "", "Danny Choi", url));
+                  songList.add(SongInfo2.abbreviated(title, "", "Danny Choi", url, false));
                 }
                 else if (lines[i].indexOf(".ytb") > 0) {
                   var title = lines[i].substring(1, lines[i].indexOf(".ytb"));
                   var url = lines[i].substring(lines[i].indexOf(".ytb") + 6, lines[i].length - 1);
-                  songList.add(SongInfo2.abbreviated(title, "", "Danny Choi", url));
+                  songList.add(SongInfo2.abbreviated(title, "", "Danny Choi", url, true));
                 }
               }
               return SongWidget();
