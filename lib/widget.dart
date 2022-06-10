@@ -1,203 +1,151 @@
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_music_player/songWidget.dart';
-import 'package:flutter_music_player/widget.dart';
-import 'package:flutter_music_player/playerWidget.dart';
-import 'package:http/http.dart' as http;
 
-void main() {
-  runApp(MyApp());
-}
+class IconText extends StatelessWidget {
+  final IconData iconData;
+  final String string;
+  final Color iconColor;
+  final Color textColor;
+  final double iconSize;
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Music Player',
-      home: MainPage(),
-    );
-  }
-}
-
-class MainPage extends StatefulWidget {
-  @override
-  MyAppState createState() => MyAppState();
-}
-
-class MyAppState extends State<MainPage> {
-  var musicDomain = "https://truemaxdh.github.io";
-  var musicListPath = "/MusicTreasureHouse/README.md";
-  var httpClient = http.Client();
-
-  @override
-  void initState() {
-    super.initState();
-    setupAudio();
-  }
-
-  void setupAudio() {
-    audioPlayer.onAudioPositionChanged.listen((Duration p) {
-      //print('Position: ${p.inSeconds}');
-      if (isPlaying) {
-        sliderValue = p.inSeconds;
-        if (duration <= sliderValue) duration = sliderValue + 10;
-        setState(() {});
-      }
-    });
-    audioPlayer.onPlayerStateChanged.listen((PlayerState s) {
-      print('PlayerState: ${s}');
-      isPlaying = (s == PlayerState.PLAYING);
-      if (s == PlayerState.COMPLETED) {
-        print('curSongIdx: ${curSongIdx}');
-        playNextSong(1);
-        print('curSongIdx: ${curSongIdx}');
-      }
-      setState(() {});
-    });
-  }
+  IconText({
+    @required this.textColor,
+    @required this.iconColor,
+    @required this.string,
+    @required this.iconSize,
+    @required this.iconData,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        drawer: Drawer(),
-        appBar: AppBar(
-          actions: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: InkWell(
-                onTap: () {
-                  setState(() {
-                    showVol = !showVol;
-                  });
-                },
-                child: IconText(
-                    textColor: Colors.white,
-                    iconColor: Colors.white,
-                    string: "volume",
-                    iconSize: 20,
-                    iconData: Icons.volume_down),
-              ),
-            )
-          ],
-          elevation: 0,
-          backgroundColor: Colors.black,
-          title: showVol
-              ? Slider(
-                  min: 0,
-                  max: 1,
-                  value: _volume,
-                  onChanged: (value) {
-                    setState(() {
-                      _volume = value;
-                      audioPlayer.setVolume(value);
-                    });
-                  },
-                )
-              : Text("Music Player"),
+    return Column(
+      children: <Widget>[
+        Icon(
+          iconData,
+          size: iconSize,
+          color: iconColor,
         ),
-        body: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: getBodyChildren()),
-      ),
-    );
-  }
-
-  List<Widget> getBodyChildren() {
-    List<Widget> ret;
-    if (screenMode == "player") {
-      ret = <Widget>[
-        playerWidget(context, this),
-      ];
-    } else if (screenMode == "list") {
-      ret = <Widget>[
-        getSongListContainer(),
-      ];
-    } else {
-      ret = <Widget>[
-        getSongListContainer(),
-        playerWidget(context, this),
-      ];
-    }
-    return ret;
-  }
-
-  Expanded getSongListContainer() {
-    return Expanded(
-      child: Container(
-        child: FutureBuilder(
-          future: httpClient.get(Uri.parse(musicDomain + musicListPath)),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              var response = snapshot.data;
-              //print('Response status: ${response.statusCode}');
-              //print('Response body: ${response.body}');
-
-              songList.clear();
-              var lines = response.body.split("\n");
-              for (var i = 0; i < lines.length; i++) {
-                if (lines[i].indexOf(".mp3") > 0) {
-                  var title = lines[i].substring(1, lines[i].indexOf(".mp3"));
-                  var url = musicDomain + lines[i].substring(lines[i].indexOf(".mp3") + 6, lines[i].length - 1);
-                  songList.add(SongInfo2.abbreviated(title, "", "Danny Choi", url, false));
-                }
-                else if (lines[i].indexOf(".ytb") > 0) {
-                  var title = lines[i].substring(1, lines[i].indexOf(".ytb"));
-                  var url = lines[i].substring(lines[i].indexOf(".ytb") + 6, lines[i].length - 1);
-                  songList.add(SongInfo2.abbreviated(title, "", "Danny Choi", url, true));
-                }
-              }
-              return SongWidget();
-            } else {
-              return Container(
-                child: Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      CircularProgressIndicator(),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Text(
-                        "Loading....",
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
-                ),
-              );
-            }
-          },
+        SizedBox(
+          height: 8,
         ),
-      ),
+        Text(
+          string,
+          style: TextStyle(
+              color: Colors.red, fontSize: 10, fontWeight: FontWeight.w900),
+        ),
+      ],
     );
   }
 }
 
-AudioPlayer audioPlayer = AudioPlayer();
-List<SongInfo2> songList = new List.empty(growable: true);
-var curSongIdx = -1;
-var playNextSong = (idxIncrease) {
-  curSongIdx += idxIncrease;
-  if (curSongIdx < 0) {
-    curSongIdx += songList.length;
-  } else if (curSongIdx >= songList.length) {
-    curSongIdx -= songList.length;
+class SongInfo2 {
+  Map<dynamic, dynamic> _data = new Map();
+
+  SongInfo2.abbreviated(
+      String title, String artist, String composer, String url, bool isYoutube) {
+    _data['album_id'] = ""; //albumId;
+    _data['artist_id'] = ""; //artistId;
+    _data['artist'] = artist; //artist;
+    _data['album'] = ""; //album;
+    _data['title'] = title; //title;
+    _data['_display_name'] = title; //displayName;
+    _data['composer'] = composer; //composer;
+    _data['year'] = ""; //year;
+    _data['track'] = ""; //track;
+    _data['duration'] = "120"; //duration;
+    _data['bookmark'] = ""; //bookmark;
+    _data['_data'] = url; //filePath;
+    _data['_size'] = ""; //fileSize;
+    _data['album_artwork'] =
+        "https://avatars.githubusercontent.com/u/12081386?s=120&v=4"; //albumArtwork;
+    _data['is_music'] = ""; //isMusic;
+    _data['is_podcast'] = ""; //isPodcast;
+    _data['is_ringtone'] = ""; //isRingtone;
+    _data['is_alarm'] = ""; //isAlarm;
+    _data['is_notification'] = ""; //isNotification;
+    _data['is_youtube'] = isYoutube; //isNotification;
   }
 
-  SongInfo2 song = songList[curSongIdx];
-  if (song.filePath.startsWith('http:') || song.filePath.startsWith('https:')) {
-    if (!song.isYoutube)
-      audioPlayer.play(song.filePath);
-  } else {
-    audioPlayer.play(song.filePath, isLocal: true);
+  SongInfo2.fromURL(String url) {
+    _data['album_id'] = "1234.mp3"; //albumId;
+    _data['artist_id'] = "1234.mp3"; //artistId;
+    _data['artist'] = "1234.mp3"; //artist;
+    _data['album'] = "1234.mp3"; //album;
+    _data['title'] = "1234.mp3"; //title;
+    _data['_display_name'] = "1234.mp3"; //displayName;
+    _data['composer'] = "1234.mp3"; //composer;
+    _data['year'] = "1234.mp3"; //year;
+    _data['track'] = "1234.mp3"; //track;
+    _data['duration'] = "123"; //duration;
+    _data['bookmark'] = "1234.mp3"; //bookmark;
+    _data['_data'] = url; //filePath;
+    _data['_size'] = "1234.mp3"; //fileSize;
+    _data['album_artwork'] =
+        "https://avatars.githubusercontent.com/u/12081386?s=120&v=4"; //albumArtwork;
+    _data['is_music'] = "1234.mp3"; //isMusic;
+    _data['is_podcast'] = "1234.mp3"; //isPodcast;
+    _data['is_ringtone'] = "1234.mp3"; //isRingtone;
+    _data['is_alarm'] = "1234.mp3"; //isAlarm;
+    _data['is_notification'] = "1234.mp3"; //isNotification;
+    _data['is_youtube'] = false; //isNotification;
   }
-};
 
-var duration = 10;
-bool showVol = false;
-bool isPlaying = false;
-double _volume = 1;
-var sliderValue = 0;
-var screenMode = 'list'; // 'mixed', 'player', 'list'
+  /// Returns the album id which this song appears.
+  String get albumId => _data['album_id'];
+
+  /// Returns the artist id who create this audio file.
+  String get artistId => _data['artist_id'];
+
+  /// Returns the artist name who create this audio file.
+  String get artist => _data['artist'];
+
+  /// Returns the album title which this song appears.
+  String get album => _data['album'];
+
+  // Returns the genre name which this song belongs.
+  //String get genre => _data['genre_name'];
+
+  /// Returns the song title.
+  String get title => _data['title'];
+
+  /// Returns the song display name. Display name string
+  /// is a combination of [Track number] + [Song title] [File extension]
+  /// Something like 1 My pretty song.mp3
+  String get displayName => _data['_display_name'];
+
+  /// Returns the composer name of this song.
+  String get composer => _data['composer'];
+
+  /// Returns the year of this song was created.
+  String get year => _data['year'];
+
+  /// Returns the album track number if this song has one.
+  String get track => _data['track'];
+
+  /// Returns a String with a number in milliseconds (ms) that is the duration of this audio file.
+  String get duration => _data['duration'];
+
+  /// Returns in ms, playback position when this song was stopped.
+  /// from the last time.
+  String get bookmark => _data['bookmark'];
+
+  /// Returns a String with a file path to audio data file
+  String get filePath => _data['_data'];
+
+  /// Returns a String with the size, in bytes, of this audio file.
+  String get fileSize => _data['_size'];
+
+  ///Returns album artwork path which current song appears.
+  String get albumArtwork => _data['album_artwork'];
+
+  bool get isMusic => _data['is_music'];
+
+  bool get isPodcast => _data['is_podcast'];
+
+  bool get isRingtone => _data['is_ringtone'];
+
+  bool get isAlarm => _data['is_alarm'];
+
+  bool get isNotification => _data['is_notification'];
+  
+  bool get isYoutube => _data['isYoutube'];
+}
