@@ -187,10 +187,12 @@ var playNextSong = (idxIncrease) {
   }
 
   SongInfo2 song = songList[curSongIdx];
-  if (song.filePath.startsWith('http:') || song.filePath.startsWith('https:')) {
-    audioPlayer.play(song.filePath);
-  } else {
-    audioPlayer.play(song.filePath, isLocal: true);
+  if (!song.isYoutube) {
+    if (song.filePath.startsWith('http:') || song.filePath.startsWith('https:')) {
+      audioPlayer.play(song.filePath);
+    } else {
+      audioPlayer.play(song.filePath, isLocal: true);
+    }
   }
 };
 
