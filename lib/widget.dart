@@ -41,7 +41,7 @@ class SongInfo2 {
   Map<dynamic, dynamic> _data = new Map();
 
   SongInfo2.abbreviated(
-      String title, String artist, String composer, String url) {
+      String title, String artist, String composer, String url, bool isYoutube) {
     _data['album_id'] = ""; //albumId;
     _data['artist_id'] = ""; //artistId;
     _data['artist'] = artist; //artist;
@@ -62,6 +62,7 @@ class SongInfo2 {
     _data['is_ringtone'] = ""; //isRingtone;
     _data['is_alarm'] = ""; //isAlarm;
     _data['is_notification'] = ""; //isNotification;
+    _data['is_youtube'] = isYoutube; //isNotification;
   }
 
   SongInfo2.fromURL(String url) {
@@ -85,6 +86,7 @@ class SongInfo2 {
     _data['is_ringtone'] = "1234.mp3"; //isRingtone;
     _data['is_alarm'] = "1234.mp3"; //isAlarm;
     _data['is_notification'] = "1234.mp3"; //isNotification;
+    _data['is_youtube'] = false; //isNotification;
   }
 
   /// Returns the album id which this song appears.
@@ -144,4 +146,6 @@ class SongInfo2 {
   bool get isAlarm => _data['is_alarm'];
 
   bool get isNotification => _data['is_notification'];
+  
+  bool get isYoutube => _data['isYoutube'];
 }
