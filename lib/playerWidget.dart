@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_music_player/main.dart';
+import 'package:flutter_music_player/youtubePlayerWidget.dart';
 
 Widget playerWidget(BuildContext context, MyAppState _myAppState) {
+  if (songList[curSongIdx].isYoutube) {
+    return youtubePlayerWidget(context, _myAppState);
+  }
   return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
