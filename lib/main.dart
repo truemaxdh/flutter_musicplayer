@@ -36,7 +36,7 @@ class MyAppState extends State<MainPage> {
   }
 
   void setupAudio() {
-    audioPlayer.onAudioPositionChanged.listen((Duration p) {
+    audioPlayer.onPositionChanged.listen((Duration p) {
       //print('Position: ${p.inSeconds}');
       if (isPlaying) {
         sliderValue = p.inSeconds;
@@ -46,17 +46,18 @@ class MyAppState extends State<MainPage> {
     });
     audioPlayer.onPlayerStateChanged.listen((PlayerState s) {
       print('PlayerState: ${s}');
-      isPlaying = (s == PlayerState.PLAYING);
-      if (s == PlayerState.COMPLETED) {
+      isPlaying = (s == PlayerState.playing);
+      if (s == PlayerState.completed) {
         print('curSongIdx: ${curSongIdx}');
         playNextSong(1);
         print('curSongIdx: ${curSongIdx}');
       }
       setState(() {});
     });
-    audioplayer.onDurationChanged.listen((Duration p) {
+    audioPlayer.onDurationChanged.listen((Duration p) {
       duration = p.inSeconds;
       setState(() {});
+    });
   }
 
   @override
@@ -142,13 +143,17 @@ class MyAppState extends State<MainPage> {
               for (var i = 0; i < lines.length; i++) {
                 if (lines[i].indexOf(".mp3") > 0) {
                   var title = lines[i].substring(1, lines[i].indexOf(".mp3"));
-                  var url = musicDomain + lines[i].substring(lines[i].indexOf(".mp3") + 6, lines[i].length - 1);
-                  songList.add(SongInfo2.abbreviated(title, "", "Danny Choi", url, false));
-                }
-                else if (lines[i].indexOf(".ytb") > 0) {
+                  var url = musicDomain +
+                      lines[i].substring(
+                          lines[i].indexOf(".mp3") + 6, lines[i].length - 1);
+                  songList.add(SongInfo2.abbreviated(
+                      title, "", "Danny Choi", url, false));
+                } else if (lines[i].indexOf(".ytb") > 0) {
                   var title = lines[i].substring(1, lines[i].indexOf(".ytb"));
-                  var url = lines[i].substring(lines[i].indexOf(".ytb") + 6, lines[i].length - 1);
-                  songList.add(SongInfo2.abbreviated(title, "", "Danny Choi", url, true));
+                  var url = lines[i].substring(
+                      lines[i].indexOf(".ytb") + 6, lines[i].length - 1);
+                  songList.add(SongInfo2.abbreviated(
+                      title, "", "Danny Choi", url, true));
                 }
               }
               return SongWidget();
@@ -191,10 +196,11 @@ var playNextSong = (idxIncrease) {
 
   SongInfo2 song = songList[curSongIdx];
   if (!song.isYoutube) {
-    if (song.filePath.startsWith('http:') || song.filePath.startsWith('https:')) {
-      audioPlayer.play(song.filePath);
+    if (song.filePath.startsWith('http:') ||
+        song.filePath.startsWith('https:')) {
+      audioPlayer.play(UrlSource(song.filePath));
     } else {
-      audioPlayer.play(song.filePath, isLocal: true);
+      audioPlayer.play(DeviceFileSource(song.filePath));
     }
   }
 };
