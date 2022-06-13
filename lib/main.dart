@@ -54,6 +54,9 @@ class MyAppState extends State<MainPage> {
       }
       setState(() {});
     });
+    audioplayer.onDurationChanged.listen((Duration p) {
+      duration = p.inSeconds;
+      setState(() {});
   }
 
   @override
