@@ -203,6 +203,8 @@ var playNextSong = (idxIncrease) {
     } else {
       audioPlayer.play(DeviceFileSource(song.filePath));
     }
+  } else {
+    audioPlayer.stop();
   }
 };
 
