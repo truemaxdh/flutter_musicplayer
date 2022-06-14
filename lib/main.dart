@@ -33,6 +33,7 @@ class MyAppState extends State<MainPage> {
   void initState() {
     super.initState();
     setupAudio();
+    _myAppState = this;
   }
 
   void setupAudio() {
@@ -183,6 +184,7 @@ class MyAppState extends State<MainPage> {
   }
 }
 
+MyAppState _myAppState;
 AudioPlayer audioPlayer = AudioPlayer();
 List<SongInfo2> songList = new List.empty(growable: true);
 var curSongIdx = -1;
@@ -205,6 +207,10 @@ var playNextSong = (idxIncrease) {
     }
   } else {
     audioPlayer.stop();
+    _myAppState.setState(() {
+      screenMode =
+        (screenMode == "player") ? "mixed" : "player";
+    });
   }
 };
 
