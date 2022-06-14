@@ -25,6 +25,7 @@ Widget playerWidget(BuildContext context, MyAppState _myAppState) {
               }),
           ),
         ),
+    ]);
   }
   return Row(
       mainAxisAlignment: MainAxisAlignment.start,
