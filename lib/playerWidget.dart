@@ -4,7 +4,27 @@ import 'package:flutter_music_player/youtubePlayerWidget.dart';
 
 Widget playerWidget(BuildContext context, MyAppState _myAppState) {
   if (songList[curSongIdx].isYoutube) {
-    return youtubePlayerWidget();
+    return Column(
+      children: <Widget>[
+        youtubePlayerWidget(),
+        CircleAvatar(
+          backgroundColor: Colors.cyan.withOpacity(0.3),
+          child: Center(
+            child: IconButton(
+              icon: Icon(
+                (screenMode == "player") ?
+                  Icons.expand_more
+                  : Icons.expand_less, //icons.expand_more,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                _myAppState.setState(() {
+                    screenMode =
+                        (screenMode == "player") ? "mixed" : "player";
+                });
+              }),
+          ),
+        ),
   }
   return Row(
       mainAxisAlignment: MainAxisAlignment.start,
