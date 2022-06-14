@@ -147,5 +147,5 @@ class SongInfo2 {
 
   bool get isNotification => _data['is_notification'];
   
-  bool get isYoutube => _data['isYoutube'];
+  bool get isYoutube => _data['is_youtube'];
 }
