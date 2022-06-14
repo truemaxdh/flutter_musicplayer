@@ -7,7 +7,7 @@ Widget youtubePlayerWidget() {
     initialVideoId: 'Il-an3K9pjg',
     params: YoutubePlayerParams(
       playlist: ['Il-an3K9pjg'], // Defining custom playlist
-      startAt: Duration(seconds: 30),
+      //startAt: Duration(seconds: 30),
       showControls: true,
       showFullscreenButton: true,
     ),
