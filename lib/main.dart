@@ -195,6 +195,7 @@ var playNextSong = (idxIncrease) {
   }
 
   SongInfo2 song = songList[curSongIdx];
+  print('isYoutube: ${song.isYoutube}');
   if (!song.isYoutube) {
     if (song.filePath.startsWith('http:') ||
         song.filePath.startsWith('https:')) {
