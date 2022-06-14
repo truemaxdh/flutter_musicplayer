@@ -2,124 +2,98 @@ import 'package:flutter/material.dart';
 import 'package:flutter_music_player/main.dart';
 import 'package:flutter_music_player/youtubePlayerWidget.dart';
 
-Widget playerWidget(BuildContext context, MyAppState _myAppState) {
+Widget playerWidget(BuildContext context) {
   if (songList[curSongIdx].isYoutube) {
-    return Column(
-      children: <Widget>[
-        youtubePlayerWidget(),
-        CircleAvatar(
-          backgroundColor: Colors.cyan.withOpacity(0.3),
-          child: Center(
-            child: IconButton(
-              icon: Icon(
-                (screenMode == "player") ?
-                  Icons.expand_more
-                  : Icons.expand_less, //icons.expand_more,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                _myAppState.setState(() {
-                    screenMode =
-                        (screenMode == "player") ? "mixed" : "player";
-                });
-              }),
-          ),
-        ),
-    ]);
+    return youtubePlayerWidget();
   }
-  return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: <Widget>[
-        Image(
-          height: 72,
-          width: 120,
-          fit: BoxFit.cover,
-          image: NetworkImage(
-              "https://avatars.githubusercontent.com/u/12081386?s=120&v=4")),
-        Expanded(
-          child:Container(
-            height: 72,
-            //width: 620,
-            padding: EdgeInsets.symmetric(horizontal: 3),
-            child: Column(
+  return Row(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
+    Image(
+        height: 72,
+        width: 120,
+        fit: BoxFit.cover,
+        image: NetworkImage(
+            "https://avatars.githubusercontent.com/u/12081386?s=120&v=4")),
+    Expanded(
+      child: Container(
+        height: 72,
+        //width: 620,
+        padding: EdgeInsets.symmetric(horizontal: 3),
+        child: Column(children: <Widget>[
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: songProgress(context),
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 5),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
-                  child: songProgress(context),
-                ),
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 5),
-                child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  CircleAvatar(
+                CircleAvatar(
                   child: Center(
                     child: IconButton(
-                      icon: Icon(
-                      Icons.skip_previous,
-                      color: Colors.white,
-                      ),
-                      onPressed: () {
-                      playNextSong(-1);
-                      }),
+                        icon: Icon(
+                          Icons.skip_previous,
+                          color: Colors.white,
+                        ),
+                        onPressed: () {
+                          playNextSong(-1);
+                        }),
                   ),
                   backgroundColor: Colors.cyan.withOpacity(0.3),
-                  ),
-                  CircleAvatar(
+                ),
+                CircleAvatar(
                   radius: 23,
                   child: Center(
                     child: IconButton(
-                    onPressed: () async {
-                      isPlaying
-                        ? audioPlayer.pause()
-                        : audioPlayer.resume();
-                    },
-                    padding: const EdgeInsets.all(0.0),
-                    icon: Icon(
-                      isPlaying ? Icons.pause : Icons.play_arrow,
-                      color: Colors.white,
-                    ),
+                      onPressed: () async {
+                        isPlaying ? audioPlayer.pause() : audioPlayer.resume();
+                      },
+                      padding: const EdgeInsets.all(0.0),
+                      icon: Icon(
+                        isPlaying ? Icons.pause : Icons.play_arrow,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
-                  ),
-                  CircleAvatar(
-                  backgroundColor: Colors.cyan.withOpacity(0.3),
-                  child: Center(
-                    child: IconButton(
-                      icon: Icon(
-                      Icons.skip_next,
-                      color: Colors.white,
-                      ),
-                      onPressed: () {
-                      playNextSong(1);
-                      }),
-                  ),
-                  ),
-                  CircleAvatar(
-                  backgroundColor: Colors.cyan.withOpacity(0.3),
-                  child: Center(
-                    child: IconButton(
-                      icon: Icon(
-                      (screenMode == "player")
-                        ? Icons.expand_more
-                        : Icons.expand_less, //icons.expand_more,
-                      color: Colors.white,
-                      ),
-                      onPressed: () {
-                      _myAppState.setState(() {
-                        screenMode =
-                          (screenMode == "player") ? "mixed" : "player";
-                      });
-                      }),
-                  ),
-                  ),
-                ],
                 ),
-              ),
-            ]),
-          ),	
-        ),    
-      ]);
+                CircleAvatar(
+                  backgroundColor: Colors.cyan.withOpacity(0.3),
+                  child: Center(
+                    child: IconButton(
+                        icon: Icon(
+                          Icons.skip_next,
+                          color: Colors.white,
+                        ),
+                        onPressed: () {
+                          playNextSong(1);
+                        }),
+                  ),
+                ),
+                CircleAvatar(
+                  backgroundColor: Colors.cyan.withOpacity(0.3),
+                  child: Center(
+                    child: IconButton(
+                        icon: Icon(
+                          (screenMode == "player")
+                              ? Icons.expand_more
+                              : Icons.expand_less, //icons.expand_more,
+                          color: Colors.white,
+                        ),
+                        onPressed: () {
+                          myAppState.setState(() {
+                            screenMode =
+                                (screenMode == "player") ? "mixed" : "player";
+                          });
+                        }),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ]),
+      ),
+    ),
+  ]);
 }
 
 String _formatDuration(Duration d) {

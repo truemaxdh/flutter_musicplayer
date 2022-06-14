@@ -4,6 +4,7 @@ import 'package:flutter_music_player/songWidget.dart';
 import 'package:flutter_music_player/widget.dart';
 import 'package:flutter_music_player/playerWidget.dart';
 import 'package:http/http.dart' as http;
+import 'package:youtube_player_iframe/youtube_player_iframe.dart' as ytb;
 
 void main() {
   runApp(MyApp());
@@ -33,7 +34,7 @@ class MyAppState extends State<MainPage> {
   void initState() {
     super.initState();
     setupAudio();
-    _myAppState = this;
+    myAppState = this;
   }
 
   void setupAudio() {
@@ -46,12 +47,12 @@ class MyAppState extends State<MainPage> {
       }
     });
     audioPlayer.onPlayerStateChanged.listen((PlayerState s) {
-      print('PlayerState: ${s}');
+      print('PlayerState: $s');
       isPlaying = (s == PlayerState.playing);
       if (s == PlayerState.completed) {
-        print('curSongIdx: ${curSongIdx}');
+        print('curSongIdx: $curSongIdx');
         playNextSong(1);
-        print('curSongIdx: ${curSongIdx}');
+        print('curSongIdx: $curSongIdx');
       }
       setState(() {});
     });
@@ -113,7 +114,7 @@ class MyAppState extends State<MainPage> {
     List<Widget> ret;
     if (screenMode == "player") {
       ret = <Widget>[
-        playerWidget(context, this),
+        playerWidget(context),
       ];
     } else if (screenMode == "list") {
       ret = <Widget>[
@@ -122,7 +123,7 @@ class MyAppState extends State<MainPage> {
     } else {
       ret = <Widget>[
         getSongListContainer(),
-        playerWidget(context, this),
+        playerWidget(context),
       ];
     }
     return ret;
@@ -184,8 +185,16 @@ class MyAppState extends State<MainPage> {
   }
 }
 
-MyAppState _myAppState;
+var duration = 10;
+bool showVol = false;
+bool isPlaying = false;
+double _volume = 1;
+var sliderValue = 0;
+var screenMode = 'list'; // 'mixed', 'player', 'list'
+
+MyAppState myAppState;
 AudioPlayer audioPlayer = AudioPlayer();
+ytb.YoutubePlayerController youtubePlayerController;
 List<SongInfo2> songList = new List.empty(growable: true);
 var curSongIdx = -1;
 var playNextSong = (idxIncrease) {
@@ -207,16 +216,8 @@ var playNextSong = (idxIncrease) {
     }
   } else {
     audioPlayer.stop();
-    _myAppState.setState(() {
-      screenMode =
-        (screenMode == "player") ? "mixed" : "player";
+    myAppState.setState(() {
+      screenMode = (screenMode == "player") ? "mixed" : "player";
     });
   }
 };
-
-var duration = 10;
-bool showVol = false;
-bool isPlaying = false;
-double _volume = 1;
-var sliderValue = 0;
-var screenMode = 'list'; // 'mixed', 'player', 'list'
