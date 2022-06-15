@@ -217,7 +217,7 @@ var playNextSong = (idxIncrease) {
   } else {
     audioPlayer.stop();
     myAppState.setState(() {
-      screenMode = (screenMode == "player") ? "mixed" : "player";
+      if (screenMode == "list") screenMode = "mixed";
     });
   }
 };
