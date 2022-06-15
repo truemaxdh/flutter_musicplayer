@@ -34,7 +34,7 @@ Widget youtubePlayerWidget() {
             child: Column(children: <Widget>[
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16),
-                child: songProgress(context),
+                child: Slider(),
               ),
               Container(
                 padding: EdgeInsets.symmetric(vertical: 5),
