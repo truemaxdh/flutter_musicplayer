@@ -6,7 +6,7 @@ Widget youtubePlayerWidget() {
   youtubePlayerController = YoutubePlayerController(
     initialVideoId: 'Il-an3K9pjg',
     params: YoutubePlayerParams(
-      autoPlay: true,
+      showFullscreenButton: true,
     ),
   );
   return Column(children: <Widget>[
@@ -55,9 +55,14 @@ Widget youtubePlayerWidget() {
                       radius: 23,
                       child: Center(
                         child: IconButton(
-                          onPressed: () async {
-                            isPlaying ? youtubePlayerController.pause() : youtubePlayerController.play();
-                          },
+                          onPressed: () { 
+                            if (isPlaying) {
+                              isPlaying = false;
+                              youtubePlayerController.pause();
+                            } else {
+                              isPlaying = true;
+                              youtubePlayerController.play();
+                            }},
                           padding: const EdgeInsets.all(0.0),
                           icon: Icon(
                             isPlaying ? Icons.pause : Icons.play_arrow,
