@@ -6,10 +6,7 @@ Widget youtubePlayerWidget() {
   youtubePlayerController = YoutubePlayerController(
     initialVideoId: 'Il-an3K9pjg',
     params: YoutubePlayerParams(
-      playlist: ['Il-an3K9pjg'], // Defining custom playlist
-      //startAt: Duration(seconds: 30),
-      showControls: true,
-      showFullscreenButton: true,
+      autoPlay: true,
     ),
   );
   return Column(children: <Widget>[
@@ -59,7 +56,7 @@ Widget youtubePlayerWidget() {
                       child: Center(
                         child: IconButton(
                           onPressed: () async {
-                            isPlaying ? youtubePlayerController.pause() : youtubePlayerController.resume();
+                            isPlaying ? youtubePlayerController.pause() : youtubePlayerController.play();
                           },
                           padding: const EdgeInsets.all(0.0),
                           icon: Icon(
