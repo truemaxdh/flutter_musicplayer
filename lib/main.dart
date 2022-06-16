@@ -42,7 +42,6 @@ class MyAppState extends State<MainPage> {
       //print('Position: ${p.inSeconds}');
       if (isPlaying) {
         sliderValue = p.inSeconds;
-        if (duration <= sliderValue) duration = sliderValue + 10;
         setState(() {});
       }
     });
