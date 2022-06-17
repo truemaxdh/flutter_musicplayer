@@ -6,6 +6,7 @@ Widget youtubePlayerWidget() {
   youtubePlayerController = YoutubePlayerController(
     initialVideoId: 'Il-an3K9pjg',
     params: YoutubePlayerParams(
+      startAt: Duration(seconds: 1),
       showFullscreenButton: true,
     ),
   );
