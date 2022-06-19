@@ -3,9 +3,6 @@ import 'package:flutter_music_player/main.dart';
 import 'package:flutter_music_player/youtubePlayerWidget.dart';
 
 Widget playerWidget(BuildContext context) {
-  if (songList[curSongIdx].isYoutube) {
-    return youtubePlayerWidget();
-  }
   return Row(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
     Image(
         height: 72,
@@ -46,7 +43,15 @@ Widget playerWidget(BuildContext context) {
                   child: Center(
                     child: IconButton(
                       onPressed: () async {
-                        isPlaying ? audioPlayer.pause() : audioPlayer.resume();
+                        if (songList[curSongIdx].isYoutube) {
+                          isPlaying
+                              ? youtubePlayerController.pause()
+                              : youtubePlayerController.play();
+                        } else {
+                          isPlaying
+                              ? audioPlayer.pause()
+                              : audioPlayer.resume();
+                        }
                       },
                       padding: const EdgeInsets.all(0.0),
                       icon: Icon(
