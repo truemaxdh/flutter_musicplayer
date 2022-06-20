@@ -66,7 +66,7 @@ class MyAppState extends State<MainPage> {
       isPlaying = (playerState == ytb.PlayerState.playing);
       setState(() {});
 
-      if (duration != 0 && sliderValue == duration) {
+      if (duration != 0 && sliderValue == (duration - 1)) {
         playNextSong(1);
       }
     });
