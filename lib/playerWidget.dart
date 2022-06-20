@@ -104,7 +104,7 @@ Widget playerWidget(BuildContext context) {
 String _formatDuration(Duration d) {
   if (d == null) return "--:--";
   int minute = d.inMinutes;
-  int second = (d.inSeconds > 60) ? (d.inSeconds % 60) : d.inSeconds;
+  int second = d.inSeconds % 60;
   String format = ((minute < 10) ? "0$minute" : "$minute") +
       ":" +
       ((second < 10) ? "0$second" : "$second");
