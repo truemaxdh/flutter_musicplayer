@@ -146,7 +146,7 @@ MyAppState myAppState;
 AudioPlayer audioPlayer = AudioPlayer();
 ytb.YoutubePlayerController youtubePlayerController =
     ytb.YoutubePlayerController(
-  initialVideoId: 'Il-an3K9pjg',
+  initialVideoId: '50VV09UDTbo',
   params: ytb.YoutubePlayerParams(
     startAt: Duration(seconds: 1),
     showFullscreenButton: true,
