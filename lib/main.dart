@@ -146,7 +146,7 @@ MyAppState myAppState;
 AudioPlayer audioPlayer = AudioPlayer();
 ytb.YoutubePlayerController youtubePlayerController =
     ytb.YoutubePlayerController(
-  initialVideoId: '50VV09UDTbo',
+  initialVideoId: '8hrmp-vMiwY',
   params: ytb.YoutubePlayerParams(
     startAt: Duration(seconds: 1),
     showFullscreenButton: true,
@@ -174,6 +174,11 @@ var playNextSong = (idxIncrease) {
     }
   } else {
     audioPlayer.stop();
+    var keyPattern = "watch?v=";
+    var startPos = song.filePath.indexOf(keyPattern);
+    var videoId =
+        song.filePath.substring(startPos, startPos + keyPattern.length);
+    youtubePlayerController.load(videoId);
     myAppState.setState(() {
       if (screenMode == "list") screenMode = "mixed";
     });

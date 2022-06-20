@@ -17,8 +17,6 @@ Expanded getSongListContainer() {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             var response = snapshot.data;
-            //print('Response status: ${response.statusCode}');
-            //print('Response body: ${response.body}');
 
             songList.clear();
             var lines = response.body.split("\n");
