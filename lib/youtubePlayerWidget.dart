@@ -4,7 +4,7 @@ import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 var _youtubeWidget = null;
 Widget youtubePlayerWidget() {
-  if (youtubeWidget == null) {
+  if (_youtubeWidget == null) {
     _youtubeWidget = Expanded(
       child: YoutubePlayerIFrame(
         controller: youtubePlayerController,
