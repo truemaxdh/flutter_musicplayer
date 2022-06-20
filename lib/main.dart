@@ -111,7 +111,7 @@ class MyAppState extends State<MainPage> {
                     });
                   },
                 )
-              : Text("Music Player"),
+              : Text(title),
         ),
         body: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -135,6 +135,7 @@ class MyAppState extends State<MainPage> {
   }
 }
 
+var title = "Music Player";
 var duration = 10;
 bool showVol = false;
 bool isPlaying = false;
@@ -172,12 +173,14 @@ var playNextSong = (idxIncrease) {
     } else {
       audioPlayer.play(DeviceFileSource(song.filePath));
     }
+    title = "Music Player";
   } else {
     audioPlayer.stop();
     var keyPattern = "watch?v=";
     var startPos = song.filePath.indexOf(keyPattern);
     var videoId =
         song.filePath.substring(startPos, startPos + keyPattern.length);
+    title = videoId;
     youtubePlayerController.load(videoId);
     myAppState.setState(() {
       if (screenMode == "list") screenMode = "mixed";
