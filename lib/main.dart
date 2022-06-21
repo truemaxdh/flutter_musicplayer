@@ -179,7 +179,7 @@ var playNextSong = (idxIncrease) {
     var keyPattern = "watch?v=";
     var startPos = song.filePath.indexOf(keyPattern);
     var videoId =
-        song.filePath.substring(startPos, startPos + keyPattern.length);
+        song.filePath.substring(startPos + keyPattern.length);
     title = videoId;
     youtubePlayerController.load(videoId);
     myAppState.setState(() {
