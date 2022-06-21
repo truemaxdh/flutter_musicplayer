@@ -112,7 +112,7 @@ class MyAppState extends State<MainPage> {
                     setState(() {
                       _volume = value;
                       if (songList[curSongIdx].isYoutube) {
-                        youtubePlayerController.setVolume(value * 100);
+                        youtubePlayerController.setVolume((value * 100).toInt());
                       } else {
                         audioPlayer.setVolume(value);
                       }
