@@ -30,7 +30,6 @@ class MyAppState extends State<MainPage> {
   void initState() {
     super.initState();
     setupAudio();
-    setupYoutube();
     myAppState = this;
   }
 
@@ -54,21 +53,6 @@ class MyAppState extends State<MainPage> {
     audioPlayer.onDurationChanged.listen((Duration p) {
       duration = p.inSeconds;
       setState(() {});
-    });
-  }
-
-  void setupYoutube() {
-    youtubePlayerController.listen((evt) {
-      sliderValue = evt.position.inSeconds;
-      duration = evt.metaData.duration.inSeconds;
-      var playerState = evt.playerState;
-      //print('Ytb Song PlayerState: $playerState');
-      isPlaying = (playerState == ytb.PlayerState.playing);
-      setState(() {});
-
-      if (duration != 0 && sliderValue == (duration - 1)) {
-        playNextSong(1);
-      }
     });
   }
 
