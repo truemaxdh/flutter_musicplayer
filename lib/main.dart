@@ -55,6 +55,21 @@ class MyAppState extends State<MainPage> {
       setState(() {});
     });
   }
+  
+  void setupYoutube() {
+    youtubePlayerController.listen((evt) {
+      sliderValue = evt.position.inSeconds;
+      duration = evt.metaData.duration.inSeconds;
+      var playerState = evt.playerState;
+      //print('Ytb Song PlayerState: $playerState');
+      isPlaying = (playerState == ytb.PlayerState.playing);
+      setState(() {});
+
+      if (duration != 0 && sliderValue == (duration - 1)) {
+        playNextSong(1);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -164,6 +179,8 @@ var playNextSong = (idxIncrease) {
         showFullscreenButton: true,
       ),
     );
+    myAppState.setupYoutube();
+    
     myAppState.setState(() {
       if (screenMode == "list") screenMode = "mixed";
     });
