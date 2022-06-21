@@ -38,11 +38,13 @@ class MyAppState extends State<MainPage> {
       //print('Position: ${p.inSeconds}');
       if (isPlaying) {
         sliderValue = p.inSeconds;
-        setState(() {});
 
         if (duration != 0 && sliderValue == duration) {
           playNextSong(1);
+          return;
         }
+        
+        setState(() {});
       }
     });
     audioPlayer.onPlayerStateChanged.listen((PlayerState s) {
@@ -63,16 +65,19 @@ class MyAppState extends State<MainPage> {
       var playerState = evt.playerState;
       //print('Ytb Song PlayerState: $playerState');
       isPlaying = (playerState == ytb.PlayerState.playing);
-      setState(() {});
-
-      if (duration != 0 && sliderValue == (duration - 1)) {
+      
+      if (isPlaying && duration != 0 && sliderValue == (duration - 1)) {
         playNextSong(1);
+        return;
       }
       
       if (title != "Music Player") {
         youtubePlayerController.load(title);
         title = "Music Player";
+        return;
       }
+      
+      setState(() {});
     });
   }
 
@@ -164,6 +169,9 @@ var playNextSong = (idxIncrease) {
   } else if (curSongIdx >= songList.length) {
     curSongIdx -= songList.length;
   }
+  
+  sliderValue = 0;
+  duration = 0;
 
   SongInfo2 song = songList[curSongIdx];
   print('isYoutube: ${song.isYoutube}');
