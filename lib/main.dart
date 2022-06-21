@@ -68,6 +68,11 @@ class MyAppState extends State<MainPage> {
       if (duration != 0 && sliderValue == (duration - 1)) {
         playNextSong(1);
       }
+      
+      if (title != "Music Player") {
+        youtubePlayerController.load(title);
+        title = "Music Player";
+      }
     });
   }
 
@@ -106,7 +111,11 @@ class MyAppState extends State<MainPage> {
                   onChanged: (value) {
                     setState(() {
                       _volume = value;
-                      audioPlayer.setVolume(value);
+                      if (songList[curSongIdx].isYoutube) {
+                        youtubePlayerController.setVolume(value * 100);
+                      } else {
+                        audioPlayer.setVolume(value);
+                      }
                     });
                   },
                 )
@@ -180,6 +189,7 @@ var playNextSong = (idxIncrease) {
       ),
     );
     myAppState.setupYoutube();
+    title = videoId;
     
     myAppState.setState(() {
       if (screenMode == "list") screenMode = "mixed";
