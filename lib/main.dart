@@ -71,7 +71,7 @@ class MyAppState extends State<MainPage> {
       }
       
       if (title != "Music Player") {
-        youtubePlayerController.load(videoId);
+        youtubePlayerController.load(title);
         title = "Music Player";
       }
     });
