@@ -4,11 +4,9 @@ import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 Widget youtubePlayerWidget() {
   return Expanded(
-    child : YoutubePlayerControllerProvider( // Provides controller to all the widget below it.
+    child : YoutubePlayerIFrame(
       controller: youtubePlayerController,
-      child: YoutubePlayerIFrame(
-        aspectRatio: 16 / 9,
-      ),
+      aspectRatio: 16 / 9,
     ),
   );  
 }
