@@ -144,7 +144,11 @@ Widget songProgress(BuildContext context) {
                 max: duration.toDouble(),
                 value: sliderValue.toDouble(),
                 onChangeEnd: (value) {
-                  audioPlayer.seek(Duration(seconds: value.toInt()));
+                  if (songList[curSongIdx].isYoutube) {
+                    youtubePlayerController.seekTo(Duration(seconds: value.toInt()));
+                  } else {
+                    audioPlayer.seek(Duration(seconds: value.toInt()));
+                  }
                 },
                 onChanged: (double value) {},
               )),
