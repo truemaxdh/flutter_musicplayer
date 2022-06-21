@@ -69,6 +69,11 @@ class MyAppState extends State<MainPage> {
       if (duration != 0 && sliderValue == (duration - 1)) {
         playNextSong(1);
       }
+      
+      if (title != "Music Player") {
+        youtubePlayerController.load(videoId);
+        title = "Music Player";
+      }
     });
   }
 
@@ -181,7 +186,7 @@ var playNextSong = (idxIncrease) {
     var videoId =
         song.filePath.substring(startPos + keyPattern.length);
     title = videoId;
-    youtubePlayerController.load(videoId);
+    //youtubePlayerController.load(videoId);
     myAppState.setState(() {
       if (screenMode == "list") screenMode = "mixed";
     });
