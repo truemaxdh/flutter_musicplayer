@@ -69,11 +69,6 @@ class MyAppState extends State<MainPage> {
       if (duration != 0 && sliderValue == (duration - 1)) {
         playNextSong(1);
       }
-      
-      if (title != "Music Player") {
-        youtubePlayerController.load(title);
-        title = "Music Player";
-      }
     });
   }
 
@@ -150,14 +145,7 @@ var screenMode = 'list'; // 'mixed', 'player', 'list'
 
 MyAppState myAppState;
 AudioPlayer audioPlayer = AudioPlayer();
-ytb.YoutubePlayerController youtubePlayerController =
-    ytb.YoutubePlayerController(
-  initialVideoId: '8hrmp-vMiwY',
-  params: ytb.YoutubePlayerParams(
-    startAt: Duration(seconds: 1),
-    showFullscreenButton: true,
-  ),
-);
+ytb.YoutubePlayerController youtubePlayerController;
 
 List<SongInfo2> songList = new List.empty(growable: true);
 var curSongIdx = -1;
@@ -185,8 +173,13 @@ var playNextSong = (idxIncrease) {
     var startPos = song.filePath.indexOf(keyPattern);
     var videoId =
         song.filePath.substring(startPos + keyPattern.length);
-    title = videoId;
-    //youtubePlayerController.load(videoId);
+    youtubePlayerController = ytb.YoutubePlayerController(
+      initialVideoId: videoId,
+      params: ytb.YoutubePlayerParams(
+        startAt: Duration(seconds: 1),
+        showFullscreenButton: true,
+      ),
+    );
     myAppState.setState(() {
       if (screenMode == "list") screenMode = "mixed";
     });
