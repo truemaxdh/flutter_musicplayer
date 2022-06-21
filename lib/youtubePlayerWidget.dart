@@ -7,9 +7,11 @@ Widget youtubePlayerWidget() {
   if (_youtubeWidget == null) {
     title = "New Youtube Widget";
     _youtubeWidget = Expanded(
-      child: YoutubePlayerIFrame(
+      YoutubePlayerControllerProvider( // Provides controller to all the widget below it.
         controller: youtubePlayerController,
-        aspectRatio: 16 / 9,
+        child: YoutubePlayerIFrame(
+          aspectRatio: 16 / 9,
+        ),
       ),
     );
   }
