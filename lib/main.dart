@@ -155,10 +155,17 @@ bool isPlaying = false;
 double _volume = 1;
 var sliderValue = 0;
 var screenMode = 'list'; // 'mixed', 'player', 'list'
+var videoId = "";
 
 MyAppState myAppState;
 AudioPlayer audioPlayer = AudioPlayer();
-ytb.YoutubePlayerController youtubePlayerController;
+ytb.YoutubePlayerController youtubePlayerController = ytb.YoutubePlayerController(
+  //initialVideoId: videoId,
+  params: ytb.YoutubePlayerParams(
+    startAt: Duration(seconds: 1),
+    showFullscreenButton: true,
+  ),
+);
 
 List<SongInfo2> songList = new List.empty(growable: true);
 var curSongIdx = -1;
@@ -172,7 +179,8 @@ var playNextSong = (idxIncrease) {
   
   sliderValue = 0;
   duration = 0;
-
+  isPlaying = false;
+  
   SongInfo2 song = songList[curSongIdx];
   print('isYoutube: ${song.isYoutube}');
   if (!song.isYoutube) {
@@ -187,15 +195,9 @@ var playNextSong = (idxIncrease) {
     audioPlayer.stop();
     var keyPattern = "watch?v=";
     var startPos = song.filePath.indexOf(keyPattern);
-    var videoId =
+    videoId =
         song.filePath.substring(startPos + keyPattern.length);
-    youtubePlayerController = ytb.YoutubePlayerController(
-      initialVideoId: videoId,
-      params: ytb.YoutubePlayerParams(
-        startAt: Duration(seconds: 1),
-        showFullscreenButton: true,
-      ),
-    );
+    
     myAppState.setupYoutube();
     title = videoId;
     
