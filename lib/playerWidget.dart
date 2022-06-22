@@ -89,6 +89,9 @@ Widget playerWidget(BuildContext context) {
                             myAppState.setState(() {
                               screenMode =
                                   (screenMode == "player") ? "mixed" : "player";
+                              if (songList[curSongIdx].isYoutube) {
+                                title = videoId;
+                              }
                             });
                           }),
                     ),
