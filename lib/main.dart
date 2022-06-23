@@ -35,24 +35,31 @@ class MyAppState extends State<MainPage> {
 
   void setupAudio() {
     audioPlayer.onPositionChanged.listen((Duration p) {
-      //print('Position: ${p.inSeconds}');
+      if (songList[curSongIdx].isYoutube) 
+        return;
+      
       if (isPlaying) {
         sliderValue = p.inSeconds;
 
+        setState(() {});
+        
         if (duration != 0 && sliderValue == duration) {
           playNextSong(1);
-          return;
         }
-        
-        setState(() {});
       }
     });
     audioPlayer.onPlayerStateChanged.listen((PlayerState s) {
+      if (songList[curSongIdx].isYoutube) 
+        return;
+      
       print('Song PlayerState: $s');
       isPlaying = (s == PlayerState.playing);
       setState(() {});
     });
     audioPlayer.onDurationChanged.listen((Duration p) {
+      if (songList[curSongIdx].isYoutube) 
+        return;
+      
       duration = p.inSeconds;
       setState(() {});
     });
@@ -60,24 +67,25 @@ class MyAppState extends State<MainPage> {
   
   void setupYoutube() {
     youtubePlayerController.listen((evt) {
+      if (!songList[curSongIdx].isYoutube) 
+        return;
+      
       sliderValue = evt.position.inSeconds;
       duration = evt.metaData.duration.inSeconds;
       var playerState = evt.playerState;
       //print('Ytb Song PlayerState: $playerState');
       isPlaying = (playerState == ytb.PlayerState.playing);
       
+      setState(() {});
+      
       if (isPlaying && duration != 0 && sliderValue == (duration - 1)) {
         playNextSong(1);
-        return;
       }
       
       if (title != "Music Player") {
         youtubePlayerController.load(title);
         title = "Music Player";
-        return;
       }
-      
-      setState(() {});
     });
   }
 
