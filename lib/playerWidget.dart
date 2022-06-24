@@ -45,9 +45,9 @@ Widget playerWidget(BuildContext context) {
                       child: IconButton(
                         onPressed: () async {
                           if (songList[curSongIdx].isYoutube) {
-                            isPlaying
-                                ? youtubePlayerController.pause()
-                                : youtubePlayerController.play();
+                            //isPlaying
+                            //    ? youtubePlayerController.pause()
+                            //    : youtubePlayerController.play();
                           } else {
                             isPlaying
                                 ? audioPlayer.pause()
@@ -148,7 +148,7 @@ Widget songProgress(BuildContext context) {
                 value: sliderValue.toDouble(),
                 onChangeEnd: (value) {
                   if (songList[curSongIdx].isYoutube) {
-                    youtubePlayerController.seekTo(Duration(seconds: value.toInt()));
+                    //youtubePlayerController.seekTo(Duration(seconds: value.toInt()));
                   } else {
                     audioPlayer.seek(Duration(seconds: value.toInt()));
                   }
