@@ -4,7 +4,7 @@ import 'package:flutter_music_player/widget.dart';
 import 'package:flutter_music_player/songListWidget.dart';
 import 'package:flutter_music_player/playerWidget.dart';
 import 'package:flutter_music_player/youtubePlayerWidget.dart';
-import 'package:youtube_player_iframe/youtube_player_iframe.dart' as ytb;
+//import 'package:youtube_player_iframe/youtube_player_iframe.dart' as ytb;
 
 void main() {
   runApp(MyApp());
@@ -66,7 +66,7 @@ class MyAppState extends State<MainPage> {
   }
   
   void setupYoutube() {
-    youtubePlayerController.listen((evt) {
+    /*youtubePlayerController.listen((evt) {
       if (!songList[curSongIdx].isYoutube) 
         return;
       
@@ -86,7 +86,7 @@ class MyAppState extends State<MainPage> {
         youtubePlayerController.load(title);
         title = "Music Player";
       }
-    });
+    });*/
   }
 
   @override
@@ -125,7 +125,7 @@ class MyAppState extends State<MainPage> {
                     setState(() {
                       _volume = value;
                       if (songList[curSongIdx].isYoutube) {
-                        youtubePlayerController.setVolume((value * 100).toInt());
+                        //youtubePlayerController.setVolume((value * 100).toInt());
                       } else {
                         audioPlayer.setVolume(value);
                       }
@@ -167,13 +167,13 @@ var videoId = "";
 
 MyAppState myAppState;
 AudioPlayer audioPlayer = AudioPlayer();
-ytb.YoutubePlayerController youtubePlayerController = ytb.YoutubePlayerController(
+/*ytb.YoutubePlayerController youtubePlayerController = ytb.YoutubePlayerController(
   //initialVideoId: videoId,
   params: ytb.YoutubePlayerParams(
     startAt: Duration(seconds: 1),
     showFullscreenButton: true,
   ),
-);
+);*/
 
 List<SongInfo2> songList = new List.empty(growable: true);
 var curSongIdx = -1;
