@@ -3,7 +3,7 @@ import 'package:flutter_music_player/main.dart';
 //import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 import 'package:webviewx/webviewx.dart';
 
-late WebViewXController webviewController;
+var WebViewXController webviewController;
 
 Widget youtubePlayerWidget() {
   return Expanded(
