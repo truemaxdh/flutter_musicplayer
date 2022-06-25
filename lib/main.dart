@@ -35,36 +35,33 @@ class MyAppState extends State<MainPage> {
 
   void setupAudio() {
     audioPlayer.onPositionChanged.listen((Duration p) {
-      if (songList[curSongIdx].isYoutube) 
-        return;
-      
+      if (songList[curSongIdx].isYoutube) return;
+
       if (isPlaying) {
         sliderValue = p.inSeconds;
 
         setState(() {});
-        
+
         if (duration != 0 && sliderValue == duration) {
           playNextSong(1);
         }
       }
     });
     audioPlayer.onPlayerStateChanged.listen((PlayerState s) {
-      if (songList[curSongIdx].isYoutube) 
-        return;
-      
+      if (songList[curSongIdx].isYoutube) return;
+
       print('Song PlayerState: $s');
       isPlaying = (s == PlayerState.playing);
       setState(() {});
     });
     audioPlayer.onDurationChanged.listen((Duration p) {
-      if (songList[curSongIdx].isYoutube) 
-        return;
-      
+      if (songList[curSongIdx].isYoutube) return;
+
       duration = p.inSeconds;
       setState(() {});
     });
   }
-  
+
   void setupYoutube() {
     /*youtubePlayerController.listen((evt) {
       if (!songList[curSongIdx].isYoutube) 
@@ -148,7 +145,8 @@ class MyAppState extends State<MainPage> {
     }
     if (screenMode == "player" || screenMode == "mixed") {
       if (songList[curSongIdx].isYoutube) {
-        ret.add(youtubePlayerWidget());
+        var _size = MediaQuery.of(context).size;
+        ret.add(youtubePlayerWidget(_size));
       }
       ret.add(playerWidget(context));
     }
@@ -184,11 +182,11 @@ var playNextSong = (idxIncrease) {
   } else if (curSongIdx >= songList.length) {
     curSongIdx -= songList.length;
   }
-  
+
   sliderValue = 0;
   duration = 0;
   isPlaying = false;
-  
+
   SongInfo2 song = songList[curSongIdx];
   print('isYoutube: ${song.isYoutube}');
   if (!song.isYoutube) {
@@ -203,12 +201,11 @@ var playNextSong = (idxIncrease) {
     audioPlayer.stop();
     var keyPattern = "watch?v=";
     var startPos = song.filePath.indexOf(keyPattern);
-    videoId =
-        song.filePath.substring(startPos + keyPattern.length);
-    
+    videoId = song.filePath.substring(startPos + keyPattern.length);
+
     myAppState.setupYoutube();
     title = videoId;
-    
+
     myAppState.setState(() {
       if (screenMode == "list") screenMode = "mixed";
     });
