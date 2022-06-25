@@ -204,7 +204,7 @@ var playNextSong = (idxIncrease) {
     videoId = song.filePath.substring(startPos + keyPattern.length);
 
     myAppState.setupYoutube();
-    title = videoId;
+    //title = videoId;
 
     myAppState.setState(() {
       if (screenMode == "list") screenMode = "mixed";
