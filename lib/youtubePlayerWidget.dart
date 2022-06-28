@@ -83,8 +83,8 @@ Widget youtubePlayerWidget(Size _size) {
         DartCallback(
           name: 'callBack',
           callBack: (msg) {
-            if (msg == "0") playNextSong(1);
-            isPlaying = (msg == "1");
+            if (msg == 0) playNextSong(1);
+            isPlaying = (msg == 1);
           },
         )
       },
