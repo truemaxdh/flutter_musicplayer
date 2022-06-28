@@ -17,11 +17,17 @@ Widget youtubePlayerWidget(Size _size) {
           "src='https://www.youtube.com/embed/$videoId?autoplay=1&" +
           "origin=https://truemaxdh.github.io/flutter_musicplayer/#/' " +
           "frameborder='0'></iframe>";
+  if (iframeInitialized) {
+    webviewController.loadContent(html, SourceType.html);
+  }
   return Expanded(
     child: WebViewX(
       initialContent: html,
       initialSourceType: SourceType.html,
-      onWebViewCreated: (controller) => webviewController = controller,
+      onWebViewCreated: (controller) { 
+        webviewController = controller;
+        iframeInitialized = true;
+      },
       width: w,
       height: h,
     ),
