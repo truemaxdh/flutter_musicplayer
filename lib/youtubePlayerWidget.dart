@@ -55,9 +55,7 @@ Widget youtubePlayerWidget(Size _size) {
       "      //    the player should play for six seconds and then stop.\n" +
       "      function onPlayerStateChange(event) {\n" +
       "        console.log(event)\n" + 
-      "        if (event.data == YT.PlayerState.ENDED) {\n" +
-      "          callBack('playEnded');\n" +
-      "        }\n" +
+      "        callBack(event.data);\n" +
       "      }\n" +
       "\n" +
       "      function loadVideoById(videoId, startSeconds, suggestedQuality) {" +
@@ -85,7 +83,8 @@ Widget youtubePlayerWidget(Size _size) {
         DartCallback(
           name: 'callBack',
           callBack: (msg) {
-            if (msg == "playEnded") playNextSong(1);
+            if (msg == "0") playNextSong(1);
+            isPlaying = (msg == "1");
           },
         )
       },
