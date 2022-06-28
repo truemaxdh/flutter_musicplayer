@@ -56,17 +56,26 @@ Widget youtubePlayerWidget(Size _size) {
       "      function onPlayerStateChange(event) {\n" +
       "        console.log(event)\n" + 
       "        if (event.data == YT.PlayerState.ENDED) {\n" +
-      "          //callBack('playEnded');\n" +
+      "          callBack('playEnded');\n" +
       "        }\n" +
       "      }\n" +
       "\n" +
+      "      function loadVideoById(videoId, startSeconds, suggestedQuality) {" +
+      "        player.loadVideoById(videoId, startSeconds, suggestedQuality);" +
+      "      }" +
+      "      function pauseVideo() {" +
+      "        player.pauseVideo();" +
+      "      }" +
+      "      function playVideo() {" +
+      "        player.playVideo();" +
+      "      }" +
       "    </script>\n" +
       "  </body>\n" +
       "</html>\n";
   var html2 = "<html><body>ASASAS<script>alert(1243);</script></body></html>";
   if (iframeInitialized) {
     webviewController
-        .callJsMethod("player.loadVideoById", [videoId, 0, 'large']);
+        .callJsMethod("loadVideoById", [videoId, 0, 'large']);
   }
   return Expanded(
     child: WebViewX(
