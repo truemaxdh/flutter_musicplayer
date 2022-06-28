@@ -15,7 +15,7 @@ Widget youtubePlayerWidget(Size _size) {
           "src='https://www.youtube.com/embed/$videoId?autoplay=1&" +
           "origin=https://truemaxdh.github.io/flutter_musicplayer/#/' " +
           "frameborder='0'></iframe>";
-  var html2 = 
+  var html = 
       "<html>\n" +
       "  <body>\n" +
       "    <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->\n" +
@@ -61,7 +61,7 @@ Widget youtubePlayerWidget(Size _size) {
       "    </script>\n" +
       "  </body>\n" +
       "</html>\n";
-  var html = "<html><body>ASASAS<script>alert(1243);</script></body></html>";
+  var html2 = "<html><body>ASASAS<script>alert(1243);</script></body></html>";
   if (iframeInitialized) {
     webviewController
         .callJsMethod("player.loadVideoById", [videoId, 0, 'large']);
