@@ -45,9 +45,11 @@ Widget playerWidget(BuildContext context) {
                       child: IconButton(
                         onPressed: () async {
                           if (songList[curSongIdx].isYoutube) {
-                            //isPlaying
-                            //    ? youtubePlayerController.pause()
-                            //    : youtubePlayerController.play();
+                            webviewController.callJsMethod(
+                                (isPlaying
+                                    ? "player.pauseVideo()"
+                                    : "player.playVideo()"),
+                                []);
                           } else {
                             isPlaying
                                 ? audioPlayer.pause()
