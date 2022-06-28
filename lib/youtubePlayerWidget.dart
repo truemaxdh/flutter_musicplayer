@@ -61,7 +61,7 @@ Widget youtubePlayerWidget(Size _size) {
       "    </script>\n" +
       "  </body>\n" +
       "</html>\n";
-  var html = "<!DOCTYPE html><html><body>ASASAS<script>alert(1243);</script></body></html>";
+  var html = "<html><body>ASASAS<script>alert(1243);</script></body></html>";
   if (iframeInitialized) {
     webviewController
         .callJsMethod("player.loadVideoById", [videoId, 0, 'large']);
