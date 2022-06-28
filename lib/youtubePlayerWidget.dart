@@ -54,7 +54,8 @@ Widget youtubePlayerWidget(Size _size) {
       "      //    the player should play for six seconds and then stop.\n" +
       "      function onPlayerStateChange(event) {\n" +
       "        if (event.data == YT.PlayerState.ENDED) {\n" +
-      "          callBack('playEnded');\n" +
+      "          console.log(event)\n" + 
+      "          //callBack('playEnded');\n" +
       "        }\n" +
       "      }\n" +
       "\n" +
