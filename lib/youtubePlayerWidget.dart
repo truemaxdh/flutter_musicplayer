@@ -34,8 +34,8 @@ Widget youtubePlayerWidget(Size _size) {
       "      var player;\n" +
       "      function onYouTubeIframeAPIReady() {\n" +
       "        player = new YT.Player('player', {\n" +
-      "          height: '$ytb_h',\n" +
-      "          width: '$w',\n" +
+      "          height: '300', //$ytb_h',\n" +
+      "          width: '400', //'$w',\n" +
       "          videoId: '$videoId',\n" +
       "          events: {\n" +
       "            'onReady': onPlayerReady,\n" +
