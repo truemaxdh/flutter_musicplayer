@@ -15,7 +15,7 @@ Widget youtubePlayerWidget(Size _size) {
           "src='https://www.youtube.com/embed/$videoId?autoplay=1&" +
           "origin=https://truemaxdh.github.io/flutter_musicplayer/#/' " +
           "frameborder='0'></iframe>";
-  var html2 = "<!DOCTYPE html>\n" +
+  var html2 = 
       "<html>\n" +
       "  <body>\n" +
       "    <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->\n" +
