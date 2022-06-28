@@ -15,52 +15,52 @@ Widget youtubePlayerWidget(Size _size) {
           "src='https://www.youtube.com/embed/$videoId?autoplay=1&" +
           "origin=https://truemaxdh.github.io/flutter_musicplayer/#/' " +
           "frameborder='0'></iframe>";
-  var html = "<!DOCTYPE html>" +
-      "<html>" +
-      "  <body>" +
-      "    <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->" +
-      "    <div id='player'></div>" +
-      "" +
-      "    <script>" +
-      "      // 2. This code loads the IFrame Player API code asynchronously." +
-      "      var tag = document.createElement('script');" +
-      "" +
-      "      tag.src = 'https://www.youtube.com/iframe_api';" +
-      "      var firstScriptTag = document.getElementsByTagName('script')[0];" +
-      "      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);" +
-      "" +
-      "      // 3. This function creates an <iframe> (and YouTube player)" +
-      "      //    after the API code downloads." +
-      "      var player;" +
-      "      function onYouTubeIframeAPIReady() {" +
-      "        player = new YT.Player('player', {" +
-      "          height: '$ytb_h'," +
-      "          width: '$w'," +
-      "          videoId: '$videoId'," +
-      "          events: {" +
-      "            'onReady': onPlayerReady," +
-      "            'onStateChange': onPlayerStateChange" +
-      "          }" +
-      "        });" +
-      "      }" +
-      "" +
-      "      // 4. The API will call this function when the video player is ready." +
-      "      function onPlayerReady(event) {" +
-      "        event.target.playVideo();" +
-      "      }" +
-      "" +
-      "      // 5. The API calls this function when the player's state changes." +
-      "      //    The function indicates that when playing a video (state=1)," +
-      "      //    the player should play for six seconds and then stop." +
-      "      function onPlayerStateChange(event) {" +
-      "        if (event.data == YT.PlayerState.ENDED) {" +
-      "          callBack('playEnded');" +
-      "        }" +
-      "      }" +
-      "" +
-      "    </script>" +
-      "  </body>" +
-      "</html>";
+  var html = "<!DOCTYPE html>\n" +
+      "<html>\n" +
+      "  <body>\n" +
+      "    <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->\n" +
+      "    <div id='player'></div>\n" +
+      "\n" +
+      "    <script>\n" +
+      "      // 2. This code loads the IFrame Player API code asynchronously.\n" +
+      "      var tag = document.createElement('script');\n" +
+      "\n" +
+      "      tag.src = 'https://www.youtube.com/iframe_api';\n" +
+      "      var firstScriptTag = document.getElementsByTagName('script')[0];\n" +
+      "      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);\n" +
+      "\n" +
+      "      // 3. This function creates an <iframe> (and YouTube player)\n" +
+      "      //    after the API code downloads.\n" +
+      "      var player;\n" +
+      "      function onYouTubeIframeAPIReady() {\n" +
+      "        player = new YT.Player('player', {\n" +
+      "          height: '$ytb_h',\n" +
+      "          width: '$w',\n" +
+      "          videoId: '$videoId',\n" +
+      "          events: {\n" +
+      "            'onReady': onPlayerReady,\n" +
+      "            'onStateChange': onPlayerStateChange\n" +
+      "          }\n" +
+      "        });\n" +
+      "      }\n" +
+      "\n" +
+      "      // 4. The API will call this function when the video player is ready.\n" +
+      "      function onPlayerReady(event) {\n" +
+      "        event.target.playVideo();\n" +
+      "      }\n" +
+      "\n" +
+      "      // 5. The API calls this function when the player's state changes.\n" +
+      "      //    The function indicates that when playing a video (state=1),\n" +
+      "      //    the player should play for six seconds and then stop.\n" +
+      "      function onPlayerStateChange(event) {\n" +
+      "        if (event.data == YT.PlayerState.ENDED) {\n" +
+      "          callBack('playEnded');\n" +
+      "        }\n" +
+      "      }\n" +
+      "\n" +
+      "    </script>\n" +
+      "  </body>\n" +
+      "</html>\n";
 
   if (iframeInitialized) {
     webviewController
