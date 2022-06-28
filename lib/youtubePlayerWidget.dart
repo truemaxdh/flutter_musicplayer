@@ -53,8 +53,8 @@ Widget youtubePlayerWidget(Size _size) {
       "      //    The function indicates that when playing a video (state=1),\n" +
       "      //    the player should play for six seconds and then stop.\n" +
       "      function onPlayerStateChange(event) {\n" +
+      "        console.log(event)\n" + 
       "        if (event.data == YT.PlayerState.ENDED) {\n" +
-      "          console.log(event)\n" + 
       "          //callBack('playEnded');\n" +
       "        }\n" +
       "      }\n" +
