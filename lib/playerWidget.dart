@@ -47,8 +47,8 @@ Widget playerWidget(BuildContext context) {
                           if (songList[curSongIdx].isYoutube) {
                             webviewController.callJsMethod(
                                 (isPlaying
-                                    ? "player.pauseVideo()"
-                                    : "player.playVideo()"),
+                                    ? "pauseVideo"
+                                    : "playVideo"),
                                 []);
                           } else {
                             isPlaying
