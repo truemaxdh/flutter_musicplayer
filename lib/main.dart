@@ -162,6 +162,7 @@ double _volume = 1;
 var sliderValue = 0;
 var screenMode = 'list'; // 'mixed', 'player', 'list'
 var videoId = "";
+var iframeInitialized = false;
 
 MyAppState myAppState;
 AudioPlayer audioPlayer = AudioPlayer();
@@ -196,14 +197,15 @@ var playNextSong = (idxIncrease) {
     } else {
       audioPlayer.play(DeviceFileSource(song.filePath));
     }
-    title = "Music Player";
+    //title = "Music Player";
+    iframeInitialized = false;
   } else {
     audioPlayer.stop();
     var keyPattern = "watch?v=";
     var startPos = song.filePath.indexOf(keyPattern);
     videoId = song.filePath.substring(startPos + keyPattern.length);
 
-    myAppState.setupYoutube();
+    //myAppState.setupYoutube();
     //title = videoId;
 
     myAppState.setState(() {
