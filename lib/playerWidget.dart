@@ -2,12 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_music_player/main.dart';
 import 'package:flutter_music_player/youtubePlayerWidget.dart';
 
+_PlayerWidget playerWidgetState;
+
 class PlayerWidget extends StatefulWidget {
   @override
   _PlayerWidget createState() => _PlayerWidget();
 }
 
 class _PlayerWidget extends State<PlayerWidget> {
+  @override
+  void initState() {
+    super.initState();
+    playerWidgetState = this;
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Container(
