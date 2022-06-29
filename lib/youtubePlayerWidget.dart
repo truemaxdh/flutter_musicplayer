@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_music_player/main.dart';
+import 'package:flutter_music_player/playerWidget.dart';
 import 'package:webviewx/webviewx.dart';
 
 WebViewXController webviewController;
