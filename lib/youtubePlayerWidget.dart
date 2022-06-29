@@ -85,7 +85,7 @@ Widget youtubePlayerWidget(Size _size) {
           callBack: (msg) {
             if (msg == 0) playNextSong(1);
             if (isPlaying != (msg == 1)) {
-              myAppState.setState(() {
+              playerWidgetState.setState(() {
                 isPlaying = (msg == 1);
               });
             };
