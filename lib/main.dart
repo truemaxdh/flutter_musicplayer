@@ -148,7 +148,7 @@ class MyAppState extends State<MainPage> {
         var _size = MediaQuery.of(context).size;
         ret.add(youtubePlayerWidget(_size));
       }
-      ret.add(playerWidget(context));
+      ret.add(PlayerWidget());
     }
     return ret;
   }
