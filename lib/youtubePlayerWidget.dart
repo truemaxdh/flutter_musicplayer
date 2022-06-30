@@ -21,15 +21,15 @@ Widget youtubePlayerWidget(Size _size) {
       "  <body>\n" +
       "    <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->\n" +
       "    <div id='player'></div>\n" +
-      "\n" +
+      
       "    <script>\n" +
       "      // 2. This code loads the IFrame Player API code asynchronously.\n" +
       "      var tag = document.createElement('script');\n" +
-      "\n" +
+      
       "      tag.src = 'https://www.youtube.com/iframe_api';\n" +
       "      var firstScriptTag = document.getElementsByTagName('script')[0];\n" +
       "      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);\n" +
-      "\n" +
+      
       "      // 3. This function creates an <iframe> (and YouTube player)\n" +
       "      //    after the API code downloads.\n" +
       "      var player;\n" +
@@ -45,20 +45,21 @@ Widget youtubePlayerWidget(Size _size) {
       "          }\n" +
       "        });\n" +
       "      }\n" +
-      "\n" +
+      
       "      // 4. The API will call this function when the video player is ready.\n" +
       "      function onPlayerReady(event) {\n" +
+      "        setTimeout(displayStatus, 500);\n" +
       "        event.target.playVideo();\n" +
       "      }\n" +
-      "\n" +
+      
       "      // 5. The API calls this function when the player's state changes.\n" +
       "      //    The function indicates that when playing a video (state=1),\n" +
       "      //    the player should play for six seconds and then stop.\n" +
       "      function onPlayerStateChange(event) {\n" +
       "        console.log(event)\n" + 
-      "        callBack(event.data);\n" +
+      "        callBack('state', event.data);\n" +
       "      }\n" +
-      "\n" +
+      
       "      function loadVideoById(videoId, startSeconds, suggestedQuality) {" +
       "        player.loadVideoById(videoId, startSeconds, suggestedQuality);" +
       "      }" +
@@ -68,6 +69,13 @@ Widget youtubePlayerWidget(Size _size) {
       "      function playVideo() {" +
       "        player.playVideo();" +
       "      }" +
+      "      function displayStatus() {" +
+      "        var time = player.getCurrentTime();" +
+      "        var duration = player.getDuration();" +
+      "        callBack('playtime', time);" +
+      "        callBack('duration', duration);" +
+      "        setTimeout(displayStatus, 500);\n" +
+      "      }" +    
       "    </script>\n" +
       "  </body>\n" +
       "</html>\n";
@@ -83,13 +91,17 @@ Widget youtubePlayerWidget(Size _size) {
       dartCallBacks: {
         DartCallback(
           name: 'callBack',
-          callBack: (msg) {
-            if (msg == 0) playNextSong(1);
-            if (isPlaying != (msg == 1)) {
-              playerWidgetState.setState(() {
-                isPlaying = (msg == 1);
-              });
-            };
+          callBack: (_type, msg) {
+            if (_type == 'state') {
+              if (msg == 0) playNextSong(1);
+              if (isPlaying != (msg == 1)) {
+                playerWidgetState.setState(() { isPlaying = (msg == 1); });
+              }
+            } else if (_type == 'playtime') {
+              playerWidgetState.setState(() { duration = msg; });
+            } else if (_type == 'duration') {
+              playerWidgetState.setState(() { sliderValue = msg; });
+            }
           },
         )
       },
