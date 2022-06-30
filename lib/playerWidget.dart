@@ -173,6 +173,7 @@ class _PlayerWidget extends State<PlayerWidget> {
                   onChanged: (value) {
                     if (songList[curSongIdx].isYoutube) {
                       webviewController.callJsMethod("seekTo", [value, false]);
+                      setState(() {sliderValue = value;});
                     }
                   },
                 )),
