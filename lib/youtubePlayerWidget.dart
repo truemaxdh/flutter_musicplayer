@@ -98,9 +98,9 @@ Widget youtubePlayerWidget(Size _size) {
                 playerWidgetState.setState(() { isPlaying = (msg[1] == 1); });
               }
             } else if (msg[0] == 'playtime') {
-              playerWidgetState.setState(() { duration = msg[1]; });
-            } else if (msg[0] == 'duration') {
               playerWidgetState.setState(() { sliderValue = msg[1]; });
+            } else if (msg[0] == 'duration') {
+              playerWidgetState.setState(() { duration = msg[1]; });
             }
           },
         )
