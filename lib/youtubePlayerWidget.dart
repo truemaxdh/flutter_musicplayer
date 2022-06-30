@@ -57,7 +57,7 @@ Widget youtubePlayerWidget(Size _size) {
       "      //    the player should play for six seconds and then stop.\n" +
       "      function onPlayerStateChange(event) {\n" +
       "        console.log(event)\n" + 
-      "        callBack('state', event.data);\n" +
+      "        callBack({type:'state', val:event.data});\n" +
       "      }\n" +
       
       "      function loadVideoById(videoId, startSeconds, suggestedQuality) {" +
@@ -72,8 +72,8 @@ Widget youtubePlayerWidget(Size _size) {
       "      function displayStatus() {" +
       "        var time = player.getCurrentTime();" +
       "        var duration = player.getDuration();" +
-      "        callBack('playtime', time);" +
-      "        callBack('duration', duration);" +
+      "        callBack({type:'playtime', val:time});" +
+      "        callBack({type:'duration', val:duration});" +
       "        setTimeout(displayStatus, 500);\n" +
       "      }" +    
       "    </script>\n" +
@@ -91,16 +91,16 @@ Widget youtubePlayerWidget(Size _size) {
       dartCallBacks: {
         DartCallback(
           name: 'callBack',
-          callBack: (_type, msg) {
-            if (_type == 'state') {
-              if (msg == 0) playNextSong(1);
-              if (isPlaying != (msg == 1)) {
-                playerWidgetState.setState(() { isPlaying = (msg == 1); });
+          callBack: (msg) {
+            if (msg.type == 'state') {
+              if (msg.val == 0) playNextSong(1);
+              if (isPlaying != (msg.val == 1)) {
+                playerWidgetState.setState(() { isPlaying = (msg.val == 1); });
               }
-            } else if (_type == 'playtime') {
-              playerWidgetState.setState(() { duration = msg; });
-            } else if (_type == 'duration') {
-              playerWidgetState.setState(() { sliderValue = msg; });
+            } else if (msg.type == 'playtime') {
+              playerWidgetState.setState(() { duration = msg.val; });
+            } else if (msg.type == 'duration') {
+              playerWidgetState.setState(() { sliderValue = msg.val; });
             }
           },
         )
