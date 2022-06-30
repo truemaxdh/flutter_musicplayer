@@ -165,12 +165,16 @@ class _PlayerWidget extends State<PlayerWidget> {
                   value: sliderValue.toDouble(),
                   onChangeEnd: (value) {
                     if (songList[curSongIdx].isYoutube) {
-                      //youtubePlayerController.seekTo(Duration(seconds: value.toInt()));
+                      webviewController.callJsMethod("seekTo", [value, true]);
                     } else {
                       audioPlayer.seek(Duration(seconds: value.toInt()));
                     }
                   },
-                  onChanged: (double value) {},
+                  onChanged: (value) {
+                    if (songList[curSongIdx].isYoutube) {
+                      webviewController.callJsMethod("seekTo", [value, false]);
+                    }
+                  },
                 )),
           ),
         ),
