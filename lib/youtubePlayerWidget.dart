@@ -57,7 +57,7 @@ Widget youtubePlayerWidget(Size _size) {
       "      //    the player should play for six seconds and then stop.\n" +
       "      function onPlayerStateChange(event) {\n" +
       "        console.log(event)\n" + 
-      "        callBack({'_type':'state', 'val':event.data});\n" +
+      "        callBack(['state', event.data]);\n" +
       "      }\n" +
       
       "      function loadVideoById(videoId, startSeconds, suggestedQuality) {" +
@@ -72,8 +72,8 @@ Widget youtubePlayerWidget(Size _size) {
       "      function displayStatus() {" +
       "        var time = player.getCurrentTime();" +
       "        var duration = player.getDuration();" +
-      "        callBack({'_type':'playtime', 'val':time});" +
-      "        callBack({'_type':'duration', 'val':duration});" +
+      "        callBack(['playtime', time]);" +
+      "        callBack(['duration', duration]);" +
       "        setTimeout(displayStatus, 500);\n" +
       "      }" +    
       "    </script>\n" +
@@ -92,15 +92,15 @@ Widget youtubePlayerWidget(Size _size) {
         DartCallback(
           name: 'callBack',
           callBack: (msg) {
-            if (msg._type == 'state') {
-              if (msg.val == 0) playNextSong(1);
-              if (isPlaying != (msg.val == 1)) {
-                playerWidgetState.setState(() { isPlaying = (msg.val == 1); });
+            if (msg[0] == 'state') {
+              if (msg[1] == 0) playNextSong(1);
+              if (isPlaying != (msg[1] == 1)) {
+                playerWidgetState.setState(() { isPlaying = (msg[1] == 1); });
               }
-            } else if (msg._type == 'playtime') {
-              playerWidgetState.setState(() { duration = msg.val; });
-            } else if (msg._type == 'duration') {
-              playerWidgetState.setState(() { sliderValue = msg.val; });
+            } else if (msg[0] == 'playtime') {
+              playerWidgetState.setState(() { duration = msg[1]; });
+            } else if (msg[0] == 'duration') {
+              playerWidgetState.setState(() { sliderValue = msg[1]; });
             }
           },
         )
