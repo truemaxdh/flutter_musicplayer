@@ -69,6 +69,9 @@ Widget youtubePlayerWidget(Size _size) {
       "      function playVideo() {" +
       "        player.playVideo();" +
       "      }" +
+      "      function seekTo(seconds, allowSeekAhead) {" +
+      "        player.seekTo(seconds, allowSeekAhead);" +
+      "      }" +
       "      function displayStatus() {" +
       "        var time = player.getCurrentTime();" +
       "        var duration = player.getDuration();" +
