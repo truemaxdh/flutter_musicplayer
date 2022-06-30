@@ -57,7 +57,7 @@ Widget youtubePlayerWidget(Size _size) {
       "      //    the player should play for six seconds and then stop.\n" +
       "      function onPlayerStateChange(event) {\n" +
       "        console.log(event)\n" + 
-      "        callBack({type:'state', val:event.data});\n" +
+      "        callBack({'_type':'state', 'val':event.data});\n" +
       "      }\n" +
       
       "      function loadVideoById(videoId, startSeconds, suggestedQuality) {" +
@@ -72,8 +72,8 @@ Widget youtubePlayerWidget(Size _size) {
       "      function displayStatus() {" +
       "        var time = player.getCurrentTime();" +
       "        var duration = player.getDuration();" +
-      "        callBack({type:'playtime', val:time});" +
-      "        callBack({type:'duration', val:duration});" +
+      "        callBack({'_type':'playtime', 'val':time});" +
+      "        callBack({'_type':'duration', 'val':duration});" +
       "        setTimeout(displayStatus, 500);\n" +
       "      }" +    
       "    </script>\n" +
@@ -92,14 +92,14 @@ Widget youtubePlayerWidget(Size _size) {
         DartCallback(
           name: 'callBack',
           callBack: (msg) {
-            if (msg.type == 'state') {
+            if (msg._type == 'state') {
               if (msg.val == 0) playNextSong(1);
               if (isPlaying != (msg.val == 1)) {
                 playerWidgetState.setState(() { isPlaying = (msg.val == 1); });
               }
-            } else if (msg.type == 'playtime') {
+            } else if (msg._type == 'playtime') {
               playerWidgetState.setState(() { duration = msg.val; });
-            } else if (msg.type == 'duration') {
+            } else if (msg._type == 'duration') {
               playerWidgetState.setState(() { sliderValue = msg.val; });
             }
           },
