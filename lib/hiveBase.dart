@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+/*
 // Create a box collection
 final collection = BoxCollection.open(
   'MySongs', // Name of your database
@@ -10,12 +11,23 @@ final collection = BoxCollection.open(
   path: './', // Path where to store your boxes (Only used in Flutter / Dart IO)
   key: HiveCipher(), // Key to encrypt your boxes (Only used in Flutter / Dart IO)
 );
-
+*/
 
 // Open your boxes. Optional: Give it a type.
-final songList1 = collection.openBox<Map>('songList1');
+//final songList1 = collection.openBox<Map>('songList1');
+var songList1;
 
 void putDBTestData() {
+  var box = Hive.box('myBox');
+
+  box.put('name', 'David');
+
+  var name = box.get('name');
+
+  print('Name: $name');
+  
+  songList1 = Hive.openBox('songList1');
+  
   // Put something in
   songList1.put(
     '2002', 
