@@ -19,7 +19,7 @@ final collection = BoxCollection.open(
 
 void putDBTestData() {
     
-  songList1 = Hive.openBox('songList1');
+  songList1 = Hive.openBox<Map>('songList1');
   print(songList1);
   
   // Put something in
