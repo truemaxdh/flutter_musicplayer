@@ -1,4 +1,6 @@
 import 'package:audioplayers/audioplayers.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_music_player/widget.dart';
 import 'package:flutter_music_player/songListWidget.dart';
@@ -6,7 +8,8 @@ import 'package:flutter_music_player/playerWidget.dart';
 import 'package:flutter_music_player/youtubePlayerWidget.dart';
 import 'package:flutter_music_player/hiveBase.dart';
 
-void main() {
+Future<void> main() async {
+  await Hive.initFlutter();
   runApp(MyApp());
 }
 
