@@ -1,45 +1,70 @@
-import 'dart:io';
-
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_music_player/main.dart';
 
-/*
-// Create a box collection
-final collection = BoxCollection.open(
-  'MySongs', // Name of your database
-  {'SongList1', 'SongList2'}, // Names of your boxes
-  path: './', // Path where to store your boxes (Only used in Flutter / Dart IO)
-  key: HiveCipher(), // Key to encrypt your boxes (Only used in Flutter / Dart IO)
-);
-*/
-
 // Open your boxes. Optional: Give it a type.
 //final songList1 = collection.openBox<Map>('songList1');
+Future<void> putDBTestData() async {
+  // Create a box collection
+  final collection = await BoxCollection.open(
+    'MySongs', // Name of your database
+    {'SongList1', 'SongList2'}, // Names of your boxes
+    path:
+        './', // Path where to store your boxes (Only used in Flutter / Dart IO)
+    key: HiveAesCipher([
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32
+    ]), // Key to encrypt your boxes (Only used in Flutter / Dart IO)
+  );
 
-void putDBTestData() {
-  print(1);  
-  songList1 = Hive.box('songList1');
-  print(songList1);
-  
-  print(2);  
-  songList1.put('1', '1');
-  print(songList1.get('1'));
-  
+  songList = await collection.openBox('songList1');
+
   // Put something in
-  print(3);  
-  songList1.put(
-    '2002', 
-    ['2002', 'Anne Marie', 'https://avatars.githubusercontent.com/u/12081386?s=120&v=4',
-     '', 'Il-an3K9pjg']);
-  print(songList1);
-  
-  
-  print(4);  
-  songList1.put(
-    'Space Trip', 
-    ['Space Trip', 'Danny Choi', 'https://avatars.githubusercontent.com/u/12081386?s=120&v=4',
-     'https://truemaxdh.github.io/MusicTreasureHouse/SpaceTrip/SpaceTrip.mp3', '']);
-  print(songList1);
-  
+  songList.put('2002', {
+    'title': '2002',
+    'artist': 'Anne Marie',
+    'albumArtwork':
+        'https://avatars.githubusercontent.com/u/12081386?s=120&v=4',
+    'mp3Url': '',
+    'ytbVideoId': 'Il-an3K9pjg'
+  });
+  songList.put('Space Trip', {
+    'title': 'Space Trip',
+    'artist': 'Danny Choi',
+    'albumArtwork':
+        'https://avatars.githubusercontent.com/u/12081386?s=120&v=4',
+    'mp3_url':
+        'https://truemaxdh.github.io/MusicTreasureHouse/SpaceTrip/SpaceTrip.mp3',
+    'ytbVideoId': ''
+  });
 }

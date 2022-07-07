@@ -12,12 +12,14 @@ class SongWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        itemCount: songList1.length,
+        itemCount: songList.length,
         itemBuilder: (context, songIndex) {
-          var song = songList1.values[songIndex];
-          if (song.title.length > 0)
+          var song = songList.getAt(songIndex);
+          if (song['title'].length > 0)
             return Card(
-              color: (curSongIdx == songIndex) ? Colors.green.shade100 : Colors.white,
+              color: (curSongIdx == songIndex)
+                  ? Colors.green.shade100
+                  : Colors.white,
               elevation: 5,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -28,10 +30,10 @@ class SongWidget extends StatelessWidget {
                         height: 90,
                         width: 150,
                         fit: BoxFit.cover,
-                        image: (song.albumArtwork.startsWith('http:') ||
-                                song.albumArtwork.startsWith('https:'))
-                            ? NetworkImage(song.albumArtwork)
-                            : FileImage(File(song.albumArtwork)),
+                        image: (song['albumArtwork'].startsWith('http:') ||
+                                song['albumArtwork'].startsWith('https:'))
+                            ? NetworkImage(song['albumArtwork'])
+                            : FileImage(File(song['albumArtwork'])),
                       ),
                       borderRadius: BorderRadius.circular(5),
                     ),
@@ -47,17 +49,17 @@ class SongWidget extends StatelessWidget {
                             children: <Widget>[
                               Container(
                                 width: MediaQuery.of(context).size.width * 0.4,
-                                child: Text(song.title,
+                                child: Text(song['title'],
                                     style: TextStyle(
                                         fontSize: 13,
                                         fontWeight: FontWeight.w700)),
                               ),
-                              Text("Artist: ${song.artist}",
+                              Text("Artist: ${song['artist']}",
                                   style: TextStyle(
                                       fontSize: 11,
                                       color: Colors.grey,
                                       fontWeight: FontWeight.w500)),
-                              Text("Composer: ${song.composer}",
+                              Text("Composer: ${song['composer']}",
                                   style: TextStyle(
                                       fontSize: 11,
                                       color: Colors.grey,
