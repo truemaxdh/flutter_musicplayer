@@ -9,10 +9,10 @@ class SongWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        itemCount: songList.length,
+        itemCount: songList1.length,
         itemBuilder: (context, songIndex) {
-          SongInfo2 song = songList[songIndex];
-          if (song.displayName.length > 0)
+          var song = songList1.values[songIndex];
+          if (song.title.length > 0)
             return Card(
               color: (curSongIdx == songIndex) ? Colors.green.shade100 : Colors.white,
               elevation: 5,
@@ -49,23 +49,12 @@ class SongWidget extends StatelessWidget {
                                         fontSize: 13,
                                         fontWeight: FontWeight.w700)),
                               ),
-                              Text("Release Year: ${song.year}",
-                                  style: TextStyle(
-                                      fontSize: 11,
-                                      color: Colors.grey,
-                                      fontWeight: FontWeight.w500)),
                               Text("Artist: ${song.artist}",
                                   style: TextStyle(
                                       fontSize: 11,
                                       color: Colors.grey,
                                       fontWeight: FontWeight.w500)),
                               Text("Composer: ${song.composer}",
-                                  style: TextStyle(
-                                      fontSize: 11,
-                                      color: Colors.grey,
-                                      fontWeight: FontWeight.w500)),
-                              Text(
-                                  "Duration: ${parseToMinutesSeconds(int.parse(song.duration))} min",
                                   style: TextStyle(
                                       fontSize: 11,
                                       color: Colors.grey,
