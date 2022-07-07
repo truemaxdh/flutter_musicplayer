@@ -4,7 +4,7 @@ import 'package:flutter_music_player/widget.dart';
 import 'package:flutter_music_player/songListWidget.dart';
 import 'package:flutter_music_player/playerWidget.dart';
 import 'package:flutter_music_player/youtubePlayerWidget.dart';
-//import 'package:youtube_player_iframe/youtube_player_iframe.dart' as ytb;
+import 'package:flutter_music_player/hiveBase.dart';
 
 void main() {
   runApp(MyApp());
@@ -63,27 +63,7 @@ class MyAppState extends State<MainPage> {
   }
 
   void setupYoutube() {
-    /*youtubePlayerController.listen((evt) {
-      if (!songList[curSongIdx].isYoutube) 
-        return;
-      
-      sliderValue = evt.position.inSeconds;
-      duration = evt.metaData.duration.inSeconds;
-      var playerState = evt.playerState;
-      //print('Ytb Song PlayerState: $playerState');
-      isPlaying = (playerState == ytb.PlayerState.playing);
-      
-      setState(() {});
-      
-      if (isPlaying && duration != 0 && sliderValue == (duration - 1)) {
-        playNextSong(1);
-      }
-      
-      if (title != "Music Player") {
-        youtubePlayerController.load(title);
-        title = "Music Player";
-      }
-    });*/
+    
   }
 
   @override
@@ -166,13 +146,8 @@ var iframeInitialized = false;
 
 MyAppState myAppState;
 AudioPlayer audioPlayer = AudioPlayer();
-/*ytb.YoutubePlayerController youtubePlayerController = ytb.YoutubePlayerController(
-  //initialVideoId: videoId,
-  params: ytb.YoutubePlayerParams(
-    startAt: Duration(seconds: 1),
-    showFullscreenButton: true,
-  ),
-);*/
+
+PutDBTestData();
 
 List<SongInfo2> songList = new List.empty(growable: true);
 var curSongIdx = -1;
@@ -197,16 +172,13 @@ var playNextSong = (idxIncrease) {
     } else {
       audioPlayer.play(DeviceFileSource(song.filePath));
     }
-    //title = "Music Player";
+    
     iframeInitialized = false;
   } else {
     audioPlayer.stop();
     var keyPattern = "watch?v=";
     var startPos = song.filePath.indexOf(keyPattern);
     videoId = song.filePath.substring(startPos + keyPattern.length);
-
-    //myAppState.setupYoutube();
-    //title = videoId;
 
     myAppState.setState(() {
       if (screenMode == "list") screenMode = "mixed";
