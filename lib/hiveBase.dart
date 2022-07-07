@@ -18,16 +18,24 @@ final collection = BoxCollection.open(
 //final songList1 = collection.openBox<Map>('songList1');
 
 void putDBTestData() {
-    
+  print(1);  
   songList1 = Hive.openBox<Map>('songList1');
   print(songList1);
   
+  print(2);  
+  songList1.put('1', '1');
+  print(songList1.get('1'));
+  
   // Put something in
+  print(3);  
   songList1.put(
     '2002', 
     ['2002', 'Anne Marie', 'https://avatars.githubusercontent.com/u/12081386?s=120&v=4',
      '', 'Il-an3K9pjg']);
   print(songList1);
+  
+  
+  print(4);  
   songList1.put(
     'Space Trip', 
     ['Space Trip', 'Danny Choi', 'https://avatars.githubusercontent.com/u/12081386?s=120&v=4',
