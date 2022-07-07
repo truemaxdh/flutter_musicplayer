@@ -14,7 +14,7 @@ final collection = await BoxCollection.open(
 // Open your boxes. Optional: Give it a type.
 final songList1 = collection.openBox<Map>('songList1');
 
-function PutDBTestData() {
+async PutDBTestData() {
   // Put something in
   await songList1.put(
     '2002', 
