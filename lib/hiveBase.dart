@@ -18,14 +18,7 @@ final collection = BoxCollection.open(
 var songList1;
 
 void putDBTestData() {
-  var box = Hive.box('myBox');
-
-  box.put('name', 'David');
-
-  var name = box.get('name');
-
-  print('Name: $name');
-  
+    
   songList1 = Hive.openBox('songList1');
   
   // Put something in
