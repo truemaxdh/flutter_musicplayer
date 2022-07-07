@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:hive/hive.dart';
 
 // Create a box collection
-final collection = await BoxCollection.open(
+final collection = BoxCollection.open(
   'MySongs', // Name of your database
   {'SongList1', 'SongList2'}, // Names of your boxes
   path: './', // Path where to store your boxes (Only used in Flutter / Dart IO)
@@ -14,9 +14,9 @@ final collection = await BoxCollection.open(
 // Open your boxes. Optional: Give it a type.
 final songList1 = collection.openBox<Map>('songList1');
 
-async PutDBTestData() {
+function PutDBTestData() {
   // Put something in
-  await songList1.put(
+  songList1.put(
     '2002', 
     {
       'title': '2002', 
@@ -24,7 +24,7 @@ async PutDBTestData() {
       'album_artwork': 'https://avatars.githubusercontent.com/u/12081386?s=120&v=4',
       'mp3_url': '',
       'ytb_video_id': 'Il-an3K9pjg'});
-  await songList1.put(
+  songList1.put(
     'Space Trip', 
     {
       'title': 'Space Trip',
