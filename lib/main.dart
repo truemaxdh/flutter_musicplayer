@@ -30,6 +30,7 @@ class MyAppState extends State<MainPage> {
   void initState() {
     super.initState();
     setupAudio();
+    PutDBTestData();
     myAppState = this;
   }
 
@@ -60,10 +61,6 @@ class MyAppState extends State<MainPage> {
       duration = p.inSeconds;
       setState(() {});
     });
-  }
-
-  void setupYoutube() {
-    
   }
 
   @override
@@ -146,8 +143,6 @@ var iframeInitialized = false;
 
 MyAppState myAppState;
 AudioPlayer audioPlayer = AudioPlayer();
-
-PutDBTestData();
 
 List<SongInfo2> songList = new List.empty(growable: true);
 var curSongIdx = -1;
