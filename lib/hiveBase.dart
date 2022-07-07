@@ -25,21 +25,13 @@ void putDBTestData() {
   // Put something in
   songList1.put(
     '2002', 
-    {
-      'title': '2002', 
-      'artist': 'Anne Marie', 
-      'album_artwork': 'https://avatars.githubusercontent.com/u/12081386?s=120&v=4',
-      'mp3_url': '',
-      'ytb_video_id': 'Il-an3K9pjg'});
+    ['2002', 'Anne Marie', 'https://avatars.githubusercontent.com/u/12081386?s=120&v=4',
+     '', 'Il-an3K9pjg']);
   print(songList1);
   songList1.put(
     'Space Trip', 
-    {
-      'title': 'Space Trip',
-      'artist': 'Danny Choi',
-      'album_artwork': 'https://avatars.githubusercontent.com/u/12081386?s=120&v=4',
-      'mp3_url': 'https://truemaxdh.github.io/MusicTreasureHouse/SpaceTrip/SpaceTrip.mp3',
-      'ytb_video_id': ''});
+    ['Space Trip', 'Danny Choi', 'https://avatars.githubusercontent.com/u/12081386?s=120&v=4',
+     'https://truemaxdh.github.io/MusicTreasureHouse/SpaceTrip/SpaceTrip.mp3', '']);
   print(songList1);
   
 }
