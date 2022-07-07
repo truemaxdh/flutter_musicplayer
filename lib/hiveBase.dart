@@ -15,7 +15,7 @@ final collection = BoxCollection.open(
 // Open your boxes. Optional: Give it a type.
 final songList1 = collection.openBox<Map>('songList1');
 
-function PutDBTestData() {
+void putDBTestData() {
   // Put something in
   songList1.put(
     '2002', 
