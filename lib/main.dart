@@ -10,6 +10,7 @@ import 'package:flutter_music_player/hiveBase.dart';
 
 Future<void> main() async {
   await Hive.initFlutter();
+  putDBTestData();
   runApp(MyApp());
 }
 
@@ -33,7 +34,7 @@ class MyAppState extends State<MainPage> {
   void initState() {
     super.initState();
     setupAudio();
-    putDBTestData();
+   
     myAppState = this;
   }
 
