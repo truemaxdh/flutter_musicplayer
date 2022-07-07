@@ -20,6 +20,7 @@ final collection = BoxCollection.open(
 void putDBTestData() {
     
   songList1 = Hive.openBox('songList1');
+  print(songList1);
   
   // Put something in
   songList1.put(
@@ -30,6 +31,7 @@ void putDBTestData() {
       'album_artwork': 'https://avatars.githubusercontent.com/u/12081386?s=120&v=4',
       'mp3_url': '',
       'ytb_video_id': 'Il-an3K9pjg'});
+  print(songList1);
   songList1.put(
     'Space Trip', 
     {
@@ -38,4 +40,6 @@ void putDBTestData() {
       'album_artwork': 'https://avatars.githubusercontent.com/u/12081386?s=120&v=4',
       'mp3_url': 'https://truemaxdh.github.io/MusicTreasureHouse/SpaceTrip/SpaceTrip.mp3',
       'ytb_video_id': ''});
+  print(songList1);
+  
 }
