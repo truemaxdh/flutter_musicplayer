@@ -33,7 +33,7 @@ class MyAppState extends State<MainPage> {
   void initState() {
     super.initState();
     setupAudio();
-    PutDBTestData();
+    putDBTestData();
     myAppState = this;
   }
 
