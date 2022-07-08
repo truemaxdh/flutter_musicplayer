@@ -1,7 +1,3 @@
-import 'dart:async';
-import 'dart:io';
-import 'package:flutter/material.dart';
-
 part of 'main.dart';
 
 var title = "Music Player";
