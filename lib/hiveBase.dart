@@ -63,7 +63,7 @@ Future<void> putDBTestData() async {
     'artist': 'Danny Choi',
     'albumArtwork':
         'https://avatars.githubusercontent.com/u/12081386?s=120&v=4',
-    'mp3_url':
+    'mp3Url':
         'https://truemaxdh.github.io/MusicTreasureHouse/SpaceTrip/SpaceTrip.mp3',
     'ytbVideoId': ''
   });
