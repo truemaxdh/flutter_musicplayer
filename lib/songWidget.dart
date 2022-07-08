@@ -30,15 +30,7 @@ class SongWidget extends StatelessWidget {
                         height: 90,
                         width: 150,
                         fit: BoxFit.cover,
-                        image: () {
-                          if (song['mp3Url'].length > 0)
-                            return FileImage(File('images/mp3.png'));
-                          else if (song['ytbVideoId'].length > 0)
-                            return FileImage(File('images/mp3.png'));
-                          else
-                            return NetworkImage(
-                              "https://avatars.githubusercontent.com/u/12081386?s=120&v=4");
-                          },
+                        image: getIcon(song),
                       ),
                       borderRadius: BorderRadius.circular(5),
                     ),
