@@ -41,7 +41,7 @@ class MyAppState extends State<MainPage> {
 
   void setupAudio() {
     audioPlayer.onPositionChanged.listen((Duration p) {
-      if (songList[curSongIdx].isYoutube) return;
+      if (curSong['mp3Url'].length == 0) return;
 
       if (isPlaying) {
         sliderValue = p.inSeconds;
@@ -54,14 +54,14 @@ class MyAppState extends State<MainPage> {
       }
     });
     audioPlayer.onPlayerStateChanged.listen((PlayerState s) {
-      if (songList[curSongIdx].isYoutube) return;
+      if (curSong['mp3Url'].length == 0) return;
 
       print('Song PlayerState: $s');
       isPlaying = (s == PlayerState.playing);
       setState(() {});
     });
     audioPlayer.onDurationChanged.listen((Duration p) {
-      if (songList[curSongIdx].isYoutube) return;
+      if (curSong['mp3Url'].length == 0) return;
 
       duration = p.inSeconds;
       setState(() {});
@@ -103,7 +103,7 @@ class MyAppState extends State<MainPage> {
                   onChanged: (value) {
                     setState(() {
                       _volume = value;
-                      if (songList[curSongIdx].isYoutube) {
+                      if (curSong['ytbVideoId'].length > 0) {
                         //youtubePlayerController.setVolume((value * 100).toInt());
                       } else {
                         audioPlayer.setVolume(value);
