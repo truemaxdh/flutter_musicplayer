@@ -14,7 +14,7 @@ class SongWidget extends StatelessWidget {
     return ListView.builder(
         itemCount: songList.length,
         itemBuilder: (context, songIndex) {
-          var song = songList.getAt(songIndex);
+          var song = songList.values.elementAt(songIndex);
           if (song['title'].length > 0)
             return Card(
               color: (curSongIdx == songIndex)
