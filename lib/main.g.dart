@@ -32,11 +32,11 @@ var playNextSong = (idxIncrease) {
 
   curSong = songList[curSongIdx];
   if (curSong['mp3Url'].length > 0) {
-    if (song.filePath.startsWith('http:') ||
-        song.filePath.startsWith('https:')) {
-      audioPlayer.play(UrlSource(song.filePath));
+    if (curSong['mp3Url'].startsWith('http:') ||
+        curSong['mp3Url'].startsWith('https:')) {
+      audioPlayer.play(UrlSource(curSong['mp3Url']));
     } else {
-      audioPlayer.play(DeviceFileSource(song.filePath));
+      audioPlayer.play(DeviceFileSource(curSong['mp3Url']));
     }
 
     iframeInitialized = false;
