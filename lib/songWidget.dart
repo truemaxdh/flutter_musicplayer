@@ -30,10 +30,15 @@ class SongWidget extends StatelessWidget {
                         height: 90,
                         width: 150,
                         fit: BoxFit.cover,
-                        image: (song['albumArtwork'].startsWith('http:') ||
-                                song['albumArtwork'].startsWith('https:'))
-                            ? NetworkImage(song['albumArtwork'])
-                            : FileImage(File(song['albumArtwork'])),
+                        image: () {
+                          if (song['mp3Url'].length > 0)
+                            return FileImage(File('images/mp3.png'));
+                          else if (song['ytbVideoId'].length > 0)
+                            return FileImage(File('images/mp3.png'));
+                          else
+                            return NetworkImage(
+                              "https://avatars.githubusercontent.com/u/12081386?s=120&v=4");
+                          },
                       ),
                       borderRadius: BorderRadius.circular(5),
                     ),
@@ -55,11 +60,6 @@ class SongWidget extends StatelessWidget {
                                         fontWeight: FontWeight.w700)),
                               ),
                               Text("Artist: ${song['artist']}",
-                                  style: TextStyle(
-                                      fontSize: 11,
-                                      color: Colors.grey,
-                                      fontWeight: FontWeight.w500)),
-                              Text("Composer: ${song['composer']}",
                                   style: TextStyle(
                                       fontSize: 11,
                                       color: Colors.grey,
