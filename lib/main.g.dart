@@ -30,7 +30,7 @@ var playNextSong = (idxIncrease) {
   duration = 0;
   isPlaying = false;
 
-  curSong = songList[curSongIdx];
+  curSong = songList.values.elementAt(curSongIdx);
   if (curSong['mp3Url'].length > 0) {
     if (curSong['mp3Url'].startsWith('http:') ||
         curSong['mp3Url'].startsWith('https:')) {
