@@ -67,6 +67,15 @@ Future<void> putDBTestData() async {
         'https://truemaxdh.github.io/MusicTreasureHouse/SpaceTrip/SpaceTrip.mp3',
     'ytbVideoId': ''
   });
+  await box.put('어땠을까', {
+    'title': '어땠을까',
+    'artist': '싸이 & 박정현',
+    'albumArtwork':
+        'https://music.bugs.co.kr/track/2708278',
+    'mp3Url':
+        '',
+    'ytbVideoId': 'iT267zwmFBw'
+  });
   
   songList = await box.getAllValues();
 }
