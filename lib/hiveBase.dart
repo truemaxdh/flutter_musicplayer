@@ -47,10 +47,10 @@ Future<void> putDBTestData() async {
     ]), // Key to encrypt your boxes (Only used in Flutter / Dart IO)
   );
 
-  songList = await collection.openBox('songList1');
-
+  CollectionBox box = await collection.openBox<Map>('songList1');
+  
   // Put something in
-  songList.put('2002', {
+  await box.put('2002', {
     'title': '2002',
     'artist': 'Anne Marie',
     'albumArtwork':
@@ -58,7 +58,7 @@ Future<void> putDBTestData() async {
     'mp3Url': '',
     'ytbVideoId': 'Il-an3K9pjg'
   });
-  songList.put('Space Trip', {
+  await box.put('Space Trip', {
     'title': 'Space Trip',
     'artist': 'Danny Choi',
     'albumArtwork':
@@ -67,4 +67,6 @@ Future<void> putDBTestData() async {
         'https://truemaxdh.github.io/MusicTreasureHouse/SpaceTrip/SpaceTrip.mp3',
     'ytbVideoId': ''
   });
+  
+  songList = await box.getAllValues();
 }
