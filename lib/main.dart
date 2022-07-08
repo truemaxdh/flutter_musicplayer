@@ -12,6 +12,10 @@ part 'main.g.dart';
 Future<void> main() async {
   await Hive.initFlutter();
   await putDBTestData();
+  WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp],
+  ); // To turn off landscape mode
   runApp(MyApp());
 }
 
