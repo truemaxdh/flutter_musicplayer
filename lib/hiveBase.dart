@@ -47,7 +47,7 @@ Future<void> putDBTestData() async {
     ]), // Key to encrypt your boxes (Only used in Flutter / Dart IO)
   );
 
-  CollectionBox box = await collection.openBox<Map>('songList1');
+  CollectionBox box = await collection.openBox<Map>('SongList1');
   
   // Put something in
   await box.put('2002', {
