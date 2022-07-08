@@ -25,15 +25,7 @@ class _PlayerWidget extends State<PlayerWidget> {
             height: 72,
             width: 120,
             fit: BoxFit.cover,
-            image: () {
-              if (song['mp3Url'].length > 0)
-                return FileImage(File('images/mp3.png'));
-              else if (song['ytbVideoId'].length > 0)
-                return FileImage(File('images/mp3.png'));
-              else
-                return NetworkImage(
-                  "https://avatars.githubusercontent.com/u/12081386?s=120&v=4");
-            },
+            image: getIcon(curSong),          
         ),
         Expanded(
           child: Container(
