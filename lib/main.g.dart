@@ -52,9 +52,9 @@ var playNextSong = (idxIncrease) {
 
 var getIcon = (song) {
   if (song['mp3Url'].length > 0)
-    return FileImage(File('images/mp3.png'));
+    return new AssetImage('images/mp3.png');
   else if (song['ytbVideoId'].length > 0)
-    return FileImage(File('images/mp3.png'));
+    return new AssetImage('images/mp3.png');
   else
     return NetworkImage(
       "https://avatars.githubusercontent.com/u/12081386?s=120&v=4");
