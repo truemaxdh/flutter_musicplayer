@@ -15,6 +15,7 @@ AudioPlayer audioPlayer = AudioPlayer();
 
 //List<SongInfo2> songList = new List.empty(growable: true);
 Map songList;
+Map curSong;
 
 var curSongIdx = -1;
 var playNextSong = (idxIncrease) {
@@ -29,9 +30,8 @@ var playNextSong = (idxIncrease) {
   duration = 0;
   isPlaying = false;
 
-  SongInfo2 song = songList[curSongIdx];
-  print('isYoutube: ${song.isYoutube}');
-  if (!song.isYoutube) {
+  curSong = songList[curSongIdx];
+  if (curSong['mp3Url'].length > 0) {
     if (song.filePath.startsWith('http:') ||
         song.filePath.startsWith('https:')) {
       audioPlayer.play(UrlSource(song.filePath));
@@ -40,11 +40,9 @@ var playNextSong = (idxIncrease) {
     }
 
     iframeInitialized = false;
-  } else {
+  } else if (curSong['ytbVideoId'].length > 0) {
     audioPlayer.stop();
-    var keyPattern = "watch?v=";
-    var startPos = song.filePath.indexOf(keyPattern);
-    videoId = song.filePath.substring(startPos + keyPattern.length);
+    videoId = curSong['ytbVideoId'];
 
     myAppState.setState(() {
       if (screenMode == "list") screenMode = "mixed";
