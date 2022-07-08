@@ -126,7 +126,7 @@ class MyAppState extends State<MainPage> {
       ret.add(getSongListContainer());
     }
     if (screenMode == "player" || screenMode == "mixed") {
-      if (songList[curSongIdx].isYoutube) {
+      if (curSong['ytbVideoId'].length > 0) {
         var _size = MediaQuery.of(context).size;
         ret.add(youtubePlayerWidget(_size));
       }
