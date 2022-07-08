@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 part of 'main.dart';
@@ -60,4 +61,4 @@ var getIcon = (song) {
   else
     return NetworkImage(
       "https://avatars.githubusercontent.com/u/12081386?s=120&v=4");
-}
+};
