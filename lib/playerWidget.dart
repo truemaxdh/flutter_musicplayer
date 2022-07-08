@@ -59,7 +59,7 @@ class _PlayerWidget extends State<PlayerWidget> {
                       child: Center(
                         child: IconButton(
                           onPressed: () async {
-                            if (songList[curSongIdx].isYoutube) {
+                            if (curSong['ytbVideoId'].length > 0) {
                               webviewController.callJsMethod(
                                   (isPlaying
                                       ? "pauseVideo"
@@ -106,9 +106,6 @@ class _PlayerWidget extends State<PlayerWidget> {
                               myAppState.setState(() {
                                 screenMode =
                                     (screenMode == "player") ? "mixed" : "player";
-                                if (songList[curSongIdx].isYoutube) {
-                                  title = videoId;
-                                }
                               });
                             }),
                       ),
@@ -164,14 +161,14 @@ class _PlayerWidget extends State<PlayerWidget> {
                   max: duration.toDouble(),
                   value: sliderValue.toDouble(),
                   onChangeEnd: (value) {
-                    if (songList[curSongIdx].isYoutube) {
+                    if (curSong['ytbVideoId'].length > 0) {
                       webviewController.callJsMethod("seekTo", [value, true]);
                     } else {
                       audioPlayer.seek(Duration(seconds: value.toInt()));
                     }
                   },
                   onChanged: (value) {
-                    if (songList[curSongIdx].isYoutube) {
+                    if (curSong['ytbVideoId'].length > 0) {
                       webviewController.callJsMethod("seekTo", [value, false]);
                       setState(() {sliderValue = value.toInt();});
                     }
