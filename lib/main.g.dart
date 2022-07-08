@@ -14,7 +14,7 @@ MyAppState myAppState;
 AudioPlayer audioPlayer = AudioPlayer();
 
 //List<SongInfo2> songList = new List.empty(growable: true);
-var songList;
+Map songList;
 
 var curSongIdx = -1;
 var playNextSong = (idxIncrease) {
