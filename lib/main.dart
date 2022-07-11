@@ -80,7 +80,7 @@ class MyAppState extends State<MainPage> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        drawer: getDrawerMenu(),
+        drawer: getDrawerMenu(context),
         appBar: AppBar(
           actions: <Widget>[
             Padding(
