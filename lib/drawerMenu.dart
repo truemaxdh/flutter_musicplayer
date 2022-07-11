@@ -1,3 +1,5 @@
+part of 'main.dart';
+
 Drawer getDrawer(context) {
   return Drawer(
     child: ListView(
