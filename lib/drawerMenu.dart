@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Drawer getDrawer(context) {
+Drawer getDrawerMenu(context) {
   return Drawer(
     child: ListView(
       // Important: Remove any padding from the ListView.
