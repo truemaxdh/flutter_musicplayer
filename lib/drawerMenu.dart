@@ -1,4 +1,4 @@
-part of 'main.dart';
+import 'package:flutter/material.dart';
 
 Drawer getDrawer(context) {
   return Drawer(
