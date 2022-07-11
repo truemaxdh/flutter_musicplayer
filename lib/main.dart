@@ -11,6 +11,7 @@ import 'package:flutter_music_player/hiveBase.dart';
 import 'package:flutter_music_player/drawerMenu.dart';
 
 part 'main.g.dart';
+part 'drawerMenu.dart';
 
 Future<void> main() async {
   await Hive.initFlutter();
