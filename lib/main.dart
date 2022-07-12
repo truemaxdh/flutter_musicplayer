@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_music_player/hiveBase.dart';
-import 'package:flutter_music_player/drawerMenu.dart';
+//import 'package:flutter_music_player/drawerMenu.dart';
 import 'package:flutter_music_player/widget.dart';
 import 'package:flutter_music_player/songListWidget.dart';
 import 'package:flutter_music_player/playerWidget.dart';
@@ -12,6 +12,7 @@ import 'package:flutter_music_player/youtubePlayerWidget.dart';
 import 'package:flutter_music_player/editSonginfo.dart';
 
 part 'main.g.dart';
+part 'drawerMenu.dart';
 
 Future<void> main() async {
   await Hive.initFlutter();
