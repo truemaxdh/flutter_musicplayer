@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
 class EditSonginfoWidget extends StatelessWidget {
-  const EditSonginfoWidget({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
