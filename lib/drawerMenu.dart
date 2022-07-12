@@ -15,7 +15,7 @@ Drawer getDrawerMenu(context) {
         ListTile(
           title: const Text('Add new Song'),
           onTap: () {
-            Navigator.pop(context);
+            //Navigator.pop(context);
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => EditSonginfoWidget()),
