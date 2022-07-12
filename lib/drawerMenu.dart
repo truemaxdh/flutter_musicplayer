@@ -19,6 +19,7 @@ Drawer getDrawerMenu(context) {
               context,
               MaterialPageRoute(builder: (context) => EditSonginfoWidget()),
             );
+            Navigator.pop(context);
           },
         ),
         ListTile(
