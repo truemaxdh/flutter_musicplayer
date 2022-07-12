@@ -9,7 +9,7 @@ import 'package:flutter_music_player/widget.dart';
 import 'package:flutter_music_player/songListWidget.dart';
 import 'package:flutter_music_player/playerWidget.dart';
 import 'package:flutter_music_player/youtubePlayerWidget.dart';
-import 'package:flutter_music_player/editSongInfo.dart';
+import 'package:flutter_music_player/editSonginfo.dart';
 
 part 'main.g.dart';
 
