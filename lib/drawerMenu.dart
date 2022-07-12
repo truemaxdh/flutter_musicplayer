@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+part of 'main.dart';
 
 Drawer getDrawerMenu(context) {
   return Drawer(
@@ -10,15 +10,15 @@ Drawer getDrawerMenu(context) {
           decoration: BoxDecoration(
             color: Colors.blue,
           ),
-          child: Text('Drawer Header'),
+          child: Text('Edit Song List'),
         ),
         ListTile(
-          title: const Text('Item 1'),
+          title: const Text('Add new Song'),
           onTap: () {
-            // Update the state of the app
-            // ...
-            // Then close the drawer
-            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const EditSonginfoWidget()),
+            );
           },
         ),
         ListTile(
