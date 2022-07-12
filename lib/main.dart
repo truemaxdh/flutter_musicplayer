@@ -79,9 +79,7 @@ class MyAppState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+    return Scaffold(
         drawer: getDrawerMenu(context),
         appBar: AppBar(
           actions: <Widget>[
@@ -125,8 +123,7 @@ class MyAppState extends State<MainPage> {
         body: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: getBodyChildren()),
-      ),
-    );
+      );
   }
 
   List<Widget> getBodyChildren() {
