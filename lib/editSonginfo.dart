@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_music_player/hiveBase.dart';
 
 class EditSonginfoWidget extends StatelessWidget {
+  final inputs = [
+    TextEditingController(),
+    TextEditingController(),
+    TextEditingController(),
+    TextEditingController()
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -8,36 +16,63 @@ class EditSonginfoWidget extends StatelessWidget {
         title: const Text('Add / Edit Song'),
       ),
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-            child: TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Enter a search term',
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+              child: TextField(
+                controller: inputs[0],
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Title',
+                ),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-            child: TextFormField(
-              decoration: const InputDecoration(
-                border: UnderlineInputBorder(),
-                labelText: 'Enter your username',
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+              child: TextFormField(
+                controller: inputs[1],
+                decoration: const InputDecoration(
+                  border: UnderlineInputBorder(),
+                  labelText: 'Artist',
+                ),
               ),
             ),
-          ),
-          Center(
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: const Text('Go back!'),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+              child: TextFormField(
+                controller: inputs[2],
+                decoration: const InputDecoration(
+                  border: UnderlineInputBorder(),
+                  labelText: 'MP3 URL',
+                ),
+              ),
             ),
-          ),
-        ]
-      )
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+              child: TextFormField(
+                controller: inputs[3],
+                decoration: const InputDecoration(
+                  border: UnderlineInputBorder(),
+                  labelText: 'Youtube Video Id',
+                ),
+              ),
+            ),
+          ]),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          await box.put(inputs[0].text, {
+            'title': inputs[0].text,
+            'artist': inputs[1].text,
+            'albumArtwork': '',
+            'mp3Url': inputs[2].text,
+            'ytbVideoId': inputs[3].text
+          });
+          Navigator.pop(context);
+        },
+        tooltip: 'Save & Close',
+        child: const Icon(Icons.text_fields),
+      ),
     );
   }
 }

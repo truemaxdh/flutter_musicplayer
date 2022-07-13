@@ -3,7 +3,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_music_player/main.dart';
 
 // Open your boxes. Optional: Give it a type.
-//final songList1 = collection.openBox<Map>('songList1');
+CollectionBox box;
 Future<void> putDBTestData() async {
   // Create a box collection
   final collection = await BoxCollection.open(
@@ -47,8 +47,8 @@ Future<void> putDBTestData() async {
     ]), // Key to encrypt your boxes (Only used in Flutter / Dart IO)
   );
 
-  CollectionBox box = await collection.openBox<Map>('SongList1');
-  
+  box = await collection.openBox<Map>('SongList1');
+
   // Put something in
   await box.put('2002', {
     'title': '2002',
@@ -70,12 +70,10 @@ Future<void> putDBTestData() async {
   await box.put('어땠을까', {
     'title': '어땠을까',
     'artist': '싸이 & 박정현',
-    'albumArtwork':
-        'https://music.bugs.co.kr/track/2708278',
-    'mp3Url':
-        '',
+    'albumArtwork': 'https://music.bugs.co.kr/track/2708278',
+    'mp3Url': '',
     'ytbVideoId': 'iT267zwmFBw'
   });
-  
+
   songList = await box.getAllValues();
 }
