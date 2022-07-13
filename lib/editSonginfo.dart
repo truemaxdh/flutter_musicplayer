@@ -54,19 +54,23 @@ class EditSonginfoWidget extends StatelessWidget {
                 controller: inputs[3],
                 decoration: const InputDecoration(
                   border: UnderlineInputBorder(),
-                  labelText: 'Youtube Video Id',
+                  labelText: 'Youtube URL or Video Id',
                 ),
               ),
             ),
           ]),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
+          var videoId = inputs[3]
+              .text
+              .replaceAll('https://youtu.be/', '')
+              .replaceAll('https://www.youtube.com/watch?v=', '');
           await box.put(inputs[0].text, {
             'title': inputs[0].text,
             'artist': inputs[1].text,
             'albumArtwork': '',
             'mp3Url': inputs[2].text,
-            'ytbVideoId': inputs[3].text
+            'ytbVideoId': videoId
           });
           Navigator.pop(context);
         },

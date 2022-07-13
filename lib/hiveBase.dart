@@ -50,30 +50,30 @@ Future<void> putDBTestData() async {
   box = await collection.openBox<Map>('SongList1');
 
   // Put something in
-  await box.put('2002', {
-    'title': '2002',
-    'artist': 'Anne Marie',
-    'albumArtwork':
-        'https://avatars.githubusercontent.com/u/12081386?s=120&v=4',
-    'mp3Url': '',
-    'ytbVideoId': 'Il-an3K9pjg'
-  });
-  await box.put('Space Trip', {
-    'title': 'Space Trip',
-    'artist': 'Danny Choi',
-    'albumArtwork':
-        'https://avatars.githubusercontent.com/u/12081386?s=120&v=4',
-    'mp3Url':
-        'https://truemaxdh.github.io/MusicTreasureHouse/SpaceTrip/SpaceTrip.mp3',
-    'ytbVideoId': ''
-  });
-  await box.put('어땠을까', {
-    'title': '어땠을까',
-    'artist': '싸이 & 박정현',
-    'albumArtwork': 'https://music.bugs.co.kr/track/2708278',
-    'mp3Url': '',
-    'ytbVideoId': 'iT267zwmFBw'
-  });
+  // await box.put('2002', {
+  //   'title': '2002',
+  //   'artist': 'Anne Marie',
+  //   'albumArtwork':
+  //       'https://avatars.githubusercontent.com/u/12081386?s=120&v=4',
+  //   'mp3Url': '',
+  //   'ytbVideoId': 'Il-an3K9pjg'
+  // });
+  // await box.put('Space Trip', {
+  //   'title': 'Space Trip',
+  //   'artist': 'Danny Choi',
+  //   'albumArtwork':
+  //       'https://avatars.githubusercontent.com/u/12081386?s=120&v=4',
+  //   'mp3Url':
+  //       'https://truemaxdh.github.io/MusicTreasureHouse/SpaceTrip/SpaceTrip.mp3',
+  //   'ytbVideoId': ''
+  // });
+  // await box.put('어땠을까', {
+  //   'title': '어땠을까',
+  //   'artist': '싸이 & 박정현',
+  //   'albumArtwork': 'https://music.bugs.co.kr/track/2708278',
+  //   'mp3Url': '',
+  //   'ytbVideoId': 'iT267zwmFBw'
+  // });
 
   songList = await box.getAllValues();
 }

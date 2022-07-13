@@ -19,11 +19,11 @@ Drawer getDrawerMenu(context) {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => EditSonginfoWidget()),
-            );            
+            );
           },
         ),
         ListTile(
-          title: const Text('Item 2'),
+          title: const Text('Edit list'),
           onTap: () {
             // Update the state of the app
             // ...
