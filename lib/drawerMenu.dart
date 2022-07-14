@@ -6,11 +6,15 @@ Drawer getDrawerMenu(context) {
       // Important: Remove any padding from the ListView.
       padding: EdgeInsets.zero,
       children: [
-        const DrawerHeader(
-          decoration: BoxDecoration(
-            color: Colors.blue,
+        
+        const SizedBox(
+          height: 80.0,
+          child: DrawerHeader(
+            decoration: BoxDecoration(
+              color: Colors.blue,
+            ),
+            child: Text('Edit Song List'),
           ),
-          child: Text('Edit Song List'),
         ),
         ListTile(
           title: const Text('Add new Song'),
