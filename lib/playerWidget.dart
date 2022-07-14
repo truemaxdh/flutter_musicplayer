@@ -22,8 +22,8 @@ class _PlayerWidget extends State<PlayerWidget> {
       margin: EdgeInsets.all(5),
       child: Row(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
         Image(
-            height: 72,
-            width: 120,
+            height: 70,
+            width: 70,
             fit: BoxFit.cover,
             image: getIcon(curSong),          
         ),
