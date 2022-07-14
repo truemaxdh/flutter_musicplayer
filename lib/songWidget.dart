@@ -27,8 +27,8 @@ class SongWidget extends StatelessWidget {
                   children: <Widget>[
                     ClipRRect(
                       child: Image(
-                        height: 90,
-                        width: 150,
+                        height: 70,
+                        width: 100,
                         fit: BoxFit.cover,
                         image: getIcon(song),
                       ),
@@ -64,12 +64,10 @@ class SongWidget extends StatelessWidget {
                               screenMode = "mixed";
                               playNextSong(0);
                             },
-                            child: IconText(
-                              iconData: Icons.play_circle_outline,
-                              iconColor: Colors.red,
-                              string: "Play",
-                              textColor: Colors.black,
-                              iconSize: 25,
+                            child: Icon(
+                              Icons.play_circle_outline,
+                              size: 35,
+                              //iconColor: Colors.black,
                             ),
                           )
                         ],
