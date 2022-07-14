@@ -1,8 +1,6 @@
 import 'dart:io';
-import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_music_player/widget.dart';
+import 'package:flutter_music_player/hiveBase.dart';
 
 import 'main.dart';
 
@@ -78,7 +76,7 @@ class EditSongListWidget extends StatelessWidget {
                                       },
                                       child: Text('Cancel')),
                                 ],
-                              ),
+                              );
                             },
                             child: IconText(
                               iconData: Icons.Delete,
@@ -108,6 +106,6 @@ class EditSongListWidget extends StatelessWidget {
         child: const Icon(Icons.text_fields),
       ),
 
-    )
+    );
    }
 }
