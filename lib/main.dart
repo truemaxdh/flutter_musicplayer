@@ -11,6 +11,7 @@ import 'package:flutter_music_player/songWidget.dart';
 import 'package:flutter_music_player/playerWidget.dart';
 import 'package:flutter_music_player/youtubePlayerWidget.dart';
 import 'package:flutter_music_player/editSonginfo.dart';
+import 'package:flutter_music_player/editSongList.dart';
 
 part 'main.g.dart';
 part 'drawerMenu.dart';
