@@ -78,12 +78,10 @@ class EditSongListWidget extends StatelessWidget {
                                 ],
                               );
                             },
-                            child: IconText(
-                              iconData: Icons.delete,
+                            child: Icon(
+                              Icons.delete,
+                              //size: 30,
                               //iconColor: Colors.red,
-                              string: "Delete",
-                              textColor: Colors.black,
-                              iconSize: 30,
                             ),
                           )
                         ],
