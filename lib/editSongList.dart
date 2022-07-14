@@ -6,7 +6,7 @@ import 'package:flutter_music_player/widget.dart';
 
 import 'main.dart';
 
-class EditSonglistWidget extends StatelessWidget {
+class EditSongListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
