@@ -6,7 +6,8 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_music_player/hiveBase.dart';
 //import 'package:flutter_music_player/drawerMenu.dart';
 import 'package:flutter_music_player/widget.dart';
-import 'package:flutter_music_player/songListWidget.dart';
+//import 'package:flutter_music_player/songListWidget.dart';
+import 'package:flutter_music_player/songWidget.dart';
 import 'package:flutter_music_player/playerWidget.dart';
 import 'package:flutter_music_player/youtubePlayerWidget.dart';
 import 'package:flutter_music_player/editSonginfo.dart';
@@ -129,7 +130,13 @@ class MyAppState extends State<MainPage> {
   List<Widget> getBodyChildren() {
     List<Widget> ret = [];
     if (screenMode == "list" || screenMode == "mixed") {
-      ret.add(getSongListContainer());
+      ret.add(
+        //getSongListContainer()
+        Expanded(
+          flex: 1,
+          child: SongWidget(),
+        ),
+      );
     }
     if (screenMode == "player" || screenMode == "mixed") {
       if (curSong['ytbVideoId'].length > 0) {
