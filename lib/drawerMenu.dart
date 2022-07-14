@@ -28,7 +28,7 @@ Drawer getDrawerMenu(context) {
             //Navigator.pop(context);
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => EditSonglistWidget()),
+              MaterialPageRoute(builder: (context) => EditSongListWidget()),
             );
           },
         ),
