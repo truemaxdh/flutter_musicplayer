@@ -25,14 +25,11 @@ class EditSongListWidget extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: <Widget>[
-                    ClipRRect(
-                      child: Image(
-                        height: 70,
-                        width: 100,
-                        fit: BoxFit.cover,
-                        image: getIcon(song),
-                      ),
-                      borderRadius: BorderRadius.circular(5),
+                    Image(
+                      height: 70,
+                      width: 100,
+                      fit: BoxFit.cover,
+                      image: getIcon(song),
                     ),
                     Container(
                       width: MediaQuery.of(context).size.width * 0.5,
@@ -59,28 +56,29 @@ class EditSongListWidget extends StatelessWidget {
                             ],
                           ),
                           InkWell(
-                            onTap: () async {
-                              await AlertDialog(
-                                title: Text('Confirm'),
-                                content: Text('Are you sure to delete this song??'),
-                                actions: [
-                                  ElevatedButton(
-                                      onPressed: () async {
-                                        await box.delete(song['title']);
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: Text('Delete')),
-                                  ElevatedButton(
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: Text('Cancel')),
+                            onTap: () => showDialog<String>(
+                              context: context,
+                              builder: (BuildContext context) => AlertDialog(
+                                title: const Text('Confirm Delete'),
+                                content: const Text('Are you sure to delete this song?'),
+                                actions: <Widget>[
+                                  TextButton(
+                                    onPressed: () async {
+                                      await box.delete(song['title']);
+                                      Navigator.pop(context, 'OK');
+                                    },
+                                    child: const Text('OK'),
+                                  ),
+                                  TextButton(
+                                    onPressed: () => Navigator.pop(context, 'Cancel'),
+                                    child: const Text('Cancel'),
+                                  ),
                                 ],
-                              );
-                            },
+                              )
+                            ),
                             child: Icon(
                               Icons.delete,
-                              //size: 30,
+                              size: 30,
                               //iconColor: Colors.red,
                             ),
                           )
@@ -101,7 +99,7 @@ class EditSongListWidget extends StatelessWidget {
           Navigator.pop(context);
         },
         tooltip: 'Close',
-        child: const Icon(Icons.text_fields),
+        child: const Icon(Icons.exit_to_app),
       ),
 
     );
