@@ -66,7 +66,7 @@ class SongWidget extends StatelessWidget {
                             },
                             child: Icon(
                               Icons.play_circle_outline,
-                              size: 35,
+                              size: 50,
                               //iconColor: Colors.black,
                             ),
                           )
