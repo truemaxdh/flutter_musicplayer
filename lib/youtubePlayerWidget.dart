@@ -38,6 +38,7 @@ Widget youtubePlayerWidget(Size _size) {
       "          height: '$ytb_h',\n" +
       "          width: '$w',\n" +
       "          videoId: '$videoId',\n" +
+      "          startSeconds: $sliderValue,\n" +
       "          host: window.location.host, // window.location.href\n" +
       "          events: {\n" +
       "            'onReady': onPlayerReady,\n" +
