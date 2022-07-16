@@ -10,14 +10,14 @@ var screenMode = 'list'; // 'mixed', 'player', 'list'
 var videoId = "";
 var iframeInitialized = false;
 
-MyAppState myAppState;
+var myAppState;
 AudioPlayer audioPlayer = AudioPlayer();
 
 //List<SongInfo2> songList = new List.empty(growable: true);
-Map songList;
-Map curSong;
+var songList;
+var curSong;
 
-var curSongIdx = -1;
+num curSongIdx = -1;
 var playNextSong = (idxIncrease) {
   curSongIdx += idxIncrease;
   if (curSongIdx < 0) {
@@ -50,12 +50,13 @@ var playNextSong = (idxIncrease) {
   }
 };
 
-var getIcon = (song) {
-  if (song['mp3Url'].length > 0)
-    return new AssetImage('assets/mp3.png');
-  else if (song['ytbVideoId'].length > 0)
-    return new AssetImage('assets/youtube.png');
-  else
-    return NetworkImage(
-      "https://avatars.githubusercontent.com/u/12081386?s=120&v=4");
+ImageProvider Function(Map song) getIcon = (Map song) {
+  if (song['mp3Url'].length > 0) {
+    return const AssetImage('assets/mp3.png');
+  } else if (song['ytbVideoId'].length > 0) {
+    return const AssetImage('assets/youtube.png');
+  } else {
+    return const NetworkImage(
+        "https://avatars.githubusercontent.com/u/12081386?s=120&v=4");
+  }
 };

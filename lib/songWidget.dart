@@ -1,13 +1,9 @@
-import 'dart:io';
-import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_music_player/widget.dart';
 
 import 'main.dart';
 
 class SongWidget extends StatelessWidget {
-  SongWidget();
+  const SongWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +11,7 @@ class SongWidget extends StatelessWidget {
         itemCount: songList.length,
         itemBuilder: (context, songIndex) {
           var song = songList.values.elementAt(songIndex);
-          if (song['title'].length > 0)
+          if (song['title'].length > 0) {
             return Card(
               color: (curSongIdx == songIndex)
                   ? Colors.green.shade100
@@ -26,13 +22,13 @@ class SongWidget extends StatelessWidget {
                 child: Row(
                   children: <Widget>[
                     ClipRRect(
+                      borderRadius: BorderRadius.circular(5),
                       child: Image(
                         height: 70,
                         width: 100,
                         fit: BoxFit.cover,
                         image: getIcon(song),
                       ),
-                      borderRadius: BorderRadius.circular(5),
                     ),
                     Container(
                       width: MediaQuery.of(context).size.width * 0.5,
@@ -44,15 +40,15 @@ class SongWidget extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Container(
+                              SizedBox(
                                 width: MediaQuery.of(context).size.width * 0.4,
                                 child: Text(song['title'],
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         fontSize: 13,
                                         fontWeight: FontWeight.w700)),
                               ),
                               Text("Artist: ${song['artist']}",
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontSize: 11,
                                       color: Colors.grey,
                                       fontWeight: FontWeight.w500)),
@@ -64,7 +60,7 @@ class SongWidget extends StatelessWidget {
                               screenMode = "mixed";
                               playNextSong(0);
                             },
-                            child: Icon(
+                            child: const Icon(
                               Icons.play_circle_outline,
                               size: 50,
                               //iconColor: Colors.black,
@@ -77,8 +73,9 @@ class SongWidget extends StatelessWidget {
                 ),
               ),
             );
+          }
 
-          return SizedBox(
+          return const SizedBox(
             height: 0,
           );
         });
@@ -91,7 +88,7 @@ class SongWidget extends StatelessWidget {
     int minutes = duration.inMinutes;
     int seconds = (duration.inSeconds) - (minutes * 60);
 
-    data = minutes.toString() + ":";
+    data = "$minutes:";
     if (seconds <= 9) data += "0";
 
     data += seconds.toString();

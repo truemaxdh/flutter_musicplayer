@@ -2,49 +2,52 @@ import 'package:flutter/material.dart';
 import 'package:flutter_music_player/main.dart';
 import 'package:flutter_music_player/youtubePlayerWidget.dart';
 
-_PlayerWidget playerWidgetState;
+late PlayerWidgetState playerWidgetState;
 
 class PlayerWidget extends StatefulWidget {
+  const PlayerWidget({Key? key}) : super(key: key);
+
   @override
-  _PlayerWidget createState() => _PlayerWidget();
+  PlayerWidgetState createState() => PlayerWidgetState();
 }
 
-class _PlayerWidget extends State<PlayerWidget> {
+class PlayerWidgetState extends State<PlayerWidget> {
   @override
   void initState() {
     super.initState();
     playerWidgetState = this;
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(5),
+      margin: const EdgeInsets.all(5),
       child: Row(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
         Image(
-            height: 70,
-            width: 70,
-            fit: BoxFit.cover,
-            image: getIcon(curSong),          
+          height: 70,
+          width: 70,
+          fit: BoxFit.cover,
+          image: getIcon(curSong),
         ),
         Expanded(
           child: Container(
             height: 72,
-            padding: EdgeInsets.symmetric(horizontal: 3),
+            padding: const EdgeInsets.symmetric(horizontal: 3),
             child: Column(children: <Widget>[
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: songProgress(context),
               ),
               Container(
-                padding: EdgeInsets.symmetric(vertical: 5),
+                padding: const EdgeInsets.symmetric(vertical: 5),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     CircleAvatar(
+                      backgroundColor: Colors.cyan.withOpacity(0.3),
                       child: Center(
                         child: IconButton(
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.skip_previous,
                               color: Colors.white,
                             ),
@@ -52,7 +55,6 @@ class _PlayerWidget extends State<PlayerWidget> {
                               playNextSong(-1);
                             }),
                       ),
-                      backgroundColor: Colors.cyan.withOpacity(0.3),
                     ),
                     CircleAvatar(
                       radius: 23,
@@ -61,10 +63,7 @@ class _PlayerWidget extends State<PlayerWidget> {
                           onPressed: () async {
                             if (curSong['ytbVideoId'].length > 0) {
                               webviewController.callJsMethod(
-                                  (isPlaying
-                                      ? "pauseVideo"
-                                      : "playVideo"),
-                                  []);
+                                  (isPlaying ? "pauseVideo" : "playVideo"), []);
                             } else {
                               isPlaying
                                   ? audioPlayer.pause()
@@ -83,7 +82,7 @@ class _PlayerWidget extends State<PlayerWidget> {
                       backgroundColor: Colors.cyan.withOpacity(0.3),
                       child: Center(
                         child: IconButton(
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.skip_next,
                               color: Colors.white,
                             ),
@@ -104,8 +103,9 @@ class _PlayerWidget extends State<PlayerWidget> {
                             ),
                             onPressed: () {
                               myAppState.setState(() {
-                                screenMode =
-                                    (screenMode == "player") ? "mixed" : "player";
+                                screenMode = (screenMode == "player")
+                                    ? "mixed"
+                                    : "player";
                               });
                             }),
                       ),
@@ -119,19 +119,17 @@ class _PlayerWidget extends State<PlayerWidget> {
       ]),
     );
   }
-  
+
   String _formatDuration(Duration d) {
-    if (d == null) return "--:--";
     int minute = d.inMinutes;
     int second = d.inSeconds % 60;
-    String format = ((minute < 10) ? "0$minute" : "$minute") +
-        ":" +
-        ((second < 10) ? "0$second" : "$second");
+    String format =
+        "${(minute < 10) ? "0$minute" : "$minute"}:${(second < 10) ? "0$second" : "$second"}";
     return format;
   }
 
   Widget songProgress(BuildContext context) {
-    var style = TextStyle(color: Colors.black);
+    var style = const TextStyle(color: Colors.black);
     return Row(
       children: <Widget>[
         Text(
@@ -140,17 +138,17 @@ class _PlayerWidget extends State<PlayerWidget> {
         ),
         Expanded(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 5),
+            padding: const EdgeInsets.symmetric(horizontal: 5),
             child: SliderTheme(
                 data: SliderTheme.of(context).copyWith(
                   trackHeight: 2,
                   thumbColor: Colors.blueAccent,
                   overlayColor: Colors.blue,
-                  thumbShape: RoundSliderThumbShape(
+                  thumbShape: const RoundSliderThumbShape(
                     disabledThumbRadius: 5,
                     enabledThumbRadius: 5,
                   ),
-                  overlayShape: RoundSliderOverlayShape(
+                  overlayShape: const RoundSliderOverlayShape(
                     overlayRadius: 10,
                   ),
                   activeTrackColor: Colors.blueAccent,
@@ -170,7 +168,9 @@ class _PlayerWidget extends State<PlayerWidget> {
                   onChanged: (value) {
                     if (curSong['ytbVideoId'].length > 0) {
                       webviewController.callJsMethod("seekTo", [value, false]);
-                      setState(() {sliderValue = value.toInt();});
+                      setState(() {
+                        sliderValue = value.toInt();
+                      });
                     }
                   },
                 )),

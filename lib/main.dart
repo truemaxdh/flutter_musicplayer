@@ -1,12 +1,9 @@
-import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_music_player/hiveBase.dart';
-//import 'package:flutter_music_player/drawerMenu.dart';
-import 'package:flutter_music_player/widget.dart';
-//import 'package:flutter_music_player/songListWidget.dart';
 import 'package:flutter_music_player/songWidget.dart';
 import 'package:flutter_music_player/playerWidget.dart';
 import 'package:flutter_music_player/youtubePlayerWidget.dart';
@@ -18,18 +15,20 @@ part 'drawerMenu.dart';
 
 Future<void> main() async {
   await Hive.initFlutter();
-  await putDBTestData();
+  await initSonglist();
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.portraitUp],
+    [DeviceOrientation.portraitUp],
   ); // To turn off landscape mode
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Music Player',
       home: MainPage(),
     );
@@ -37,6 +36,8 @@ class MyApp extends StatelessWidget {
 }
 
 class MainPage extends StatefulWidget {
+  const MainPage({Key? key}) : super(key: key);
+
   @override
   MyAppState createState() => MyAppState();
 }
@@ -67,7 +68,9 @@ class MyAppState extends State<MainPage> {
     audioPlayer.onPlayerStateChanged.listen((PlayerState s) {
       if (curSong['mp3Url'].length == 0) return;
 
-      print('Song PlayerState: $s');
+      if (kDebugMode) {
+        print('Song PlayerState: $s');
+      }
       isPlaying = (s == PlayerState.playing);
       setState(() {});
     });
@@ -82,50 +85,45 @@ class MyAppState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: getDrawerMenu(context),
-        appBar: AppBar(
-          actions: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: InkWell(
-                onTap: () {
+      drawer: getDrawerMenu(context),
+      appBar: AppBar(
+        actions: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: InkWell(
+              onTap: () {
+                setState(() {
+                  showVol = !showVol;
+                });
+              },
+              child: const Icon(Icons.volume_down, size: 35),
+            ),
+          )
+        ],
+        elevation: 0,
+        backgroundColor: Colors.black,
+        title: showVol
+            ? Slider(
+                min: 0,
+                max: 1,
+                value: _volume,
+                onChanged: (value) {
                   setState(() {
-                    showVol = !showVol;
+                    _volume = value;
+                    if (curSong['ytbVideoId'].length > 0) {
+                      //youtubePlayerController.setVolume((value * 100).toInt());
+                    } else {
+                      audioPlayer.setVolume(value);
+                    }
                   });
                 },
-                child: IconText(
-                    textColor: Colors.white,
-                    iconColor: Colors.white,
-                    string: "volume",
-                    iconSize: 20,
-                    iconData: Icons.volume_down),
-              ),
-            )
-          ],
-          elevation: 0,
-          backgroundColor: Colors.black,
-          title: showVol
-              ? Slider(
-                  min: 0,
-                  max: 1,
-                  value: _volume,
-                  onChanged: (value) {
-                    setState(() {
-                      _volume = value;
-                      if (curSong['ytbVideoId'].length > 0) {
-                        //youtubePlayerController.setVolume((value * 100).toInt());
-                      } else {
-                        audioPlayer.setVolume(value);
-                      }
-                    });
-                  },
-                )
-              : Text(title),
-        ),
-        body: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: getBodyChildren()),
-      );
+              )
+            : Text(title),
+      ),
+      body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: getBodyChildren()),
+    );
   }
 
   List<Widget> getBodyChildren() {
@@ -133,7 +131,7 @@ class MyAppState extends State<MainPage> {
     if (screenMode == "list" || screenMode == "mixed") {
       ret.add(
         //getSongListContainer()
-        Expanded(
+        const Expanded(
           flex: 1,
           child: SongWidget(),
         ),
@@ -141,10 +139,10 @@ class MyAppState extends State<MainPage> {
     }
     if (screenMode == "player" || screenMode == "mixed") {
       if (curSong['ytbVideoId'].length > 0) {
-        var _size = MediaQuery.of(context).size;
-        ret.add(youtubePlayerWidget(_size));
+        var size = MediaQuery.of(context).size;
+        ret.add(youtubePlayerWidget(size));
       }
-      ret.add(PlayerWidget());
+      ret.add(const PlayerWidget());
     }
     return ret;
   }
