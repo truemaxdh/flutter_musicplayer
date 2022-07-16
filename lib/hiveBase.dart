@@ -5,7 +5,6 @@ import 'package:flutter_music_player/main.dart';
 // Open your boxes. Optional: Give it a type.
 late CollectionBox<Map> box;
 Future<void> initSonglist() async {
-  print('point1');
   // Create a box collection
   final collection = await BoxCollection.open(
     'MySongs', // Name of your database
@@ -47,12 +46,8 @@ Future<void> initSonglist() async {
       32
     ]), // Key to encrypt your boxes (Only used in Flutter / Dart IO)
   );
-  print('point2');
   box = await collection.openBox<Map>('SongList1');
-  print('point3:$box');
   await box.getAllValues().then((values) async {
-    print('point4');
-
     if (values.isEmpty) {
       // Put something in
       await box.put('2002', {
@@ -76,9 +71,7 @@ Future<void> initSonglist() async {
         'mp3Url': '',
         'ytbVideoId': 'iT267zwmFBw'
       });
-      print('point5:$box');
     }
-    print('point6');
   });
 
   songList = await box.getAllValues();
