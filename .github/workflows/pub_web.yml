@@ -27,9 +27,10 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-      - uses: subosito/flutter-action@v1
+      - uses: subosito/flutter-action@v2
         with:
-          channel: 'dev'
+          flutter-version: 2.10.4
+          #channel: 'dev'
 
       # Runs a single command using the runners shell
       #- name: Run a one-line script
