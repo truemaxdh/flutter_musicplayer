@@ -1,6 +1,6 @@
 part of 'main.dart';
 
-var title = "Music Player";
+String title = "Music Player";
 var duration = 10;
 bool showVol = false;
 bool isPlaying = false;
@@ -10,15 +10,15 @@ var screenMode = 'list'; // 'mixed', 'player', 'list'
 var videoId = "";
 var iframeInitialized = false;
 
-var myAppState;
+late MyAppState myAppState;
 AudioPlayer audioPlayer = AudioPlayer();
 
 //List<SongInfo2> songList = new List.empty(growable: true);
-var songList;
-var curSong;
+late Map songList;
+late Map curSong;
 
-num curSongIdx = -1;
-var playNextSong = (idxIncrease) {
+int curSongIdx = -1;
+var playNextSong = (int idxIncrease) {
   curSongIdx += idxIncrease;
   if (curSongIdx < 0) {
     curSongIdx += songList.length;
@@ -44,9 +44,8 @@ var playNextSong = (idxIncrease) {
     audioPlayer.stop();
     videoId = curSong['ytbVideoId'];
 
-    myAppState.setState(() {
-      if (screenMode == "list") screenMode = "mixed";
-    });
+    if (screenMode == "list") screenMode = "mixed";
+    myAppState.redraw();
   }
 };
 

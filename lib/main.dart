@@ -58,7 +58,7 @@ class MyAppState extends State<MainPage> {
       if (isPlaying) {
         sliderValue = p.inSeconds;
 
-        setState(() {});
+        playerWidgetState.setState(() {});
 
         if (duration != 0 && sliderValue == duration) {
           playNextSong(1);
@@ -72,14 +72,18 @@ class MyAppState extends State<MainPage> {
         print('Song PlayerState: $s');
       }
       isPlaying = (s == PlayerState.playing);
-      setState(() {});
+      playerWidgetState.setState(() {});
     });
     audioPlayer.onDurationChanged.listen((Duration p) {
       if (curSong['mp3Url'].length == 0) return;
 
       duration = p.inSeconds;
-      setState(() {});
+      playerWidgetState.setState(() {});
     });
+  }
+
+  void redraw() {
+    setState(() {});
   }
 
   @override
