@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:in_app_update/in_app_update.dart';
+
 import 'package:flutter_music_player/hiveBase.dart';
 import 'package:flutter_music_player/songWidget.dart';
 import 'package:flutter_music_player/playerWidget.dart';
@@ -14,6 +16,7 @@ part 'main.g.dart';
 part 'drawerMenu.dart';
 
 Future<void> main() async {
+  await checkForUpdate();
   await Hive.initFlutter();
   await initSonglist();
   WidgetsFlutterBinding.ensureInitialized();
