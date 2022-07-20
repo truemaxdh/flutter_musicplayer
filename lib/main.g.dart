@@ -61,9 +61,11 @@ ImageProvider Function(Map song) getIcon = (Map song) {
 };
 
 Future<void> checkForUpdate() async {
-  AppUpdateInfo updateInfo = await InAppUpdate.checkForUpdate();
-  if (updateInfo.updateAvailability == UpdateAvailability.updateAvailable) {
-    await InAppUpdate.performImmediateUpdate();
-    //.catchError((e) => showSnack(e.toString()));
+  if (!kIsWeb) {
+    AppUpdateInfo updateInfo = await InAppUpdate.checkForUpdate();
+    if (updateInfo.updateAvailability == UpdateAvailability.updateAvailable) {
+      await InAppUpdate.performImmediateUpdate();
+      //.catchError((e) => showSnack(e.toString()));
+    }
   }
 }
