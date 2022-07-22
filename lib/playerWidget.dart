@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter_music_player/main.dart';
 import 'package:flutter_music_player/youtubePlayerWidget.dart';
 
@@ -36,9 +37,9 @@ class PlayerWidgetState extends State<PlayerWidget> {
     audioPlayer.onPlayerStateChanged.listen((PlayerState s) {
       if (curSong['mp3Url'].length == 0) return;
 
-      if (kDebugMode) {
-        print('Song PlayerState: $s');
-      }
+      //if (kDebugMode) {
+      //  print('Song PlayerState: $s');
+      //}
       isPlaying = (s == PlayerState.playing);
       setState(() {});
     });
