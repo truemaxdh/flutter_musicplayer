@@ -15,9 +15,41 @@ class PlayerWidgetState extends State<PlayerWidget> {
   @override
   void initState() {
     super.initState();
+    setupAudio();
     playerWidgetState = this;
   }
 
+  void setupAudio() {
+    audioPlayer.onPositionChanged.listen((Duration p) {
+      if (curSong['mp3Url'].length == 0) return;
+
+      if (isPlaying) {
+        sliderValue = p.inSeconds;
+
+        setState(() {});
+
+        if (duration != 0 && sliderValue == duration) {
+          playNextSong(1);
+        }
+      }
+    });
+    audioPlayer.onPlayerStateChanged.listen((PlayerState s) {
+      if (curSong['mp3Url'].length == 0) return;
+
+      if (kDebugMode) {
+        print('Song PlayerState: $s');
+      }
+      isPlaying = (s == PlayerState.playing);
+      setState(() {});
+    });
+    audioPlayer.onDurationChanged.listen((Duration p) {
+      if (curSong['mp3Url'].length == 0) return;
+
+      duration = p.inSeconds;
+      setState(() {});
+    });
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -102,11 +134,10 @@ class PlayerWidgetState extends State<PlayerWidget> {
                               color: Colors.white,
                             ),
                             onPressed: () {
-                              myAppState.setState(() {
-                                screenMode = (screenMode == "player")
+                              screenMode = (screenMode == "player")
                                     ? "mixed"
                                     : "player";
-                              });
+                              myAppState.redraw();
                             }),
                       ),
                     ),
