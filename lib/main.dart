@@ -49,12 +49,12 @@ class MyAppState extends State<MainPage> {
   @override
   void initState() {
     super.initState();
-    setupAudio();
+    //setupAudio();
 
     myAppState = this;
   }
 
-  void setupAudio() {
+  /*void setupAudio() {
     audioPlayer.onPositionChanged.listen((Duration p) {
       if (curSong['mp3Url'].length == 0) return;
 
@@ -83,7 +83,7 @@ class MyAppState extends State<MainPage> {
       duration = p.inSeconds;
       playerWidgetState.setState(() {});
     });
-  }
+  }*/
 
   void redraw() {
     setState(() {});
