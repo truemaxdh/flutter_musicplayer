@@ -43,10 +43,10 @@ var playNextSong = (int idxIncrease) {
   } else if (curSong['ytbVideoId'].length > 0) {
     audioPlayer.stop();
     videoId = curSong['ytbVideoId'];
-
-    if (screenMode == "list") screenMode = "mixed";
-    myAppState.redraw();
   }
+  
+  //if (screenMode == "list") screenMode = "mixed";
+  myAppState.redraw();
 };
 
 ImageProvider Function(Map song) getIcon = (Map song) {
