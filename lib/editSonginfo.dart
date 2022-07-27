@@ -75,6 +75,7 @@ class EditSonginfoWidget extends StatelessWidget {
             'ytbVideoId': videoId
           });
           Navigator.pop(context);
+          myAppState.redraw();
         },
         tooltip: 'Save & Close',
         child: const Icon(Icons.text_fields),
