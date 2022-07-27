@@ -2,9 +2,23 @@ import 'package:flutter/material.dart';
 
 import 'main.dart';
 
-class SongWidget extends StatelessWidget {
-  const SongWidget({Key? key}) : super(key: key);
+late SongWidgetState songWidgetState;
 
+class SongWidget extends StatefulWidget {
+  const SongWidget({Key? key}) : super(key: key);
+    
+  @override
+  SongWidgetState createState() => SongWidgetState();
+}
+
+class SongWidgetState extends State<SongWidget> {
+  @override
+  void initState() {
+    super.initState();
+    
+    songWidgetState = this;
+  }
+  
   void redraw() {
     setState(() {});
   }
