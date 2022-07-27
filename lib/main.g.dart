@@ -47,6 +47,9 @@ var playNextSong = (int idxIncrease) {
   
   //if (screenMode == "list") screenMode = "mixed";
   myAppState.redraw();
+  if (screenMode == "list" || screenMode == "mixed") {
+    songWidgetState.redraw();
+  }
 };
 
 ImageProvider Function(Map song) getIcon = (Map song) {
