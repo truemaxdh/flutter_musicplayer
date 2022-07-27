@@ -5,6 +5,10 @@ import 'main.dart';
 class SongWidget extends StatelessWidget {
   const SongWidget({Key? key}) : super(key: key);
 
+  void redraw() {
+    setState(() {});
+  }
+  
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
