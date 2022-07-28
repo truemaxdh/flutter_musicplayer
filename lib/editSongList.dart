@@ -68,6 +68,7 @@ class EditSongListWidget extends StatelessWidget {
                                           TextButton(
                                             onPressed: () async {
                                               await box.delete(song['title']);
+                                              await initSonglist();
                                               Navigator.pop(context, 'OK');
                                               myAppState.redraw();
                                             },
