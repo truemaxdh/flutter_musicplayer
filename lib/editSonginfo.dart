@@ -75,6 +75,7 @@ class EditSonginfoWidget extends StatelessWidget {
             'mp3Url': inputs[2].text,
             'ytbVideoId': videoId
           });
+          await initSonglist();
           Navigator.pop(context);
           songWidgetState.redraw();
         },
