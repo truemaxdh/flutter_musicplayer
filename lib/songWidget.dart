@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'main.dart';
 
-late SongWidgetState songWidgetState;
-
 class SongWidget extends StatefulWidget {
   const SongWidget({Key? key}) : super(key: key);
     
