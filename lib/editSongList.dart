@@ -4,7 +4,14 @@ import 'package:flutter_music_player/hiveBase.dart';
 
 import 'main.dart';
 
-class EditSongListWidget extends StatelessWidget {
+class EditSongListWidget extends StatefulWidget {
+  const EditSongListWidget({Key? key}) : super(key: key);
+  
+  @override
+  EditSongListWidgetState createState() => EditSongListWidgetState();
+}
+
+class EditSongListWidgetState extends State<EditSongListWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
