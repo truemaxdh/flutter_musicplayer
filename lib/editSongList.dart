@@ -70,7 +70,8 @@ class EditSongListWidget extends StatelessWidget {
                                               await box.delete(song['title']);
                                               await initSonglist();
                                               Navigator.pop(context, 'OK');
-                                              myAppState.redraw();
+                                              songWidgetState.redraw();
+                                              setState(() {});
                                             },
                                             child: const Text('OK'),
                                           ),
