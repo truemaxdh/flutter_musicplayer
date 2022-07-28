@@ -11,11 +11,14 @@ var videoId = "";
 var iframeInitialized = false;
 
 late MyAppState myAppState;
+late SongWidgetState songWidgetState;
+
+late Map songList;
+late Map curSong;
+
 AudioPlayer audioPlayer = AudioPlayer();
 
 //List<SongInfo2> songList = new List.empty(growable: true);
-late Map songList;
-late Map curSong;
 
 int curSongIdx = -1;
 var playNextSong = (int idxIncrease) {
