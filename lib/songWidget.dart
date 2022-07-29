@@ -20,7 +20,8 @@ class SongWidgetState extends State<SongWidget> {
     songWidgetState = this;
   }
   
-  @overridevoid dispose() {
+  @override
+  void dispose() {
     _controller.dispose();
     super.dispose();
   }
