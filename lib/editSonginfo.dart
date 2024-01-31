@@ -68,7 +68,7 @@ class EditSonginfoWidget extends StatelessWidget {
               .text
               .replaceAll('https://youtu.be/', '')
               .replaceAll('https://www.youtube.com/watch?v=', '');
-           videoId = videoId.substr(0, videoId.indexOf('?si='));
+           videoId = videoId.substring(0, videoId.indexOf('?si='));
           await box.put(inputs[0].text, {
             'title': inputs[0].text,
             'artist': inputs[1].text,
